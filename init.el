@@ -17,6 +17,8 @@
 (load-file "~/.emacs.d/setup/setup-helm-gtags.el")
 (load-file "~/.emacs.d/setup/setup-smartparens.el")
 (load-file "~/.emacs.d/setup/setup-diff-hl.el")
+(load-file "~/.emacs.d/setup/setup-sr-speedbar.el")
+(load-file "~/.emacs.d/setup/setup-company.el")
 (load-file "~/.emacs.d/setup/setup-slime.el")
 
 ;; helm setup
@@ -36,6 +38,12 @@
 
 ;; diff-hl setup
 (require 'setup-diff-hl)
+
+;; sr-speedbar setup
+(require 'setup-sr-speedbar)
+
+;; company setup
+(require 'setup-company)
 
 ;; slime setup
 (require 'setup-slime)
