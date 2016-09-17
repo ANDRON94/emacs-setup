@@ -19,6 +19,7 @@
 (load-file "~/.emacs.d/setup/setup-diff-hl.el")
 (load-file "~/.emacs.d/setup/setup-sr-speedbar.el")
 (load-file "~/.emacs.d/setup/setup-company.el")
+(load-file "~/.emacs.d/setup/setup-yasnippet.el")
 (load-file "~/.emacs.d/setup/setup-slime.el")
 
 ;; helm setup
@@ -44,6 +45,9 @@
 
 ;; company setup
 (require 'setup-company)
+
+;; yasnippet setup
+(require 'setup-yasnippet)
 
 ;; slime setup
 (require 'setup-slime)
