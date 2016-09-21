@@ -1,0 +1,13 @@
+# Compiled
+*.elc
+
+# Packaging
+.cask
+
+# Temporary
+*~
+
+#Specific folders
+elpa/
+eshell/
+semanticdb/
