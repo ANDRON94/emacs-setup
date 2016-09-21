@@ -17,6 +17,7 @@
 (add-hook 'java-mode-hook 'helm-gtags-mode)
 (add-hook 'javascript-mode-hook 'helm-gtags-mode)
 (add-hook 'lisp-mode-hook 'helm-gtags-mode)
+(add-hook 'python-mode-hook 'helm-gtags-mode)
 
 ;; General setup
 (setq
