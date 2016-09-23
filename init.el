@@ -21,6 +21,7 @@
 (load-file "~/.emacs.d/setup/setup-company.el")
 (load-file "~/.emacs.d/setup/setup-yasnippet.el")
 ;; Custom paths to packages setup(language specific features)
+(load-file "~/.emacs.d/setup/setup-irony.el") ; Completion/Check syntax for C & C++
 (load-file "~/.emacs.d/setup/setup-slime.el") ; IDE for Common Lisp
 ;; Custom paths to general configs
 (load-file "~/.emacs.d/config/config-appearance.el")
@@ -37,6 +38,7 @@
 (require 'setup-sr-speedbar)     ; sr-speedbar setup
 (require 'setup-company)         ; company setup
 (require 'setup-yasnippet)       ; yasnippet setup
+(require 'setup-irony)           ; irony setup
 (require 'setup-slime)           ; slime setup
 
 ;; Config setup
