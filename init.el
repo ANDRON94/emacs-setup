@@ -37,7 +37,6 @@
 (require 'setup-sr-speedbar)     ; sr-speedbar setup
 (require 'setup-company)         ; company setup
 (require 'setup-yasnippet)       ; yasnippet setup
-(require 'setup-semantic)        ; semantic setup
 (require 'setup-slime)           ; slime setup
 
 ;; Config setup
