@@ -15,11 +15,13 @@
 (load-file "~/.emacs.d/setup/setup-helm-projectile.el")
 (load-file "~/.emacs.d/setup/setup-helm-swoop.el")
 (load-file "~/.emacs.d/setup/setup-helm-gtags.el")
+(load-file "~/.emacs.d/setup/setup-helm-flycheck.el")
 (load-file "~/.emacs.d/setup/setup-smartparens.el")
 (load-file "~/.emacs.d/setup/setup-diff-hl.el")
 (load-file "~/.emacs.d/setup/setup-sr-speedbar.el")
 (load-file "~/.emacs.d/setup/setup-company.el")
 (load-file "~/.emacs.d/setup/setup-yasnippet.el")
+(load-file "~/.emacs.d/setup/setup-flycheck.el")
 ;; Custom paths to packages setup(language specific features)
 (load-file "~/.emacs.d/setup/setup-irony.el") ; Completion/Check syntax for C & C++
 (load-file "~/.emacs.d/setup/setup-slime.el") ; IDE for Common Lisp
@@ -33,11 +35,13 @@
 (require 'setup-helm-projectile) ; helm-projectile setup
 (require 'setup-helm-swoop)      ; helm-swoop setup
 (require 'setup-helm-gtags)      ; helm-gtags setup
+(require 'setup-helm-flycheck)      ; helm-flycheck setup
 (require 'setup-smartparens)     ; smartparens setup
 (require 'setup-diff-hl)         ; diff-hl setup
 (require 'setup-sr-speedbar)     ; sr-speedbar setup
 (require 'setup-company)         ; company setup
 (require 'setup-yasnippet)       ; yasnippet setup
+(require 'setup-flycheck)        ; flycheck setup
 (require 'setup-irony)           ; irony setup
 (require 'setup-slime)           ; slime setup
 
