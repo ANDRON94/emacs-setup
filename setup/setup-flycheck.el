@@ -7,6 +7,7 @@
 (add-hook 'javascript-mode-hook 'flycheck-mode)
 ;(add-hook 'lisp-mode-hook 'flycheck-mode)
 (add-hook 'python-mode-hook 'flycheck-mode)
+(add-hook 'sql-mode-hook 'flycheck-mode)
 
  ;; Integrate with Irony
 (eval-after-load 'flycheck
