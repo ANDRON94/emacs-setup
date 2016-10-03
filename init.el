@@ -23,6 +23,7 @@
 (load-file "~/.emacs.d/setup/setup-yasnippet.el")
 (load-file "~/.emacs.d/setup/setup-flycheck.el")
 (load-file "~/.emacs.d/setup/setup-org.el")
+(load-file "~/.emacs.d/setup/setup-magit.el")
 ;; Custom paths to packages setup(language specific features)
 (load-file "~/.emacs.d/setup/setup-irony.el") ; Completion/Check syntax for C & C++
 (load-file "~/.emacs.d/setup/setup-slime.el") ; IDE for Common Lisp
@@ -44,6 +45,7 @@
 (require 'setup-yasnippet)       ; yasnippet setup
 (require 'setup-flycheck)        ; flycheck setup
 (require 'setup-org)             ; org setup
+(require 'setup-magit)           ; magit setup
 (require 'setup-irony)           ; irony setup
 (require 'setup-slime)           ; slime setup
 
