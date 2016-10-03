@@ -4,5 +4,7 @@
 (windmove-default-keybindings)
 ;; Always end a file with a newline
 (setq require-final-newline t)
+;; Always allow narrowing
+(put 'narrow-to-region 'disabled nil)
 
 (provide 'config-ease)
