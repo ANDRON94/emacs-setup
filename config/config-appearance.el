@@ -16,4 +16,7 @@
 (tool-bar-mode -1) ; Disable tool bar
 ;(menu-bar-mode -1) ; Disable menu bar
 
+;; Run ediff control panel in the current frame
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
+
 (provide 'config-appearance)
