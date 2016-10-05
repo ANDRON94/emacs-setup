@@ -5,7 +5,8 @@
 (use-package nlinum
   :ensure t
   :config
-  (global-nlinum-mode +1))
+  (global-nlinum-mode +1)
+  (add-hook 'org-mode-hook (lambda () (nlinum-mode -1))))
 
 ;; Setup theme
 (use-package material-theme
