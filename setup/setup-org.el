@@ -6,4 +6,21 @@
   :config
   (setq org-log-done t)
   (setq org-directory "~/.emacs.d/org")
-  (setq org-agenda-files (list (concat org-directory "/holidays.org"))))
+  (setq org-agenda-files (list (concat org-directory "/holidays.org")
+                               (concat org-directory "/gtd.org")))
+  (custom-set-variables
+   ;; custom-set-variables was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(org-capture-templates
+     (quote
+      (("t" "Simple TODO task" entry
+        (file+headline "gtd.org" "TASKS")
+        "* TODO %^{Task} %^g\n SCHEDULED: %^T\n Captured: %<%Y-%m-%d %H:%M>")))))
+  (custom-set-faces
+   ;; custom-set-faces was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   ))
