@@ -2,10 +2,13 @@
 (setq inhibit-startup-message t)
 
 ;; Display line numbers
-(global-linum-mode t)
+(use-package nlinum
+  :ensure t
+  :config
+  (global-nlinum-mode +1))
 
 ;; Setup theme
-(use-package material-theme ;Use 'material' theme
+(use-package material-theme
   :ensure t
   :config
   (load-theme 'material t))
