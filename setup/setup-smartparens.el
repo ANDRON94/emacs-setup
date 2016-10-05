@@ -1,8 +1,8 @@
-(require 'smartparens-config)
-
-;; General setup
-(show-smartparens-global-mode +1)
-(smartparens-global-mode 1)
+(use-package smartparens
+  :ensure t
+  :config
+  (show-smartparens-global-mode +1)
+  (smartparens-global-mode +1))
 
 ;; when you press RET, the curly braces automatically
 ;; add another newline
@@ -10,5 +10,3 @@
 ;;   (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET")))
 ;;   (sp-local-pair "/*" "*/" :post-handlers '((" | " "SPC")
 ;;                                             ("* ||\n[i]" "RET"))))
-
-(provide 'setup-smartparens)

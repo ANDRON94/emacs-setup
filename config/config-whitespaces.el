@@ -12,5 +12,3 @@
 ;; Set default indent
 (defvaralias 'c-basic-offset 'tab-width)
 (defvaralias 'cperl-indent-level 'tab-width)
-
-(provide 'config-whitespaces)
