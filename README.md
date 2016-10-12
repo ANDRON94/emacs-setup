@@ -56,19 +56,19 @@ It's nice :)
     2.  Install [ctags](http://ctags.sourceforge.net/);
     3.  Install [pygments](http://pygments.org/) package;
     4.  Enable pygments plugin: 
-        Add enviroment variables to '.profile'(or whatever you use):
+        <div>Add enviroment variables to '.profile'(or whatever you use):
         export GTAGSCONF=/usr/local/share/gtags/gtags.conf
         export GTAGSLABEL=pygments
-        You can find a more detailed guide at 'global-x.x.x/plugin-factory/PLUGIN<sub>HOWTO</sub>.pygments'.
+        You can find a more detailed guide at 'global-x.x.x/plugin-factory/PLUGIN<sub>HOWTO</sub>.pygments'.</div>
 3.  Generate gtags for external libraries(you can do it later):
     1.  Add enviroment variable to '.profile'(or whatever you use) =):
-        export GTAGSLIBPATH=$HOME/.gtags/
+        <div>export GTAGSLIBPATH=$HOME/.gtags/</div>
     2.  Create database:
-        mkdir ~/.gtags
+        <div>mkdir ~/.gtags
         ln -s <LIBRARY PATH1> <NAME1>
         ln -s <LIBRARY PATH2> <NAME2>
-        gtags -c
+        gtags -c</div>
 4.  Get my configuration:
-    Clone to your Emacs directory 'git clone <https://github.com/ANDRON94/emacs-setup.git> .'
+    <div>Clone to your Emacs directory 'git clone <https://github.com/ANDRON94/emacs-setup.git> .'</div>
 5.  Run Emacs :)
-    [use-package](https://github.com/jwiegley/use-package) download and setup all packages automatically.
+    <div>[use-package](https://github.com/jwiegley/use-package) download and setup all packages automatically.</div>
