@@ -11,9 +11,9 @@
 
 # Introduction<a id="sec-1" name="sec-1"></a>
 
-Emacs is a great text editor and you can read up on it on the Internet. 
-But "With great power comes great responsibility" =) 
-So, if you want to feel a full power of Emacs, you'll need to customise it yourself. 
+Emacs is a great text editor and you can read up on it on the Internet.
+But "With great power comes great responsibility" =)
+So, if you want to feel a full power of Emacs, you'll need to customise it yourself.
 And I just want to help by sharing my own configuration. Ok, let's start!
 
 # How To<a id="sec-2" name="sec-2"></a>
@@ -34,7 +34,7 @@ So, my configuration has next features(you can add/remove/modify as you want):
 -   a code snippets([yasnippet](https://github.com/joaotavora/yasnippet));
 -   keeping notes, maintaining TODO lists, planning projects([org](http://orgmode.org/));
 -   a Common Lisp IDE([slime](https://github.com/slime/slime));
--   and finally [cool color theme](https://github.com/cpaulik/emacs-material-theme), working with whitespaces and other 
+-   and finally [cool color theme](https://github.com/cpaulik/emacs-material-theme), working with whitespaces and other
     small useful features.
 
 A little bit scary, yeah? =)
@@ -45,7 +45,7 @@ Ok, read this to find out how it works:
 -   [Emacs as C++ IDE](http://syamajala.github.io/c-ide.html).
 
 Of course, don't forget to visit github pages of packages(links above).
-At last, read about [use-package](https://github.com/jwiegley/use-package) package. I'm using it in my configuration files. 
+At last, read about [use-package](https://github.com/jwiegley/use-package) package. I'm using it in my configuration files.
 It's nice :)
 
 # Installation<a id="sec-3" name="sec-3"></a>
@@ -55,7 +55,7 @@ It's nice :)
     1.  Install [python](https://www.python.org/);
     2.  Install [ctags](http://ctags.sourceforge.net/);
     3.  Install [pygments](http://pygments.org/) package;
-    4.  Enable pygments plugin: 
+    4.  Enable pygments plugin:
         <div>Add enviroment variables to '.profile'(or whatever you use):
         export GTAGSCONF=/usr/local/share/gtags/gtags.conf
         export GTAGSLABEL=pygments
