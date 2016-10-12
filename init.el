@@ -21,25 +21,30 @@
 (require 'diminish)                ;; if you use :diminish
 (require 'bind-key)                ;; if you use any :bind variant
 
+;; A small function that returns path relative to Emacs
+;; home directory.
+(defun emacs-home-rel (file)
+  (expand-file-name file user-emacs-directory))
+
 ;; Configuration setup
-(load-file "~/.emacs.d/config/config-appearance.el")
-(load-file "~/.emacs.d/config/config-ease.el")
-(load-file "~/.emacs.d/config/config-whitespaces.el")
+(load-file (emacs-home-rel "config/config-appearance.el"))
+(load-file (emacs-home-rel "config/config-ease.el"))
+(load-file (emacs-home-rel "config/config-whitespaces.el"))
 
 ;; Packages setup
 ;; TODO: maybe add comments?
-(load-file "~/.emacs.d/setup/setup-helm.el")
-(load-file "~/.emacs.d/setup/setup-helm-projectile.el")
-(load-file "~/.emacs.d/setup/setup-helm-swoop.el")
-(load-file "~/.emacs.d/setup/setup-helm-gtags.el")
-(load-file "~/.emacs.d/setup/setup-helm-flycheck.el")
-(load-file "~/.emacs.d/setup/setup-smartparens.el")
-(load-file "~/.emacs.d/setup/setup-diff-hl.el")
-(load-file "~/.emacs.d/setup/setup-sr-speedbar.el")
-(load-file "~/.emacs.d/setup/setup-company.el")
-(load-file "~/.emacs.d/setup/setup-yasnippet.el")
-(load-file "~/.emacs.d/setup/setup-flycheck.el")
-(load-file "~/.emacs.d/setup/setup-org.el")
-(load-file "~/.emacs.d/setup/setup-magit.el")
-(load-file "~/.emacs.d/setup/setup-irony.el")       ; Completion/Check syntax for C & C++
-(load-file "~/.emacs.d/setup/setup-slime.el")       ; IDE for Common Lisp
+(load-file (emacs-home-rel "setup/setup-helm.el"))
+(load-file (emacs-home-rel "setup/setup-helm-projectile.el"))
+(load-file (emacs-home-rel "setup/setup-helm-swoop.el"))
+(load-file (emacs-home-rel "setup/setup-helm-gtags.el"))
+(load-file (emacs-home-rel "setup/setup-helm-flycheck.el"))
+(load-file (emacs-home-rel "setup/setup-smartparens.el"))
+(load-file (emacs-home-rel "setup/setup-diff-hl.el"))
+(load-file (emacs-home-rel "setup/setup-sr-speedbar.el"))
+(load-file (emacs-home-rel "setup/setup-company.el"))
+(load-file (emacs-home-rel "setup/setup-yasnippet.el"))
+(load-file (emacs-home-rel "setup/setup-flycheck.el"))
+(load-file (emacs-home-rel "setup/setup-org.el"))
+(load-file (emacs-home-rel "setup/setup-magit.el"))
+(load-file (emacs-home-rel "setup/setup-irony.el"))       ; Completion/Check syntax for C & C++
+(load-file (emacs-home-rel "setup/setup-slime.el"))       ; IDE for Common Lisp
