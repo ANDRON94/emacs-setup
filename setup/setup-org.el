@@ -17,7 +17,10 @@
      (quote
       (("t" "Simple TODO task" entry
         (file+headline "gtd.org" "TASKS")
-        "* TODO %^{Task} %^g\n SCHEDULED: %^T\n Captured: %<%Y-%m-%d %H:%M>")))))
+        "* TODO %^{Task} %^g\n SCHEDULED: %^T\n Captured: %<%Y-%m-%d %H:%M>")
+       ("n" "Get a Note" entry
+        (file+headline "gtd.org" "NOTES")
+         "* %^{Note} %^g\n SCHEDULED: %^T\n Captured: %<%Y-%m-%d %H:%M>")))))
   (custom-set-faces
    ;; custom-set-faces was added by Custom.
    ;; If you edit it by hand, you could mess it up, so be careful.
