@@ -2,5 +2,5 @@
   :ensure t
   :config
   (setq inferior-lisp-program "/usr/local/bin/sbcl") ; Compiler path
-  (add-to-list 'slime-contribs 'slime-repl) ; Enable REPL
-  (add-to-list 'slime-contribs 'slime-fancy)) ; Also setup the slime-fancy contrib
+  (use-package slime-company :ensure t)
+  (slime-setup '(slime-repl slime-fancy slime-company)))
