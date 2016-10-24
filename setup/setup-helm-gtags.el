@@ -1,5 +1,6 @@
 (use-package helm-gtags
   :ensure t
+  :commands (helm-gtags-mode)
   :init
   (add-hook 'dired-mode-hook 'helm-gtags-mode)
   (add-hook 'eshell-mode-hook 'helm-gtags-mode)
@@ -8,7 +9,7 @@
   (add-hook 'asm-mode-hook 'helm-gtags-mode)
   (add-hook 'java-mode-hook 'helm-gtags-mode)
   (add-hook 'javascript-mode-hook 'helm-gtags-mode)
-  ;(add-hook 'lisp-mode-hook 'helm-gtags-mode) ; Use slime instead of helm-gtags
+                                        ;(add-hook 'lisp-mode-hook 'helm-gtags-mode) ; Use slime instead of helm-gtags
   (add-hook 'python-mode-hook 'helm-gtags-mode)
   :bind (:map helm-gtags-mode-map
               ("C-c g a" . helm-gtags-tags-in-this-function)

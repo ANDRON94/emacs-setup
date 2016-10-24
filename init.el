@@ -17,6 +17,7 @@
 
 ;; Enable use-package
 (eval-when-compile
+  (defvar use-package-verbose t)
   (require 'use-package))
 (require 'diminish)                ;; if you use :diminish
 (require 'bind-key)                ;; if you use any :bind variant
@@ -37,7 +38,6 @@
 (load-file (emacs-home-rel "setup/setup-helm-projectile.el"))
 (load-file (emacs-home-rel "setup/setup-helm-swoop.el"))
 (load-file (emacs-home-rel "setup/setup-helm-gtags.el"))
-(load-file (emacs-home-rel "setup/setup-helm-flycheck.el"))
 (load-file (emacs-home-rel "setup/setup-smartparens.el"))
 (load-file (emacs-home-rel "setup/setup-diff-hl.el"))
 (load-file (emacs-home-rel "setup/setup-sr-speedbar.el"))

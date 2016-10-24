@@ -1,5 +1,6 @@
 (use-package helm-projectile
   :ensure t
+  :demand t
   :config
   (projectile-global-mode +1)
   (setq projectile-completion-system 'helm)

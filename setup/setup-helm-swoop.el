@@ -10,8 +10,8 @@
          ("M-i" . helm-swoop-from-isearch)) ; When doing isearch, hand the word over to helm-swoop
   :config
                                         ;(setq helm-multi-swoop-edit-save t) ; Save buffer when helm-multi-swoop-edit complete
-  (setq helm-swoop-split-with-multiple-windows t) ; If this value is t, split window inside the current window
-  (setq helm-swoop-split-direction 'split-window-vertically) ; Split direcion. 'split-window-vertically or 'split-window-horizontally
-  (setq helm-swoop-speed-or-color t)) ; If nil, you can slightly boost invoke speed in exchange for text color
+  (setq helm-swoop-split-with-multiple-windows t            ; If this value is t, split window inside the current window
+        helm-swoop-split-direction 'split-window-vertically ; Split direcion. 'split-window-vertically or 'split-window-horizontally
+        helm-swoop-speed-or-color t))                       ; If nil, you can slightly boost invoke speed in exchange for text color
 
 
