@@ -11,10 +11,10 @@
 
 # Introduction<a id="sec-1" name="sec-1"></a>
 
-Emacs is a great text editor and you can read up on it on the Internet.
-But "With great power comes great responsibility" =)
-So, if you want to feel a full power of Emacs, you'll need to customise it yourself.
-And I just want to help by sharing my own configuration. Ok, let's start!
+Emacs is a great text editor and you can read up on it on the Internet.  
+But "With great power comes great responsibility" =)  
+So, if you want to feel a full power of Emacs, you'll need to customise it yourself.  
+And I just want to help by sharing my own configuration. Ok, let's start!  
 
 # How To<a id="sec-2" name="sec-2"></a>
 
@@ -37,16 +37,15 @@ So, my configuration has next features(you can add/remove/modify as you want):
 -   and finally [cool color theme](https://github.com/cpaulik/emacs-material-theme), working with whitespaces and other
     small useful features.
 
-A little bit scary, yeah? =)
-Ok, read this to find out how it works:
+A little bit scary, yeah? =) Ok, read this to find out how it works:
 -   [A Package in a league of its own: Helm](http://tuhdo.github.io/helm-intro.html);
 -   [Exploring large projects with Projectile and Helm Projectile](http://tuhdo.github.io/helm-projectile.html);
 -   [C/C++ Development Environment for Emacs](http://tuhdo.github.io/c-ide.html);
 -   [Emacs as C++ IDE](http://syamajala.github.io/c-ide.html).
 
-Of course, don't forget to visit github pages of packages(links above).
-At last, read about [use-package](https://github.com/jwiegley/use-package) package. I'm using it in my configuration files.
-It's nice :)
+Of course, don't forget to visit github pages of packages(links above).  
+At last, read about [use-package](https://github.com/jwiegley/use-package) package. I'm using it in my configuration files.  
+It's nice :)  
 
 # Installation<a id="sec-3" name="sec-3"></a>
 
@@ -55,20 +54,21 @@ It's nice :)
     1.  Install [python](https://www.python.org/);
     2.  Install [ctags](http://ctags.sourceforge.net/);
     3.  Install [pygments](http://pygments.org/) package;
-    4.  Enable pygments plugin:
-        <div>Add enviroment variables to '.profile'(or whatever you use):
-        export GTAGSCONF=/usr/local/share/gtags/gtags.conf
-        export GTAGSLABEL=pygments
-        You can find a more detailed guide at 'global-x.x.x/plugin-factory/PLUGIN<sub>HOWTO</sub>.pygments'.</div>
+    4.  Enable pygments plugin:  
+        Add enviroment variables to '.profile'(or whatever you use):  
+        "export GTAGSCONF=/usr/local/share/gtags/gtags.conf"  
+        "export GTAGSLABEL=pygments"  
+        You can find a more detailed guide at 'global-x.x.x/plugin-factory/PLUGIN<sub>HOWTO</sub>.pygments'.
 3.  Generate gtags for external libraries(you can do it later):
-    1.  Add enviroment variable to '.profile'(or whatever you use) =):
-        <div>export GTAGSLIBPATH=$HOME/.gtags/</div>
-    2.  Create database:
-        <div>mkdir ~/.gtags
-        ln -s <LIBRARY PATH1> <NAME1>
-        ln -s <LIBRARY PATH2> <NAME2>
-        gtags -c</div>
-4.  Get my configuration:
-    <div>Clone to your Emacs directory 'git clone <https://github.com/ANDRON94/emacs-setup.git> .'</div>
-5.  Run Emacs :)
-    <div>[use-package](https://github.com/jwiegley/use-package) download and setup all packages automatically.</div>
+    1.  Add enviroment variable to '.profile'(or whatever you use) =):  
+        "export GTAGSLIBPATH=$HOME/.gtags/"
+    2.  Create database:  
+        "mkdir ~/.gtags"  
+        "ln -s *LIBRARY PATH1* *NAME1*"  
+        "ln -s *LIBRARY PATH2* *NAME2*"  
+        "&#x2026;"  
+        "gtags -c"
+4.  Get my configuration:  
+    Clone to your Emacs directory 'git clone <https://github.com/ANDRON94/emacs-setup.git> .'
+5.  Run Emacs :)  
+    [use-package](https://github.com/jwiegley/use-package) download and setup all packages automatically.
