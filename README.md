@@ -29,6 +29,7 @@ So, my configuration has next features(you can add/remove/modify as you want):
     -   git porcelain([magit!!!](https://github.com/magit/magit) - it's really a cool stuff);
     -   git-svn extension([magit-svn!!!](https://github.com/magit/magit-svn));
     -   highlighting uncommitted changes([diff-hl](https://github.com/dgutov/diff-hl));
+    -   popup commit message at current line([git-messenger](https://github.com/syohex/emacs-git-messenger));
 -   text completion([company](https://github.com/company-mode/company-mode)):
     -   also, smart completion for C++, C([irony](https://github.com/Sarcasm/irony-mode));
 -   a code snippets([yasnippet](https://github.com/joaotavora/yasnippet));

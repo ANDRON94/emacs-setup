@@ -46,5 +46,6 @@
 (load-file (emacs-home-rel "setup/setup-flycheck.el"))
 (load-file (emacs-home-rel "setup/setup-org.el"))
 (load-file (emacs-home-rel "setup/setup-magit.el"))
+(load-file (emacs-home-rel "setup/setup-git-messenger.el"))
 (load-file (emacs-home-rel "setup/setup-irony.el"))       ; Completion/Check syntax for C & C++
 (load-file (emacs-home-rel "setup/setup-slime.el"))       ; IDE for Common Lisp
