@@ -27,3 +27,16 @@
 
 ;; Run ediff control panel in the current frame
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
+
+;; Show which function mode in headerline
+(which-function-mode +1) ; Enable mode globaly
+
+(setq mode-line-format (delete (assoc 'which-func-mode
+                                      mode-line-format) mode-line-format) ; Remove from modeline
+      which-func-header-line-format '(which-func-mode ("" which-func-format))) ; Set headerline format
+
+(defadvice which-func-ff-hook (after header-line activate) ; Add info to headerline
+  (when which-func-mode
+    (setq mode-line-format (delete (assoc 'which-func-mode
+                                          mode-line-format) mode-line-format)
+          header-line-format which-func-header-line-format)))
