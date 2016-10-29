@@ -3,6 +3,15 @@
   :init
   (add-hook 'after-init-hook 'global-company-mode) ; Activate company mode globally
   :config
+  (use-package company-quickhelp
+    :ensure t
+    :demand t
+    :bind (:map company-active-map
+           ("M-h" . company-quickhelp-manual-begin))
+    :config
+    (setf company-quickhelp-delay nil)
+                                        ; (company-quickhelp-mode +1)
+    )
   (use-package company-irony
     :ensure t
     :config
