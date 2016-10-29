@@ -33,6 +33,7 @@ So, my configuration has next features(you can add/remove/modify as you want):
 -   text completion([company](https://github.com/company-mode/company-mode)):
     -   also, smart completion for C++, C([irony](https://github.com/Sarcasm/irony-mode));
 -   a code snippets([yasnippet](https://github.com/joaotavora/yasnippet));
+-   working with Web(HTML, CSS, JS)([web-mode](http://web-mode.org/));
 -   keeping notes, maintaining TODO lists, planning projects([org](http://orgmode.org/));
 -   a Common Lisp IDE([slime](https://github.com/slime/slime));
 -   and finally [cool color theme](https://github.com/cpaulik/emacs-material-theme), working with whitespaces and other
@@ -70,6 +71,6 @@ It's nice :)
         "&#x2026;"  
         "gtags -c"
 4.  Get my configuration:  
-    Clone to your Emacs directory 'git clone <https://github.com/ANDRON94/emacs-setup.git> .'
+    Clone to your Emacs directory "git clone <https://github.com/ANDRON94/emacs-setup.git> ."
 5.  Run Emacs :)  
     [use-package](https://github.com/jwiegley/use-package) download and setup all packages automatically.
