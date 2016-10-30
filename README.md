@@ -36,6 +36,7 @@ So, my configuration has next features(you can add/remove/modify as you want):
 -   working with Web(HTML, CSS, JS)([web-mode](http://web-mode.org/));
 -   keeping notes, maintaining TODO lists, planning projects([org](http://orgmode.org/));
 -   a Common Lisp IDE([slime](https://github.com/slime/slime));
+-   update installed packages at startup([auto-package-update](https://github.com/rranelli/auto-package-update.el));
 -   and finally [cool color theme](https://github.com/cpaulik/emacs-material-theme), working with whitespaces and other
     small useful features.
 

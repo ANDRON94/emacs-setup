@@ -34,6 +34,7 @@
 
 ;; Packages setup
 ;; TODO: maybe add comments?
+(load-file (emacs-home-rel "setup/setup-auto-package-update.el"))
 (load-file (emacs-home-rel "setup/setup-helm.el"))
 (load-file (emacs-home-rel "setup/setup-helm-projectile.el"))
 (load-file (emacs-home-rel "setup/setup-helm-swoop.el"))
