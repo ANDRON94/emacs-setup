@@ -37,6 +37,7 @@ So, my configuration has next features(you can add/remove/modify as you want):
 -   keeping notes, maintaining TODO lists, planning projects([org](http://orgmode.org/));
 -   a Common Lisp IDE([slime](https://github.com/slime/slime));
 -   update installed packages at startup([auto-package-update](https://github.com/rranelli/auto-package-update.el));
+-   a markdown support([markdown-mode](http://jblevins.org/projects/markdown-mode/));
 -   and finally [cool color theme](https://github.com/cpaulik/emacs-material-theme), working with whitespaces and other
     small useful features.
 
@@ -57,21 +58,32 @@ It's nice :)
     1.  Install [python](https://www.python.org/);
     2.  Install [ctags](http://ctags.sourceforge.net/);
     3.  Install [pygments](http://pygments.org/) package;
-    4.  Enable pygments plugin:  
-        Add enviroment variables to '.profile'(or whatever you use):  
-        "export GTAGSCONF=/usr/local/share/gtags/gtags.conf"  
-        "export GTAGSLABEL=pygments"  
-        You can find a more detailed guide at 'global-x.x.x/plugin-factory/PLUGIN<sub>HOWTO</sub>.pygments'.
+    4.  Enable pygments plugin:
+        
+        ```
+        Add enviroment variables to '.profile'(or whatever you use):
+        "export GTAGSCONF=/usr/local/share/gtags/gtags.conf"
+        "export GTAGSLABEL=pygments"
+        You can find a more detailed guide at 'global-x.x.x/plugin-factory/PLUGIN_HOWTO.pygments'.
+        ```
 3.  Generate gtags for external libraries(you can do it later):
-    1.  Add enviroment variable to '.profile'(or whatever you use) =):  
+    1.  Add enviroment variable to '.profile'(or whatever you use) =):
+        
+        ```
         "export GTAGSLIBPATH=$HOME/.gtags/"
-    2.  Create database:  
-        "mkdir ~/.gtags"  
-        "ln -s *LIBRARY PATH1* *NAME1*"  
-        "ln -s *LIBRARY PATH2* *NAME2*"  
-        "&#x2026;"  
+        ```
+    2.  Create database:
+        
+        ```
+        "mkdir ~/.gtags"
+        "ln -s /LIBRARY PATH1/ /NAME1/"
+        "ln -s /LIBRARY PATH2/ /NAME2/"
+        "..."
         "gtags -c"
-4.  Get my configuration:  
-    Clone to your Emacs directory "git clone <https://github.com/ANDRON94/emacs-setup.git> ."
-5.  Run Emacs :)  
-    [use-package](https://github.com/jwiegley/use-package) download and setup all packages automatically.
+        ```
+4.  Get my configuration:
+    
+    ```
+    Clone to your Emacs directory "git clone https://github.com/ANDRON94/emacs-setup.git ."
+    ```
+5.  Run Emacs :) [use-package](https://github.com/jwiegley/use-package) download and setup all packages automatically.
