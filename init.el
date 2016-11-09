@@ -31,6 +31,7 @@
 (load-file (emacs-home-rel "config/config-appearance.el"))
 (load-file (emacs-home-rel "config/config-ease.el"))
 (load-file (emacs-home-rel "config/config-whitespaces.el"))
+(load-file (emacs-home-rel "config/config-navigation.el"))
 
 ;; Packages setup
 ;; TODO: maybe add comments?
