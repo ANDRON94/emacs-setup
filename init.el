@@ -35,6 +35,7 @@
 (load-file (emacs-home-rel "config/config-appearance.el"))
 (load-file (emacs-home-rel "config/config-ease.el"))
 (load-file (emacs-home-rel "config/config-whitespaces.el"))
+(load-file (emacs-home-rel "config/config-navigation.el"))
 
 ;; Packages setup
 ;; TODO: maybe add comments?
@@ -54,5 +55,6 @@
 (load-file (emacs-home-rel "setup/setup-git-messenger.el"))
 (load-file (emacs-home-rel "setup/setup-web-mode.el"))
 (load-file (emacs-home-rel "setup/setup-markdown-mode.el"))
+(load-file (emacs-home-rel "setup/setup-highlight-symbol.el"))
 (load-file (emacs-home-rel "setup/setup-irony.el"))       ; Completion/Check syntax for C & C++
 (load-file (emacs-home-rel "setup/setup-slime.el"))       ; IDE for Common Lisp
