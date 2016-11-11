@@ -1,13 +1,17 @@
 (use-package org
+  :demand t
   :ensure t
   :bind (("C-c l" . org-store-link)
          ("C-c c" . org-capture)
          ("C-c a" . org-agenda))
   :config
   (setq org-log-done t)
-  (setq org-directory "~/.emacs.d/org")
-  (setq org-agenda-files (list (concat org-directory "/holidays.org")
-                               (concat org-directory "/gtd.org")))
+  (setq org-directory (emacs-home-rel "org"))
+  (setq org-agenda-files (list (org-home-rel "holidays.org")
+                               (org-home-rel "gtd.org")))
+  ;; Load my custom org helpers.
+  ;; Only for personal usage. You can remove this line without any harm.
+  (load-file (org-home-rel "init.el"))
   (custom-set-variables
    ;; custom-set-variables was added by Custom.
    ;; If you edit it by hand, you could mess it up, so be careful.

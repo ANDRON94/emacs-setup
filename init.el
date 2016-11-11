@@ -27,6 +27,10 @@
 (defun emacs-home-rel (file)
   (expand-file-name file user-emacs-directory))
 
+;; Returns path relative to Org home directory.
+(defun org-home-rel (file)
+  (expand-file-name file org-directory))
+
 ;; Configuration setup
 (load-file (emacs-home-rel "config/config-appearance.el"))
 (load-file (emacs-home-rel "config/config-ease.el"))
