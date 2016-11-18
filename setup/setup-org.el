@@ -3,7 +3,8 @@
   :ensure t
   :bind (("C-c l" . org-store-link)
          ("C-c c" . org-capture)
-         ("C-c a" . org-agenda))
+         ("C-c a" . org-agenda)
+         ("C-c o u" . org-table-iterate-buffer-tables))
   :config
   (setq org-log-done t)
   (setq org-directory (emacs-home-rel "org"))
