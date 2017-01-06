@@ -2,6 +2,7 @@
   :ensure t
   :config
   (setq inferior-lisp-program "/usr/local/bin/sbcl") ; Compiler path
+  (setq common-lisp-hyperspec-root "file:///files/Documents/Library/HyperSpec-7-0/HyperSpec/") ; Custom hyperspec path
   (unbind-key "M-p" slime-mode-map)
   (unbind-key "M-n" slime-mode-map)
   (use-package slime-company
