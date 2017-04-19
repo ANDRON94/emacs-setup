@@ -8,6 +8,7 @@
                                         ;(add-hook 'lisp-mode-hook 'flycheck-mode)
   (add-hook 'python-mode-hook 'flycheck-mode)
                                         ;(add-hook 'sql-mode-hook 'flycheck-mode)
+  (add-hook 'web-mode-hook 'flycheck-mode)
   :config
   (use-package helm-flycheck ; Integrate flycheck with Helm
     :ensure t
@@ -17,7 +18,8 @@
     :config (flycheck-pos-tip-mode))
   (use-package flycheck-irony ; Integrate flycheck with Irony
     :ensure t
-    :init (add-hook 'flycheck-mode-hook 'flycheck-irony-setup)))
+    :init (add-hook 'flycheck-mode-hook 'flycheck-irony-setup))
+  (flycheck-add-mode 'html-tidy 'web-mode)) ; Integrate flycheck with Web
 
 ;(require 'flycheck-color-mode-line)
 ;; Integrate with mode line
