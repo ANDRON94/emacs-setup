@@ -20,6 +20,6 @@
     (add-to-list 'company-backends '(company-irony-c-headers company-irony))
     (with-eval-after-load 'irony
       (add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)))
-  (setq (car (member 'company-capf company-backends))
+  (setf (car (member 'company-capf company-backends))
         '(company-capf company-dabbrev)) ; Merge results of capf and dabbrev backends
   (setq company-dabbrev-downcase nil)) ; Disable downcasing of autocompletes with dabbrev
