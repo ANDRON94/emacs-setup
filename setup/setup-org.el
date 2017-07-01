@@ -27,9 +27,12 @@
         (file+headline "gtd.org" "NOTES")
         "* %^{Note} %^g\n SCHEDULED: %^T\n Captured: %<%Y-%m-%d %H:%M>"))))
    '(org-export-backends (quote (ascii html icalendar latex md))))
-  (custom-set-faces
-   ;; custom-set-faces was added by Custom.
-   ;; If you edit it by hand, you could mess it up, so be careful.
-   ;; Your init file should contain only one such instance.
-   ;; If there is more than one, they won't work right.
-   ))
+  (use-package org-alert
+    :load-path "custom-packages/org-alert"
+    :config
+    (setq alert-default-style 'libnotify)
+    (setq org-alert-interval (* 6 60 60)) ; six hours
+    ;; Regexp: ' spaces here   ''CAPS WORD HERE'.*':lettersanddigits123:'
+    (setq org-alert-headline-regexp ":[[:space:]+[A-Z][^a-z][A-Z].+:[[:alnum:]]+:")
+    (setq org-alert-notification-title "Org")
+    (org-alert-enable)))
