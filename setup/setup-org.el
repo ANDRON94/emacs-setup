@@ -8,8 +8,7 @@
   :config
   (setq org-log-done t)
   (setq org-directory (emacs-home-rel "org"))
-  (setq org-agenda-files (list (org-home-rel "holidays.org")
-                               (org-home-rel "gtd.org")))
+  (setq org-agenda-files (list (org-home-rel "gtd.org")))
   ;; Load my custom org helpers.
   ;; Only for personal usage. You can remove this line without any harm.
   (load-file (org-home-rel "init.el"))
