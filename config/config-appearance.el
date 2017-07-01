@@ -1,5 +1,7 @@
 ;; Disable the welcome message
 (setq inhibit-startup-message t)
+;; Make 'bell signal' a visible
+(setq visible-bell t)
 
 ;; Display line numbers
 (use-package nlinum
