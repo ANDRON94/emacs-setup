@@ -7,8 +7,17 @@
 # Temporary
 *~
 
-#Specific folders
+# Specific files
+recentf
+bookmarks
+tramp
+projectile-bookmarks.eld
+.last-package-update-day
+
+# Specific folders
 elpa/
 eshell/
 semanticdb/
 irony/
+org/
+snippets/
