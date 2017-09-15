@@ -25,13 +25,16 @@
        ("n" "Get a Note" entry
         (file+headline "gtd.org" "NOTES")
         "* %^{Note} %^g\n SCHEDULED: %^T\n Captured: %<%Y-%m-%d %H:%M>"))))
-   '(org-export-backends (quote (ascii html icalendar latex md))))
-  (use-package org-alert
-    :load-path "custom-packages/org-alert"
-    :config
-    (setq alert-default-style 'libnotify)
-    (setq org-alert-interval (* 6 60 60)) ; six hours
-    ;; Regexp: ' spaces here   ''CAPS WORD HERE'.*':lettersanddigits123:'
-    (setq org-alert-headline-regexp ":[[:space:]+[A-Z][^a-z][A-Z].+:[[:alnum:]]+:")
-    (setq org-alert-notification-title "Org")
-    (org-alert-enable)))
+   '(org-export-backends (quote (ascii html icalendar latex md)))))
+
+(use-package org-alert
+  :demand t
+  :ensure t
+  :config
+  (setq alert-default-style 'libnotify)
+  (setq org-alert-interval (* 6 60 60)) ; six hours
+  ;; Regexp: ' spaces here   ''CAPS WORD HERE'.*':lettersanddigits123:'
+  (setq org-alert-headline-regexp
+        ":[[:space:]+[A-Z][^a-z][A-Z].+:[[:alnum:]]+:")
+  (setq org-alert-notification-title "Org")
+  (org-alert-enable))
