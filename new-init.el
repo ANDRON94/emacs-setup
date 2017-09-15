@@ -25,7 +25,16 @@
 that always used by user-specified loaders.")
 
 (require 'unconditional-loader my-unconditional-loader-path)
-(require 'test-gui)
+(require 'custom-loader-dispatcher nil t)
 
+(defconst my-default-configuration-loader-path
+  (emacs-absolute-path "configuration/loader/default/configuration-loader.el")
+  "The path to the default configuration loader. A default configuration
+loader is used when user doesn't specify custom loader
+(CUSTOM-LOADER-DISPATCHER feature is missing).")
+
+(require 'configuration-loader (if (featurep 'custom-loader-dispatcher)
+                                   (get-custom-loader-path)
+                                 my-default-configuration-loader-path))
 
 ;;; new-init.el ends here
