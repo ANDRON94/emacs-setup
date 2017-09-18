@@ -15,26 +15,41 @@
 
 ;;; Code:
 
-(add-to-list 'load-path (expand-file-name "./" user-emacs-directory))
+(defconst my--config-dir-path
+  (expand-file-name "./configuration" user-emacs-directory)
+  "The path to the main configuration directory. It holds
+all configuration related files, features, functions.")
+
+(defconst my--loader-dir-path
+  (concat my--config-dir-path "/loader")
+  "The path to the directory which holds configuration
+loaders.")
+
+(add-to-list 'load-path my--config-dir-path)
+(add-to-list 'load-path my--loader-dir-path)
 
 (require 'my-utility)
+(require 'my-unconditional-loader)
+(require 'my-custom-loader-dispatcher nil t)
 
-(defconst my-unconditional-loader-path
-  (emacs-absolute-path "configuration/loader/unconditional-loader.el")
-  "The path to the unconditional loader. It loads configuration
-that always used by user-specified loaders.")
-
-(require 'unconditional-loader my-unconditional-loader-path)
-(require 'custom-loader-dispatcher nil t)
+(defconst my-custom-loader-p (featurep 'my-custom-loader-dispatcher)
+  "The predicate variable which specifies if custom loader was used
+or not.")
 
 (defconst my-default-configuration-loader-path
-  (emacs-absolute-path "configuration/loader/default/configuration-loader.el")
+  (concat my--loader-dir-path "/default/my-configuration-loader.el")
   "The path to the default configuration loader. A default configuration
 loader is used when user doesn't specify custom loader
-(CUSTOM-LOADER-DISPATCHER feature is missing).")
+(MY-CUSTOM-LOADER-DISPATCHER feature is missing).")
 
-(require 'configuration-loader (if (featurep 'custom-loader-dispatcher)
-                                   (get-custom-loader-path)
-                                 my-default-configuration-loader-path))
+(defun my-get-loader-path ()
+  "Helper function which returns custom loader path
+if custom loader is specified by user or it fallbacks
+to default loader path."
+  (if my-custom-loader-p
+      (my-get-custom-loader-path)
+    my-default-configuration-loader-path))
+
+(require 'my-configuration-loader (my-get-loader-path))
 
 ;;; new-init.el ends here

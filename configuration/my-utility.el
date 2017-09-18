@@ -1,4 +1,4 @@
-;;; utility.el --- Helper functions.  -*- lexical-binding: t; -*-
+;;; my-utility.el --- Helper functions.  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2017  Andrii Tymchuk
 
@@ -12,11 +12,11 @@
 
 ;;; Code:
 
-(defun emacs-absolute-path (file-relative-path)
+(defun my-emacs-absolute-path (file-relative-path)
   "Returns absolute path for path relative to
 user emacs directory."
   (expand-file-name file-relative-path user-emacs-directory))
 
 (provide 'my-utility)
 
-;;; utility.el ends here
+;;; my-utility.el ends here

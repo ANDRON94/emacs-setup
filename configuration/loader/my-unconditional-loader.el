@@ -1,3 +1,3 @@
 (message "Hello, unconditional!")
 
-(provide 'unconditional-loader)
+(provide 'my-unconditional-loader)
