@@ -17,30 +17,32 @@
 
 (defconst my--config-dir-path
   (expand-file-name "./configuration" user-emacs-directory)
-  "The path to the main configuration directory. It holds
-all configuration related files, features, functions.")
+  "The path to the main configuration directory.
+It holds all configuration related files, features, functions.")
 
 (defconst my--loader-dir-path
   (concat my--config-dir-path "/loader")
-  "The path to the directory which holds configuration
-loaders.")
+  "The path to the directory which holds configuration loaders.")
 
-(add-to-list 'load-path my--config-dir-path)
+(defconst my--custom-packages-dir-path
+  (concat my--config-dir-path "/custom-packages"))
+
 (add-to-list 'load-path my--loader-dir-path)
+(add-to-list 'load-path my--custom-packages-dir-path)
 
 (require 'my-utility)
 (require 'my-unconditional-loader)
 (require 'my-custom-loader-dispatcher nil t)
 
 (defconst my-custom-loader-p (featurep 'my-custom-loader-dispatcher)
-  "The predicate variable which specifies if custom loader was used
-or not.")
+  "The predicate variable which specifies if custom loader was used or not.")
 
 (defconst my-default-configuration-loader-path
   (concat my--loader-dir-path "/default/my-configuration-loader.el")
-  "The path to the default configuration loader. A default configuration
-loader is used when user doesn't specify custom loader
-(MY-CUSTOM-LOADER-DISPATCHER feature is missing).")
+  "The path to the default configuration loader.
+The default configuration loader is used
+when user doesn't specify custom loader
+\(MY-CUSTOM-LOADER-DISPATCHER feature is missing\).")
 
 (defun my-get-loader-path ()
   "Helper function which returns custom loader path
