@@ -15,22 +15,73 @@
 
 ;;; Code:
 
+;; Configure load path
 (defconst my--config-dir-path
   (expand-file-name "./configuration" user-emacs-directory)
   "The path to the main configuration directory.
 It holds all configuration related files, features, functions.")
 
+(defconst my--custom-packages-dir-path
+  (concat my--config-dir-path "/custom-packages")
+  "The path to the directory that contains custom user packages.")
+
 (defconst my--loader-dir-path
   (concat my--config-dir-path "/loader")
-  "The path to the directory which holds configuration loaders.")
+  "The path to the directory that contains configuration loaders.")
 
-(defconst my--custom-packages-dir-path
-  (concat my--config-dir-path "/custom-packages"))
+(defconst my--setup-dir-path
+  (concat my--config-dir-path "/setup")
+  "The path to the directory that contains setup files.
+Setup files are the files that install external/custom package and
+describe configuration for it.")
 
 (add-to-list 'load-path my--loader-dir-path)
 (add-to-list 'load-path my--custom-packages-dir-path)
 
+;; Load all packages that necessary for
+;; successful configuration setup.
 (require 'my-unconditional-loader)
+
+;; Define main setup files registry.
+(my-load-add-setup-files
+ (list
+  ;; appearance
+  'nlinum '(:path (concat my---setup-dir-path "/appearance/setup-nlinum.el")
+            :keybindings-func my-nlinum-keybindings
+            :customization-func my-nlinum-customization)))
+;; 'powerline (my-load-make-setup-options )
+;; 'theme (my-load-make-setup-options)
+;; ;; edit
+;; 'irony (my-load-make-setup-options)
+;; 'slime (my-load-make-setup-options)
+;; 'markdown-mode (my-load-make-setup-options)
+;; 'smartparens (my-load-make-setup-options)
+;; 'web-mode (my-load-make-setup-options)
+;; ;; interface-enchancement
+;; 'helm (my-load-make-setup-options)
+;; ;; navigate
+;; 'helm-gtags (my-load-make-setup-options)
+;; 'sr-speedbar (my-load-make-setup-options)
+;; ;; package-managment
+;; ;; TODO: 'auto-package-update (my-load-make-setup-options)
+;; ;; project-managment
+;; 'helm-projectile (my-load-make-setup-options)
+;; ;; search
+;; 'helm-swoop (my-load-make-setup-options)
+;; 'highlight-symbol (my-load-make-setup-options)
+;; ;; syntax-checking
+;; 'flycheck (my-load-make-setup-options)
+;; ;; task-managment
+;; 'org (my-load-make-setup-options)
+;; ;; type
+;; 'company (my-load-make-setup-options)
+;; 'yasnippet (my-load-make-setup-options)
+;; ;; version-control
+;; 'diff-hl (my-load-make-setup-options)
+;; 'git-messenger (my-load-make-setup-options)
+;; 'magit (my-load-make-setup-options)))
+
+;; Define and load 'configuration loader' file.
 (require 'my-custom-loader-dispatcher nil t)
 
 (defconst my-custom-loader-p (featurep 'my-custom-loader-dispatcher)
