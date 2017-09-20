@@ -46,9 +46,9 @@ describe configuration for it.")
 (my-load-add-setup-files
  (list
   ;; appearance
-  'nlinum '(:path (concat my---setup-dir-path "/appearance/setup-nlinum.el")
-            :keybindings-func my-nlinum-keybindings
-            :customization-func my-nlinum-customization)))
+  'nlinum (list :path (concat my--setup-dir-path "/appearance/setup-nlinum.el")
+                :keybindings-func 'my-nlinum-keybindings
+                :customization-func 'my-nlinum-customization)))
 ;; 'powerline (my-load-make-setup-options )
 ;; 'theme (my-load-make-setup-options)
 ;; ;; edit
