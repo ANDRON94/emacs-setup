@@ -19,6 +19,13 @@
 FILE-RELATIVE-PATH is the path relative to user's Emacs directory."
   (expand-file-name file-relative-path user-emacs-directory))
 
+(defun my-this-absolute-path (file-relative-path)
+  "Return absolute path for FILE-RELATIVE-PATH.
+FILE-RELATIVE-PATH is the path relative to file from which
+this function was called."
+  (expand-file-name file-relative-path
+                    (file-name-directory load-file-name)))
+
 (defmacro my-doplist (key value plist &rest body)
   "Macro for easy iterating property list.
 KEY is bound to property name and VALUE is bound
