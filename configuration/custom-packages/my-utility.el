@@ -12,6 +12,8 @@
 
 ;;; Code:
 
+;; Interface
+
 (defun my-emacs-absolute-path (file-relative-path)
   "Return absolute path for FILE-RELATIVE-PATH.
 FILE-RELATIVE-PATH is the path relative to user's Emacs directory."
@@ -30,6 +32,12 @@ code that should be executed on each iteration."
             (,value (cadr ,curr-elem)))
         ,@body
         (setq ,curr-elem (cddr ,curr-elem)))))))
+
+(defun my-funcall-if-exist (function &rest arguments)
+  "Call function FUNCTION with arguments ARGUMENTS if it's defined.
+Return result of the function or nil otherwise."
+  (when (fboundp function)
+    (apply function arguments)))
 
 (provide 'my-utility)
 
