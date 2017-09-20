@@ -33,6 +33,8 @@
 (require 'diminish)
 (require 'bind-key)
 
+;; Use 'my-utility' package that contains useful functions and macros.
+(require 'my-utility)
 ;; Use 'my-load' package that helps to organize setup files and their
 ;; customizations in the simple fashion.
 (require 'my-load)
