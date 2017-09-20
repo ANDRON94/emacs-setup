@@ -30,7 +30,6 @@ It holds all configuration related files, features, functions.")
 (add-to-list 'load-path my--loader-dir-path)
 (add-to-list 'load-path my--custom-packages-dir-path)
 
-(require 'my-utility)
 (require 'my-unconditional-loader)
 (require 'my-custom-loader-dispatcher nil t)
 
@@ -45,9 +44,8 @@ when user doesn't specify custom loader
 \(MY-CUSTOM-LOADER-DISPATCHER feature is missing\).")
 
 (defun my-get-loader-path ()
-  "Helper function which returns custom loader path
-if custom loader is specified by user or it fallbacks
-to default loader path."
+  "Helper function which return custom loader path.
+If custom loader isn't specified by user returns default loader path."
   (if my-custom-loader-p
       (my-get-custom-loader-path)
     my-default-configuration-loader-path))
