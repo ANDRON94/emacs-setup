@@ -33,6 +33,10 @@
 (require 'diminish)
 (require 'bind-key)
 
+;; Use 'my-load' package that helps to organize setup files and their
+;; customizations in the simple fashion.
+(require 'my-load)
+
 (provide 'my-unconditional-loader)
 
 ;;; my-unconditional-loader.el ends here
