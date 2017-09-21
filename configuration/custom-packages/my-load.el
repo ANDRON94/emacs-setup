@@ -32,7 +32,7 @@
 Key is unique identifier of setup file and value is also a property
 list of different options for such file.  Supported options are
 :PATH - path to configuration file;
-:KEYBINDINGS-FUNC - name of function to setup keybindings;
+:KEYBINDINGS-MACRO - name of macro to setup keybindings;
 :CUSTOMIZATION-FUNC- name of function to setup various of options.")
 
 (defun my-load--get-setup-option (unique-key option-name)
@@ -40,6 +40,13 @@ list of different options for such file.  Supported options are
 OPTION-NAME is the name of desired option."
   (let ((setup-options (plist-get my-load--central-registry unique-key)))
     (plist-get setup-options option-name)))
+
+(defun my-load--set-setup-option (unique-key option-name option-value)
+  "Set option for setup file with UNIQUE-KEY identifier.
+OPTION-NAME is the name of desired option.
+OPTION-VALUE is the value of desired option."
+  (let ((setup-options (plist-get my-load--central-registry unique-key)))
+    (plist-put setup-options option-name optiona-value)))
 
 (defconst my-load--success-load-format-msg
   "Load setup file with identifier '%s'."
@@ -61,10 +68,10 @@ because it's in the exception list."
                                              customization-func)
   "Create property list of setup file options.
 FILE-PATH is a path to the setup file.
-KEYBINDINGS-FUNC is the name of function to configure keybindings.
+KEYBINDINGS-MACRO is the name of macro to configure keybindings.
 CUSTOMIZATION-FUNC is the name of function to configure various of options."
   (list :path file-path
-        :keybindings-func keybindings-func
+        :keybindings-macro keybindings-func
         :customization-func customization-func))
 
 (defun my-load-add-setup-file (unique-key setup-options)
@@ -82,15 +89,27 @@ value is the setup file options."
   (setq my-load--central-registry
         (append my-load--central-registry setup-files)))
 
-(defun my-load-get-keybindings-func (unique-key)
-  "Get keybindings customization function of setup file.
+(defun my-load-get-keybindings-macro (unique-key)
+  "Get keybindings customization macro of setup file.
 UNIQUE-KEY is the identifier of desired setup file."
-  (my-load--get-setup-option unique-key :keybindings-func))
+  (my-load--get-setup-option unique-key :keybindings-macro))
+
+(defun my-load-set-keybindings-macro (unique-key keybindings-macro)
+  "Set keybindings customization function for setup file.
+UNIQUE-KEY is the identifier of desired setup file.
+KEYBINDINGS-MACRO is the name of desired keybindings customization macro."
+  (my-load--set-setup-option unique-key :keybindings-macro keybindings-macro))
 
 (defun my-load-get-customization-func (unique-key)
   "Get general customization function for setup file.
 UNIQUE-KEY is the identifier of desired setup file."
   (my-load--get-setup-option unique-key :customization-func))
+
+(defun my-load-set-customization-func (unique-key customization-func)
+  "Set general customization function for setup file.
+UNIQUE-KEY is the identifier of desired setup file.
+CUSTOMIZATION-FUNC is the name of desired customization function."
+  (my-load--set-setup-option unique-key :customization-func customization-func))
 
 (defun my-load-load-only (only-keys)
   "Load setup files from central registry which identifiers exist in ONLY-KEYS.
