@@ -61,6 +61,12 @@ Return the macro expansion or nil otherwise."
   (when (my-mboundp (car form))
     (macroexpand form environment)))
 
+(defmacro my-macro-with-arg-factory (macro-name arguments-factory)
+  "Expand macro with name MACRO-NAME and with arguments produced by function.
+ARGUMENTS-FACTORY is the arguments factory function.  It should return list
+of valid macro arguments."
+  `(,macro-name ,@(funcall arguments-factory)))
+
 (provide 'my-utility)
 
 ;;; my-utility.el ends here
