@@ -16,8 +16,13 @@
 (defun my-nlinum-customization ()
   (add-hook 'org-mode-hook (lambda () (nlinum-mode -1))))
 
+(defun my-powerline-customization ()
+  (powerline-center-theme)
+  (setq powerline-default-separator 'wave))
+
 ;; Attach customizations to corresponding setup files.
 (my-load-set-customization-func 'nlinum 'my-nlinum-customization)
+(my-load-set-customization-func 'powerline 'my-powerline-customization)
 
 (provide 'my-customization)
 
