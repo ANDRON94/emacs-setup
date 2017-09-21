@@ -67,6 +67,10 @@ FILE-RELATIVE-PATH is the path relative to SETUP directory."
   (my-load-make-setup-options
    (my--setup-absolute-path "/appearance/setup-solarized-theme.el"))
 
+  ;; interface-enchancement
+  'general
+  (my-load-make-setup-options
+   (my--setup-absolute-path "/interface-enchancement/general.el"))
   ))
 ;; ;; edit
 ;; 'irony (my-load-make-setup-options)

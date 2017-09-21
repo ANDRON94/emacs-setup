@@ -27,6 +27,10 @@
   (setq solarized-high-contrast-mode-line t)
   (load-theme 'solarized-light t))
 
+(defun my-general-customization ()
+  (setq visible-bell t) ; Make 'bell signal' a visible.
+  (tool-bar-mode -1)) ; Disable tool bar.
+
 ;; Attach customizations to corresponding setup files.
 (my-load-set-customization-func 'nlinum 'my-nlinum-customization)
 
@@ -37,6 +41,8 @@
 
 (my-load-set-customization-func 'solarized-theme
                                 'my-solarized-theme-customization)
+
+(my-load-set-customization-func 'general 'my-general-customization)
 
 (provide 'my-customization)
 
