@@ -46,6 +46,21 @@ Return result of the function or nil otherwise."
   (when (fboundp function)
     (apply function arguments)))
 
+(defun my-mboundp (symbol)
+  "Return t if SYMBOL's macro definition is not void."
+  (let ((sym-func (symbol-function symbol)))
+    (and (fboundp symbol)
+         (listp sym-func)
+         (eq (car sym-func) 'macro))))
+
+(defun my-macroexpand-if-exist (form &optional environment)
+  "Expand macro with name FORM if it's defined.
+For more information about FORM, ENVIRONMENT and result
+of expansion see `macroexpand' documentationl.
+Return the macro expansion or nil otherwise."
+  (when (my-mboundp (car form))
+    (macroexpand form environment)))
+
 (provide 'my-utility)
 
 ;;; my-utility.el ends here
