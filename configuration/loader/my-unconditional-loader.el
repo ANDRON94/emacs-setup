@@ -21,7 +21,8 @@
 ;; (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
 (package-initialize)
 
-;; Install `use-package'(handy package configuration macro) if necessary.
+;; Install `use-package'(handy macro for package configuration)
+;; if it wasn't installed before.
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
@@ -34,10 +35,12 @@
 (require 'bind-key)
 
 ;; Use 'my-utility' package that contains useful functions and macros.
-(require 'my-utility)
+(require 'my-utility (expand-file-name
+                      "../custom-packages/my-utility.el"
+                      (file-name-directory load-file-name)))
 ;; Use 'my-load' package that helps to organize setup files and their
 ;; customizations in the simple fashion.
-(require 'my-load)
+(require 'my-load (my-this-absolute-path "../custom-packages/my-load.el"))
 
 (provide 'my-unconditional-loader)
 
