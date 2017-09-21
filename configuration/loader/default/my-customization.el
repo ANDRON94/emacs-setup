@@ -20,9 +20,23 @@
   (powerline-center-theme)
   (setq powerline-default-separator 'wave))
 
+(defun my-material-theme-customization ()
+  (load-theme 'material t))
+
+(defun my-solarized-theme-customization ()
+  (setq solarized-high-contrast-mode-line t)
+  (load-theme 'solarized-light t))
+
 ;; Attach customizations to corresponding setup files.
 (my-load-set-customization-func 'nlinum 'my-nlinum-customization)
+
 (my-load-set-customization-func 'powerline 'my-powerline-customization)
+
+(my-load-set-customization-func 'material-theme
+                                'my-material-theme-customization)
+
+(my-load-set-customization-func 'solarized-theme
+                                'my-solarized-theme-customization)
 
 (provide 'my-customization)
 

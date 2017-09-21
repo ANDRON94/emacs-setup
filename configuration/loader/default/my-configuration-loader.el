@@ -37,7 +37,7 @@
 (require 'my-customization my--customization-file-path)
 
 ;; Load necessary setup files.
-(my-load-load-all)
+(my-load-load-except '(material-theme))
 
 (provide 'my-configuration-loader)
 
