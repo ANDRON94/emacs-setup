@@ -35,6 +35,11 @@ It holds all configuration related files, features, functions.")
 Setup files are the files that install external/custom package and
 describe configuration for it.")
 
+(defun my--setup-absolute-path (file-relative-path)
+  "Return absolute path for FILE-RELATIVE-PATH.
+FILE-RELATIVE-PATH is the path relative to SETUP directory."
+  (concat my--setup-dir-path file-relative-path))
+
 (add-to-list 'load-path my--loader-dir-path)
 (add-to-list 'load-path my--custom-packages-dir-path)
 
@@ -46,11 +51,9 @@ describe configuration for it.")
 (my-load-add-setup-files
  (list
   ;; appearance
-  'nlinum (list :path (concat my--setup-dir-path "/appearance/setup-nlinum.el")
-                :keybindings-func 'my-nlinum-keybindings
-                :customization-func 'my-nlinum-customization)))
-;; 'powerline (my-load-make-setup-options )
-;; 'theme (my-load-make-setup-options)
+  'nlinum (my-load-make-setup-options
+           (my--setup-absolute-path "/appearance/setup-nlinum.el"))
+  ))
 ;; ;; edit
 ;; 'irony (my-load-make-setup-options)
 ;; 'slime (my-load-make-setup-options)

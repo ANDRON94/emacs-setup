@@ -12,7 +12,12 @@
 
 ;;; Code:
 
-;; TODO: add customization here!!!
+;; Define customization.
+(defun my-nlinum-customization ()
+  (add-hook 'org-mode-hook (lambda () (nlinum-mode -1))))
+
+;; Attach customizations to corresponding setup files.
+(my-load-set-customization-func 'nlinum 'my-nlinum-customization)
 
 (provide 'my-customization)
 
