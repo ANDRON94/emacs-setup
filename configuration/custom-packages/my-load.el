@@ -23,7 +23,9 @@
 
 ;; TODO: choose better names!
 
-(require 'my-utility)
+(require 'my-utility (expand-file-name
+                      "./my-utility.el"
+                      (file-name-directory load-file-name)))
 
 ;; Implementation
 
