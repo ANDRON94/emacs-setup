@@ -71,6 +71,10 @@ FILE-RELATIVE-PATH is the path relative to SETUP directory."
   'general
   (my-load-make-setup-options
    (my--setup-absolute-path "/interface-enchancement/general.el"))
+
+  'helm
+  (my-load-make-setup-options
+   (my--setup-absolute-path "/interface-enchancement/setup-helm.el"))
   ))
 ;; ;; edit
 ;; 'irony (my-load-make-setup-options)
@@ -78,8 +82,6 @@ FILE-RELATIVE-PATH is the path relative to SETUP directory."
 ;; 'markdown-mode (my-load-make-setup-options)
 ;; 'smartparens (my-load-make-setup-options)
 ;; 'web-mode (my-load-make-setup-options)
-;; ;; interface-enchancement
-;; 'helm (my-load-make-setup-options)
 ;; ;; navigate
 ;; 'helm-gtags (my-load-make-setup-options)
 ;; 'sr-speedbar (my-load-make-setup-options)

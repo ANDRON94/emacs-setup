@@ -17,6 +17,7 @@
 (use-package material-theme
   :ensure t
   :config
-  (my-funcall-if-exist (my-load-get-customization-func 'material-theme)))
+  ;; Custom settings
+  (my-apply-if-exist (my-load-get-customization-func 'material-theme) nil))
 
 ;;; setup-material-theme.el ends here

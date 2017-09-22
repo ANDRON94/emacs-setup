@@ -67,6 +67,16 @@ ARGUMENTS-FACTORY is the arguments factory function.  It should return list
 of valid macro arguments."
   `(,macro-name ,@(funcall arguments-factory)))
 
+(defmacro my-apply-at-expansion (function &rest arguments)
+  "Call function FUNCTION with arguments ARGUMENTS at expansion time."
+  `,(my-apply-if-exist function arguments))
+
+(defmacro my-apply-at-expansion2 (factory factory-args &rest arguments)
+  "FACTORY return function name that should be called at expansion time.
+FACTORY-ARGS is list of arguments that used by FACTORY function.
+ARGUMENTS is list of arguments that used by produced function."
+  `(my-apply-at-expansion ,(apply factory factory-args) ,@arguments))
+
 (provide 'my-utility)
 
 ;;; my-utility.el ends here
