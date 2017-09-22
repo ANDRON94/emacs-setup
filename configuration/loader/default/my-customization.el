@@ -15,6 +15,12 @@
 (require 'my-load)
 
 ;; Define customization.
+(defun my-general-appearance-customization ()
+  ;; Make 'bell signal' a visible.
+  (setq visible-bell t)
+  ;; Disable tool bar.
+  (tool-bar-mode -1))
+
 (defun my-nlinum-customization ()
   (add-hook 'org-mode-hook (lambda () (nlinum-mode -1))))
 
@@ -28,10 +34,6 @@
 (defun my-solarized-theme-customization ()
   (setq solarized-high-contrast-mode-line t)
   (load-theme 'solarized-light t))
-
-(defun my-general-customization ()
-  (setq visible-bell t) ; Make 'bell signal' a visible.
-  (tool-bar-mode -1)) ; Disable tool bar.
 
 (defun my-helm-customization ()
   (setq ;; Open helm buffer inside current window,
@@ -54,6 +56,9 @@
   (add-to-list 'helm-sources-using-default-as-input 'helm-source-man-pages))
 
 ;; Attach customizations to corresponding setup files.
+(my-load-set-customization-func 'general-appearance
+                                'my-general-appearance-customization)
+
 (my-load-set-customization-func 'nlinum 'my-nlinum-customization)
 
 (my-load-set-customization-func 'powerline 'my-powerline-customization)
@@ -63,8 +68,6 @@
 
 (my-load-set-customization-func 'solarized-theme
                                 'my-solarized-theme-customization)
-
-(my-load-set-customization-func 'general 'my-general-customization)
 
 (my-load-set-customization-func 'helm 'my-helm-customization)
 

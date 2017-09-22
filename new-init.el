@@ -51,6 +51,10 @@ FILE-RELATIVE-PATH is the path relative to SETUP directory."
 (my-load-add-setup-files
  (list
   ;; appearance
+  'general-appearance
+  (my-load-make-setup-options
+   (my--setup-absolute-path "/appearance/general-appearance.el"))
+
   'nlinum
   (my-load-make-setup-options
    (my--setup-absolute-path "/appearance/setup-nlinum.el"))
@@ -68,10 +72,6 @@ FILE-RELATIVE-PATH is the path relative to SETUP directory."
    (my--setup-absolute-path "/appearance/setup-solarized-theme.el"))
 
   ;; interface-enchancement
-  'general
-  (my-load-make-setup-options
-   (my--setup-absolute-path "/interface-enchancement/general.el"))
-
   'helm
   (my-load-make-setup-options
    (my--setup-absolute-path "/interface-enchancement/setup-helm.el"))

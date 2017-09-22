@@ -17,6 +17,6 @@
 ;; Disable the welcome message.
 (setq inhibit-startup-message t)
 ;; Setup user customizations.
-(my-apply-if-exist (my-load-get-customization-func 'general) nil)
+(my-apply-if-exist (my-load-get-customization-func 'general-appearance) nil)
 
 ;;; general.el ends here
