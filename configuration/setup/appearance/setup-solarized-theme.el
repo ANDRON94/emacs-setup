@@ -17,6 +17,6 @@
 (use-package solarized-theme
   :ensure t
   :config
-  (my-funcall-if-exist (my-load-get-customization-func 'solarized-theme)))
+  (my-apply-if-exist (my-load-get-customization-func 'solarized-theme) nil))
 
 ;;; setup-solarized-theme.el ends here

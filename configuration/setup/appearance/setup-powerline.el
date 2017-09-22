@@ -18,6 +18,6 @@
 (use-package powerline
   :ensure t
   :config
-  (my-funcall-if-exist (my-load-get-customization-func 'powerline)))
+  (my-apply-if-exist (my-load-get-customization-func 'powerline) nil))
 
 ;;; setup-powerline.el ends here

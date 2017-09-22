@@ -19,6 +19,6 @@
   :ensure t
   :config
   (global-nlinum-mode +1)
-  (my-funcall-if-exist (my-load-get-customization-func 'nlinum)))
+  (my-apply-if-exist (my-load-get-customization-func 'nlinum) nil))
 
 ;;; setup-nlinum.el ends here

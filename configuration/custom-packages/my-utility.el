@@ -40,11 +40,11 @@ code that should be executed on each iteration."
         ,@body
         (setq ,curr-elem (cddr ,curr-elem)))))))
 
-(defun my-funcall-if-exist (function &rest arguments)
+(defun my-apply-if-exist (function &rest arguments)
   "Call function FUNCTION with arguments ARGUMENTS if it's defined.
 Return result of the function or nil otherwise."
   (when (fboundp function)
-    (apply function arguments)))
+    (apply 'apply function arguments)))
 
 (defun my-mboundp (symbol)
   "Return t if SYMBOL's macro definition is not void."
