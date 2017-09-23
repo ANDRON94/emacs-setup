@@ -47,6 +47,9 @@
   ;; (unbind-key "M-n" slime-mode-map)
   (setq slime-contribs '(slime-fancy)))
 
+(defun my-markdown-mode-customization ()
+  (setq markdown-command "multimarkdown"))
+
 ;; -- Interface enchancement
 (defun my-helm-customization ()
   (setq ;; Open helm buffer inside current window,
@@ -83,6 +86,8 @@
                                 'my-solarized-theme-customization)
 
 (my-load-set-customization-func 'slime 'my-slime-customization)
+
+(my-load-set-customization-func 'markdown-mode 'my-markdown-mode-customization)
 
 (my-load-set-customization-func 'helm 'my-helm-customization)
 
