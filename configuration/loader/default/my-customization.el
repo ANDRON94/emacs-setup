@@ -50,6 +50,15 @@
 (defun my-markdown-mode-customization ()
   (setq markdown-command "multimarkdown"))
 
+(defun my-web-mode-customization ()
+  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.scss\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.tpl\\'" . web-mode))
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2))
+
 ;; -- Interface enchancement
 (defun my-helm-customization ()
   (setq ;; Open helm buffer inside current window,
@@ -88,6 +97,8 @@
 (my-load-set-customization-func 'slime 'my-slime-customization)
 
 (my-load-set-customization-func 'markdown-mode 'my-markdown-mode-customization)
+
+(my-load-set-customization-func 'web-mode 'my-web-mode-customization)
 
 (my-load-set-customization-func 'helm 'my-helm-customization)
 
