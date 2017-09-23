@@ -36,6 +36,17 @@
   (setq solarized-high-contrast-mode-line t)
   (load-theme 'solarized-light t))
 
+;; -- Edit
+(defun my-slime-customization ()
+  ;; Path to compiler.
+  (setq inferior-lisp-program "/usr/local/bin/sbcl")
+  ;; Path to local hyperspec copy.
+  ;; (setq common-lisp-hyperspec-root "file:///files/Documents/Library/HyperSpec-7-0/HyperSpec/")
+  ;; TODO: Do I need it?
+  ;; (unbind-key "M-p" slime-mode-map)
+  ;; (unbind-key "M-n" slime-mode-map)
+  (setq slime-contribs '(slime-fancy)))
+
 ;; -- Interface enchancement
 (defun my-helm-customization ()
   (setq ;; Open helm buffer inside current window,
@@ -57,8 +68,6 @@
   ;; man support.
   (add-to-list 'helm-sources-using-default-as-input 'helm-source-man-pages))
 
-;; -- Edit
-
 ;; Attach customizations to corresponding setup files.
 (my-load-set-customization-func 'general-appearance
                                 'my-general-appearance-customization)
@@ -72,6 +81,8 @@
 
 (my-load-set-customization-func 'solarized-theme
                                 'my-solarized-theme-customization)
+
+(my-load-set-customization-func 'slime 'my-slime-customization)
 
 (my-load-set-customization-func 'helm 'my-helm-customization)
 
