@@ -17,6 +17,8 @@
 (use-package material-theme
   :ensure t
   :config
+  ;; Custom keybindings
+  (my-apply-if-exist (my-load-get-keybindings-func 'material-theme) nil)
   ;; Custom settings
   (my-apply-if-exist (my-load-get-customization-func 'material-theme) nil))
 

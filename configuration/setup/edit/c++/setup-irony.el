@@ -32,7 +32,7 @@
   (add-hook 'irony-mode-hook 'my-irony-mode-hook)
   (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
   ;; Custom keybindings
-  (my-apply-at-expansion2 my-load-get-keybindings-func (irony))
+  (my-apply-if-exist (my-load-get-keybindings-func 'irony) nil)
   ;; Custom settings
   (my-apply-if-exist (my-load-get-customization-func 'irony) nil))
 

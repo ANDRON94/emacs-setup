@@ -17,6 +17,8 @@
 (use-package solarized-theme
   :ensure t
   :config
+  ;; Custom keybindings
+  (my-apply-if-exist (my-load-get-keybindings-func 'solarized-theme) nil)
   ;; Custom settings
   (my-apply-if-exist (my-load-get-customization-func 'solarized-theme) nil))
 

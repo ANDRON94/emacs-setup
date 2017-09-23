@@ -18,6 +18,8 @@
 (use-package powerline
   :ensure t
   :config
+  ;; Custom keybindings
+  (my-apply-if-exist (my-load-get-keybindings-func 'powerline) nil)
   ;; Custom settings
   (my-apply-if-exist (my-load-get-customization-func 'powerline) nil))
 

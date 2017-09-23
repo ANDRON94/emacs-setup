@@ -18,8 +18,10 @@
 (use-package nlinum
   :ensure t
   :config
-  (global-nlinum-mode +1)
+  ;; Custom keybindings
+  (my-apply-if-exist (my-load-get-keybindings-func 'nlinum) nil)
   ;; Custom settings
-  (my-apply-if-exist (my-load-get-customization-func 'nlinum) nil))
+  (my-apply-if-exist (my-load-get-customization-func 'nlinum) nil)
+  (global-nlinum-mode +1))
 
 ;;; setup-nlinum.el ends here

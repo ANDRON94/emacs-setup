@@ -28,7 +28,7 @@
   (global-set-key (kbd "C-c h") 'helm-command-prefix)
   (global-unset-key (kbd "C-x c"))
   ;; Custom keybindings
-  (my-apply-at-expansion2 my-load-get-keybindings-func (helm))
+  (my-apply-if-exist (my-load-get-keybindings-func 'helm) nil)
   ;; Custom settings
   (my-apply-if-exist (my-load-get-customization-func 'helm) nil)
   (helm-mode +1))

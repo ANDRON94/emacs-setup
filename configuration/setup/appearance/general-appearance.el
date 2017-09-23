@@ -1,4 +1,4 @@
-;;; general.el --- General interface settings.  -*- lexical-binding: t; -*-
+;;; general-appearance.el --- General interface settings.  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2017  Andrii Tymchuk
 
@@ -16,7 +16,9 @@
 
 ;; Disable the welcome message.
 (setq inhibit-startup-message t)
-;; Setup user customizations.
+;; Custom keybindings
+(my-apply-if-exist (my-load-get-keybindings-func 'general-appearance) nil)
+;; Custom settings
 (my-apply-if-exist (my-load-get-customization-func 'general-appearance) nil)
 
-;;; general.el ends here
+;;; general-appearance.el ends here

@@ -15,6 +15,7 @@
 (require 'my-load)
 
 ;; Define customization.
+;; -- Appearance
 (defun my-general-appearance-customization ()
   ;; Make 'bell signal' a visible.
   (setq visible-bell t)
@@ -35,6 +36,7 @@
   (setq solarized-high-contrast-mode-line t)
   (load-theme 'solarized-light t))
 
+;; -- Interface enchancement
 (defun my-helm-customization ()
   (setq ;; Open helm buffer inside current window,
         ;; not occupy whole other window.
@@ -54,6 +56,8 @@
     (setq helm-google-suggest-use-curl-p t))
   ;; man support.
   (add-to-list 'helm-sources-using-default-as-input 'helm-source-man-pages))
+
+;; -- Edit
 
 ;; Attach customizations to corresponding setup files.
 (my-load-set-customization-func 'general-appearance
