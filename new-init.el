@@ -101,11 +101,12 @@ FILE-RELATIVE-PATH is the path relative to SETUP directory."
   'helm-gtags
   (my-load-make-setup-options
    (my--setup-absolute-path "/navigate/setup-helm-gtags.el"))
+
+  'sr-speedbar
+  (my-load-make-setup-options
+   (my--setup-absolute-path "/navigate/setup-sr-speedbar.el"))
   ))
 
-;; ;; navigate
-;; 'helm-gtags (my-load-make-setup-options)
-;; 'sr-speedbar (my-load-make-setup-options)
 ;; ;; package-managment
 ;; ;; TODO: 'auto-package-update (my-load-make-setup-options)
 ;; ;; project-managment

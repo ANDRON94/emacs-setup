@@ -99,6 +99,16 @@
         helm-gtags-prefix-key "\C-cg"
         helm-gtags-suggested-key-mapping t))
 
+(defun my-sr-speedbar-customization ()
+  (setq speedbar-directory-unshown-regexp
+        "^\\(CVS\\|RCS\\|SCCS\\|\\.\\.*$\\)\\'"
+        ;; Use text for buttons
+        ;; (setq speedbar-use-images nil)
+        ;;  Show all files
+        speedbar-show-unknown-files t
+        ;; Put on left side
+        sr-speedbar-right-side nil))
+
 ;; Attach customizations to corresponding setup files.
 (my-load-set-customization-func 'general-appearance
                                 'my-general-appearance-customization)
@@ -122,6 +132,8 @@
 (my-load-set-customization-func 'helm 'my-helm-customization)
 
 (my-load-set-customization-func 'helm-gtags 'my-helm-gtags-customization)
+
+(my-load-set-customization-func 'sr-speedbar 'my-sr-speedbar-customization)
 
 (provide 'my-customization)
 

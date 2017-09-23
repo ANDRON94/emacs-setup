@@ -53,12 +53,17 @@
              ("C-c <" . helm-gtags-previous-history)
              ("C-c >" . helm-gtags-next-history)))
 
+(defun my-sr-speedbar-keybindings ()
+  (bind-keys ([f2] . sr-speedbar-toggle)))
+
 ;; Attach keybindings to corresponding setup files.
 (my-load-set-keybindings-func 'helm 'my-helm-keybindings)
 
 (my-load-set-keybindings-func 'smartparens 'my-smartparens-keybindings)
 
 (my-load-set-keybindings-func 'helm-gtags 'my-helm-gtags-keybindings)
+
+(my-load-set-keybindings-func 'sr-speedbar 'my-sr-speedbar-keybindings)
 
 (provide 'my-keybindings)
 
