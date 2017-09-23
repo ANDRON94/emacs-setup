@@ -84,6 +84,10 @@ FILE-RELATIVE-PATH is the path relative to SETUP directory."
   (my-load-make-setup-options
    (my--setup-absolute-path "/edit/setup-markdown-mode.el"))
 
+  'smartparens
+  (my-load-make-setup-options
+   (my--setup-absolute-path "/edit/setup-smartparens.el"))
+
   ;; interface-enchancement
   'helm
   (my-load-make-setup-options

@@ -15,6 +15,21 @@
 (require 'my-load)
 
 ;; Define keybindings.
+;; -- Edit
+(defun my-smartparens-keybindings ()
+  (bind-keys :map smartparens-mode-map
+             ;; Navigation
+             ;; TODO: setup smarparens navigation
+             ("C-M-f" . sp-forward-sexp)
+             ("C-M-b" . sp-backward-sexp)
+             ;; Manipulation
+             ;; TODO: setup smartparens manipulation
+             ("C-M-k" . sp-kill-sexp)
+             ("C-M-w" . sp-copy-sexp)
+             ("M-<delete>" . sp-unwrap-sexp)
+             ("C-]" . sp-select-next-thing)
+             ("C-M-]" . sp-select-previous-thing)))
+
 ;; -- Interface enchancement
 (defun my-helm-keybindings ()
   (bind-keys ("M-x" . helm-M-x)
@@ -30,6 +45,8 @@
 
 ;; Attach keybindings to corresponding setup files.
 (my-load-set-keybindings-func 'helm 'my-helm-keybindings)
+
+(my-load-set-keybindings-func 'smartparens 'my-smartparens-keybindings)
 
 (provide 'my-keybindings)
 
