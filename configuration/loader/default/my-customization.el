@@ -80,6 +80,25 @@
   ;; man support.
   (add-to-list 'helm-sources-using-default-as-input 'helm-source-man-pages))
 
+;; -- Navigate
+(defun my-helm-gtags-customization ()
+  ;; (add-hook 'dired-mode-hook 'helm-gtags-mode)
+  ;; (add-hook 'eshell-mode-hook 'helm-gtags-mode)
+  ;; (add-hook 'asm-mode-hook 'helm-gtags-mode)
+  ;; (add-hook 'java-mode-hook 'helm-gtags-mode)
+  ;; (add-hook 'javascript-mode-hook 'helm-gtags-mode)
+  ;; (add-hook 'python-mode-hook 'helm-gtags-mode)
+  ;; Use slime instead of helm-gtags
+  ;; (add-hook 'lisp-mode-hook 'helm-gtags-mode)
+  (add-hook 'c++-mode-hook 'helm-gtags-mode)
+  (add-hook 'c-mode-hook 'helm-gtags-mode)
+  (setq helm-gtags-ignore-case t
+        helm-gtags-auto-uptdate t
+        helm-gtags-use-input-at-cursor t
+        helm-gtags-pulse-at-cursor t
+        helm-gtags-prefix-key "\C-cg"
+        helm-gtags-suggested-key-mapping t))
+
 ;; Attach customizations to corresponding setup files.
 (my-load-set-customization-func 'general-appearance
                                 'my-general-appearance-customization)
@@ -101,6 +120,8 @@
 (my-load-set-customization-func 'web-mode 'my-web-mode-customization)
 
 (my-load-set-customization-func 'helm 'my-helm-customization)
+
+(my-load-set-customization-func 'helm-gtags 'my-helm-gtags-customization)
 
 (provide 'my-customization)
 

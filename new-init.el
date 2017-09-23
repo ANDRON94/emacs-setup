@@ -96,6 +96,11 @@ FILE-RELATIVE-PATH is the path relative to SETUP directory."
   'helm
   (my-load-make-setup-options
    (my--setup-absolute-path "/interface-enchancement/setup-helm.el"))
+
+  ;; navigate
+  'helm-gtags
+  (my-load-make-setup-options
+   (my--setup-absolute-path "/navigate/setup-helm-gtags.el"))
   ))
 
 ;; ;; navigate

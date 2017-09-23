@@ -43,10 +43,22 @@
              ("C-z" . helm-select-action)))
 ;; (global-set-key (kbd "C-h SPC") 'helm-all-mark-rings)
 
+;; -- Navigate
+(defun my-helm-gtags-keybindings ()
+  (bind-keys :map helm-gtags-mode-map
+             ("C-c g a" . helm-gtags-tags-in-this-function)
+             ("C-j" . helm-gtags-select)
+             ("M-." . helm-gtags-dwim)
+             ("M-," . helm-gtags-pop-stack)
+             ("C-c <" . helm-gtags-previous-history)
+             ("C-c >" . helm-gtags-next-history)))
+
 ;; Attach keybindings to corresponding setup files.
 (my-load-set-keybindings-func 'helm 'my-helm-keybindings)
 
 (my-load-set-keybindings-func 'smartparens 'my-smartparens-keybindings)
+
+(my-load-set-keybindings-func 'helm-gtags 'my-helm-gtags-keybindings)
 
 (provide 'my-keybindings)
 
