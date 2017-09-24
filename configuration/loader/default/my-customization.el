@@ -116,6 +116,17 @@
   (add-to-list 'projectile-globally-ignored-files "GTAGS")
   (add-to-list 'projectile-globally-ignored-files "GRTAGS"))
 
+;; -- Edit
+(defun my-helm-swoop-customization ()
+  ;; Save buffer when helm-multi-swoop-edit complete
+  ;; (setq helm-multi-swoop-edit-save t)
+  (setq ;; If this value is t, split window inside the current window
+        helm-swoop-split-with-multiple-windows t
+        ;; Split direcion. 'split-window-vertically or 'split-window-horizontally
+        helm-swoop-split-direction 'split-window-vertically
+        ;; If nil, you can slightly boost invoke speed in exchange for text color
+        helm-swoop-speed-or-color t))
+
 ;; Attach customizations to corresponding setup files.
 (my-load-set-customization-func 'general-appearance
                                 'my-general-appearance-customization)
@@ -144,6 +155,8 @@
 
 (my-load-set-customization-func 'helm-projectile
                                 'my-helm-projectile-customization)
+
+(my-load-set-customization-func 'helm-swoop 'my-helm-swoop-customization)
 
 (provide 'my-customization)
 

@@ -110,6 +110,11 @@ FILE-RELATIVE-PATH is the path relative to SETUP directory."
   'helm-projectile
   (my-load-make-setup-options
    (my--setup-absolute-path "/project-managment/setup-helm-projectile.el"))
+
+  ;; search
+  'helm-swoop
+  (my-load-make-setup-options
+   (my--setup-absolute-path "/search/setup-helm-swoop.el"))
   ))
 
 ;; ;; package-managment
