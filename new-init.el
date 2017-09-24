@@ -105,6 +105,11 @@ FILE-RELATIVE-PATH is the path relative to SETUP directory."
   'sr-speedbar
   (my-load-make-setup-options
    (my--setup-absolute-path "/navigate/setup-sr-speedbar.el"))
+
+  ;; project-managment
+  'helm-projectile
+  (my-load-make-setup-options
+   (my--setup-absolute-path "/project-managment/setup-helm-projectile.el"))
   ))
 
 ;; ;; package-managment

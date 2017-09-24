@@ -109,6 +109,13 @@
         ;; Put on left side
         sr-speedbar-right-side nil))
 
+;; -- Project managment
+(defun my-helm-projectile-customization ()
+  ;; (setq projectile-enable-caching t)
+  (add-to-list 'projectile-globally-ignored-files "GPATH")
+  (add-to-list 'projectile-globally-ignored-files "GTAGS")
+  (add-to-list 'projectile-globally-ignored-files "GRTAGS"))
+
 ;; Attach customizations to corresponding setup files.
 (my-load-set-customization-func 'general-appearance
                                 'my-general-appearance-customization)
@@ -134,6 +141,9 @@
 (my-load-set-customization-func 'helm-gtags 'my-helm-gtags-customization)
 
 (my-load-set-customization-func 'sr-speedbar 'my-sr-speedbar-customization)
+
+(my-load-set-customization-func 'helm-projectile
+                                'my-helm-projectile-customization)
 
 (provide 'my-customization)
 
