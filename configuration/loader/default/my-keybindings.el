@@ -76,6 +76,13 @@
             ("C-c n p" . highlight-symbol-prev)
             ("C-c n r" . highlight-symbol-query-replace)))
 
+;; -- Task managment
+(defun my-org-keybindings ()
+  (bind-keys ("C-c l" . org-store-link)
+             ("C-c c" . org-capture)
+             ("C-c a" . org-agenda)
+             ("C-c o u" . org-table-iterate-buffer-tables)))
+
 ;; Attach keybindings to corresponding setup files.
 (my-load-set-keybindings-func 'helm 'my-helm-keybindings)
 
@@ -88,6 +95,8 @@
 (my-load-set-keybindings-func 'helm-swoop 'my-helm-swoop-keybindings)
 
 (my-load-set-keybindings-func 'highlight-symbol 'my-highlight-symbol-keybindings)
+
+(my-load-set-keybindings-func 'org 'my-org-keybindings)
 
 (provide 'my-keybindings)
 

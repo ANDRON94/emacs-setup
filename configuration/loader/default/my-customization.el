@@ -127,6 +127,20 @@
         ;; If nil, you can slightly boost invoke speed in exchange for text color
         helm-swoop-speed-or-color t))
 
+;; -- Task managment
+(defun my-org-customization ()
+  (setq org-log-done t
+        org-capture-templates '(("t" "Simple TODO task" entry
+                                 (file+headline "gtd.org" "TASKS")
+                                 "* TODO %^{Task} %^g\n SCHEDULED: %^T\n Captured: %<%Y-%m-%d %H:%M>")
+                                ("n" "Get a Note" entry
+                                 (file+headline "gtd.org" "NOTES")
+                                 "* %^{Note} %^g\n SCHEDULED: %^T\n Captured: %<%Y-%m-%d %H:%M>"))
+        org-export-backends '(ascii html icalendar latex md))
+  (setq org-directory (my-emacs-absolute-path "org"))
+  (setq org-agenda-files (list (my-emacs-absolute-path "org/gtd.org")))
+  (load-file (my-emacs-absolute-path "org/init.el")))
+
 ;; Attach customizations to corresponding setup files.
 (my-load-set-customization-func 'general-appearance
                                 'my-general-appearance-customization)
@@ -157,6 +171,8 @@
                                 'my-helm-projectile-customization)
 
 (my-load-set-customization-func 'helm-swoop 'my-helm-swoop-customization)
+
+(my-load-set-customization-func 'org 'my-org-customization)
 
 (provide 'my-customization)
 

@@ -119,14 +119,19 @@ FILE-RELATIVE-PATH is the path relative to SETUP directory."
   'highlight-symbol
   (my-load-make-setup-options
    (my--setup-absolute-path "/search/setup-highlight-symbol.el"))
+
+  ;; task-managment
+  'org
+  (my-load-make-setup-options
+   (my--setup-absolute-path "/task-managment/setup-org.el"))
+
   ))
 
 ;; ;; package-managment
 ;; ;; TODO: 'auto-package-update (my-load-make-setup-options)
 ;; ;; syntax-checking
 ;; 'flycheck (my-load-make-setup-options)
-;; ;; task-managment
-;; 'org (my-load-make-setup-options)
+
 ;; ;; type
 ;; 'company (my-load-make-setup-options)
 ;; 'yasnippet (my-load-make-setup-options)
