@@ -115,15 +115,14 @@ FILE-RELATIVE-PATH is the path relative to SETUP directory."
   'helm-swoop
   (my-load-make-setup-options
    (my--setup-absolute-path "/search/setup-helm-swoop.el"))
+
+  'highlight-symbol
+  (my-load-make-setup-options
+   (my--setup-absolute-path "/search/setup-highlight-symbol.el"))
   ))
 
 ;; ;; package-managment
 ;; ;; TODO: 'auto-package-update (my-load-make-setup-options)
-;; ;; project-managment
-;; 'helm-projectile (my-load-make-setup-options)
-;; ;; search
-;; 'helm-swoop (my-load-make-setup-options)
-;; 'highlight-symbol (my-load-make-setup-options)
 ;; ;; syntax-checking
 ;; 'flycheck (my-load-make-setup-options)
 ;; ;; task-managment

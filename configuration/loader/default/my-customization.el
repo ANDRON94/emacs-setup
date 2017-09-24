@@ -116,7 +116,7 @@
   (add-to-list 'projectile-globally-ignored-files "GTAGS")
   (add-to-list 'projectile-globally-ignored-files "GRTAGS"))
 
-;; -- Edit
+;; -- Search
 (defun my-helm-swoop-customization ()
   ;; Save buffer when helm-multi-swoop-edit complete
   ;; (setq helm-multi-swoop-edit-save t)
