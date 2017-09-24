@@ -89,6 +89,9 @@
   (global-set-key (kbd "C-c d p") 'diff-hl-previous-hunk)
   (global-set-key (kbd "C-c d r") 'diff-hl-revert-hunk))
 
+(defun my-git-messenger-keybindings ()
+  (bind-keys ("C-c d m" . git-messenger:popup-message)))
+
 ;; Attach keybindings to corresponding setup files.
 (my-load-set-keybindings-func 'helm 'my-helm-keybindings)
 
@@ -105,6 +108,8 @@
 (my-load-set-keybindings-func 'org 'my-org-keybindings)
 
 (my-load-set-keybindings-func 'diff-hl 'my-diff-hl-keybindings)
+
+(my-load-set-keybindings-func 'git-messenger 'my-git-messenger-keybindings)
 
 (provide 'my-keybindings)
 

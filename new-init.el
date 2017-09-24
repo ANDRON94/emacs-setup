@@ -130,6 +130,10 @@ FILE-RELATIVE-PATH is the path relative to SETUP directory."
   (my-load-make-setup-options
    (my--setup-absolute-path "/version-control/setup-diff-hl.el"))
 
+  'git-messenger
+  (my-load-make-setup-options
+   (my--setup-absolute-path "/version-control/setup-git-messenger.el"))
+
   ))
 
 ;; ;; package-managment
