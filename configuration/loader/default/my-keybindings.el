@@ -85,9 +85,9 @@
 
 ;; -- Version control
 (defun my-diff-hl-keybindings ()
-  (global-set-key (kbd "C-c d n") 'diff-hl-next-hunk)
-  (global-set-key (kbd "C-c d p") 'diff-hl-previous-hunk)
-  (global-set-key (kbd "C-c d r") 'diff-hl-revert-hunk))
+  (bind-keys   ("C-c d n" . diff-hl-next-hunk)
+               ("C-c d p" . diff-hl-previous-hunk)
+               ("C-c d r" . diff-hl-revert-hunk)))
 
 (defun my-git-messenger-keybindings ()
   (bind-keys ("C-c d m" . git-messenger:popup-message)))
@@ -103,7 +103,8 @@
 
 (my-load-set-keybindings-func 'helm-swoop 'my-helm-swoop-keybindings)
 
-(my-load-set-keybindings-func 'highlight-symbol 'my-highlight-symbol-keybindings)
+(my-load-set-keybindings-func 'highlight-symbol
+                              'my-highlight-symbol-keybindings)
 
 (my-load-set-keybindings-func 'org 'my-org-keybindings)
 
