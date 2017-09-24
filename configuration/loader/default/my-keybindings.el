@@ -92,6 +92,11 @@
 (defun my-git-messenger-keybindings ()
   (bind-keys ("C-c d m" . git-messenger:popup-message)))
 
+(defun my-magit-keybindings ()
+  (bind-keys ("C-c d s" . magit-status)
+             ("C-c d i" . magit-init)
+             ("C-c d c" . magit-clone)))
+
 ;; Attach keybindings to corresponding setup files.
 (my-load-set-keybindings-func 'helm 'my-helm-keybindings)
 
@@ -111,6 +116,8 @@
 (my-load-set-keybindings-func 'diff-hl 'my-diff-hl-keybindings)
 
 (my-load-set-keybindings-func 'git-messenger 'my-git-messenger-keybindings)
+
+(my-load-set-keybindings-func 'magit 'my-magit-keybindings)
 
 (provide 'my-keybindings)
 

@@ -134,6 +134,9 @@ FILE-RELATIVE-PATH is the path relative to SETUP directory."
   (my-load-make-setup-options
    (my--setup-absolute-path "/version-control/setup-git-messenger.el"))
 
+  'magit
+  (my-load-make-setup-options
+   (my--setup-absolute-path "/version-control/setup-magit.el"))
   ))
 
 ;; ;; package-managment
@@ -144,10 +147,6 @@ FILE-RELATIVE-PATH is the path relative to SETUP directory."
 ;; ;; type
 ;; 'company (my-load-make-setup-options)
 ;; 'yasnippet (my-load-make-setup-options)
-;; ;; version-control
-;; 'diff-hl (my-load-make-setup-options)
-;; 'git-messenger (my-load-make-setup-options)
-;; 'magit (my-load-make-setup-options)))
 
 ;; Define and load 'configuration loader' file.
 (require 'my-custom-loader-dispatcher nil t)
