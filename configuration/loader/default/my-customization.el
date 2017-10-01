@@ -167,6 +167,14 @@
 (defun my-company-irony-c-headers-customization ()
   (add-to-list 'company-backends 'company-irony-c-headers))
 
+(defun my-yasnippet-customization ()
+  ;; Disable yasnippet in terminal mode
+  (add-hook 'term-mode-hook (lambda() (yas-minor-mode -1)))
+  (setf (car (member 'company-irony company-backends))
+        '(company-irony :with company-yasnippet)
+        (car (member '(company-capf company-dabbrev) company-backends))
+        '(company-capf company-dabbrev  :with company-yasnippet)))
+
 ;; -- Version control
 ;; TODO!!!
 
@@ -214,6 +222,8 @@
 
 (my-load-set-customization-func 'company-irony-c-headers
                                 'my-company-irony-c-headers-customization)
+
+(my-load-set-customization-func 'yasnippet 'my-yasnippet-customization)
 
 (provide 'my-customization)
 

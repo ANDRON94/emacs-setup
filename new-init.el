@@ -143,6 +143,10 @@ FILE-RELATIVE-PATH is the path relative to SETUP directory."
   (my-load-make-setup-options
    (my--setup-absolute-path "/type/c++/setup-company-irony-c-headers.el"))
 
+  'yasnippet
+  (my-load-make-setup-options
+   (my--setup-absolute-path "/type/setup-yasnippet.el"))
+
   ;; version-control
   'diff-hl
   (my-load-make-setup-options
@@ -164,10 +168,6 @@ FILE-RELATIVE-PATH is the path relative to SETUP directory."
 ;; ;; TODO: 'auto-package-update (my-load-make-setup-options)
 ;; ;; syntax-checking
 ;; 'flycheck (my-load-make-setup-options)
-
-;; ;; type
-;; 'company (my-load-make-setup-options)
-;; 'yasnippet (my-load-make-setup-options)
 
 ;; Define and load 'configuration loader' file.
 (require 'my-custom-loader-dispatcher nil t)
