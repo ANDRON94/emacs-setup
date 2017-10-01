@@ -78,6 +78,10 @@
   (setq web-mode-css-indent-offset 2))
 
 ;; -- Interface enchancement
+(defun my-general-interface-enchancement ()
+  ;; Use y or n instead of yes or not
+  (fset 'yes-or-no-p 'y-or-n-p))
+
 (defun my-helm-customization ()
   (setq ;; Open helm buffer inside current window,
         ;; not occupy whole other window.
@@ -245,6 +249,9 @@
                                 'my-smartparens-customization)
 
 (my-load-set-customization-func 'web-mode 'my-web-mode-customization)
+
+(my-load-set-customization-func 'general-interface-enchancement
+                                'my-general-interface-enchancement)
 
 (my-load-set-customization-func 'helm 'my-helm-customization)
 

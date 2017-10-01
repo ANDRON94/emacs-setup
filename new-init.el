@@ -101,6 +101,11 @@ FILE-RELATIVE-PATH is the path relative to SETUP directory."
    (my--setup-absolute-path "/edit/web/setup-web-mode.el"))
 
   ;; interface-enchancement
+  'general-interface-enchancement
+  (my-load-make-setup-options
+   (my--setup-absolute-path
+    "/interface-enchancement/general-interface-enchancement.el"))
+
   'helm
   (my-load-make-setup-options
    (my--setup-absolute-path "/interface-enchancement/setup-helm.el"))
