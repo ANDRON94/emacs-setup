@@ -139,6 +139,10 @@ FILE-RELATIVE-PATH is the path relative to SETUP directory."
   (my-load-make-setup-options
    (my--setup-absolute-path "/syntax-checking/setup-flycheck.el"))
 
+  'flycheck-irony
+  (my-load-make-setup-options
+   (my--setup-absolute-path "/syntax-checking/c++/setup-flycheck-irony.el"))
+
   ;; task-managment
   'org
   (my-load-make-setup-options

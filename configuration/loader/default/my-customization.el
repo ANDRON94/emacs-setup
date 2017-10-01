@@ -150,6 +150,9 @@
   (add-hook 'c++-mode-hook 'flycheck-mode)
   (add-hook 'emacs-lisp-mode-hook 'flycheck-mode))
 
+(defun my-flycheck-irony-customization ()
+  (add-hook 'flycheck-mode-hook 'flycheck-irony-setup))
+
 ;; -- Task managment
 (defun my-org-customization ()
   (setq org-log-done t
@@ -232,6 +235,9 @@
 (my-load-set-customization-func 'helm-swoop 'my-helm-swoop-customization)
 
 (my-load-set-customization-func 'flycheck 'my-flycheck-customization)
+
+(my-load-set-customization-func 'flycheck-irony
+                                'my-flycheck-irony-customization)
 
 (my-load-set-customization-func 'org 'my-org-customization)
 
