@@ -97,6 +97,10 @@ FILE-RELATIVE-PATH is the path relative to SETUP directory."
   (my-load-make-setup-options
    (my--setup-absolute-path "/interface-enchancement/setup-helm.el"))
 
+  'helm-flycheck
+  (my-load-make-setup-options
+   (my--setup-absolute-path "/interface-enchancement/setup-helm-flycheck.el"))
+
   'company-quickhelp
   (my-load-make-setup-options
    (my--setup-absolute-path

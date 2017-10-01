@@ -46,6 +46,10 @@
              ("C-i" . helm-execute-persistent-action)
              ("C-z" . helm-select-action)))
 
+(defun my-helm-flycheck-keybindings ()
+  (bind-keys :map flycheck-mode-map
+             ("C-c f h" . helm-flycheck)))
+
 (defun my-company-quickhelp-keybindings ()
   (bind-keys :map company-active-map
              ("M-h" . company-quickhelp-manual-begin)))
@@ -120,6 +124,8 @@
 (my-load-set-keybindings-func 'smartparens 'my-smartparens-keybindings)
 
 (my-load-set-keybindings-func 'helm 'my-helm-keybindings)
+
+(my-load-set-keybindings-func 'helm-flycheck 'my-helm-flycheck-keybindings)
 
 (my-load-set-keybindings-func 'company-quickhelp
                               'my-company-quickhelp-keybindings)
