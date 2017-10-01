@@ -126,7 +126,8 @@
         sr-speedbar-right-side nil))
 
 ;; -- Package managment
-;; TODO!!!
+(defun my-spu-customization ()
+  (setq spu-require-confirm-upgrade-package t))
 
 ;; -- Project managment
 (defun my-helm-projectile-customization ()
@@ -243,6 +244,9 @@
 (my-load-set-customization-func 'helm-gtags 'my-helm-gtags-customization)
 
 (my-load-set-customization-func 'sr-speedbar 'my-sr-speedbar-customization)
+
+(my-load-set-customization-func 'spu
+                                'my-spu-customization)
 
 (my-load-set-customization-func 'helm-projectile
                                 'my-helm-projectile-customization)

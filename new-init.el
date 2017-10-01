@@ -124,6 +124,11 @@ FILE-RELATIVE-PATH is the path relative to SETUP directory."
   (my-load-make-setup-options
    (my--setup-absolute-path "/navigate/setup-sr-speedbar.el"))
 
+  ;; package-managment
+  'spu
+  (my-load-make-setup-options
+   (my--setup-absolute-path "/package-managment/setup-spu.el"))
+
   ;; project-managment
   'helm-projectile
   (my-load-make-setup-options
@@ -189,9 +194,6 @@ FILE-RELATIVE-PATH is the path relative to SETUP directory."
   'magit-svn
   (my-load-make-setup-options
    (my--setup-absolute-path "/version-control/setup-magit-svn.el"))))
-
-;; ;; package-managment
-;; ;; TODO: 'auto-package-update (my-load-make-setup-options)
 
 ;; Define and load 'configuration loader' file.
 (require 'my-custom-loader-dispatcher nil t)
