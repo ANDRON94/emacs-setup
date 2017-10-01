@@ -79,7 +79,10 @@
   (when (executable-find "curl")
     (setq helm-google-suggest-use-curl-p t))
   ;; man support.
-  (add-to-list 'helm-sources-using-default-as-input 'helm-source-man-pages))
+  (add-to-list 'helm-sources-using-default-as-input 'helm-source-man-pages)
+  ;; Remove from mode line.
+  (with-eval-after-load 'helm-mode
+    (diminish 'helm-mode)))
 
 (defun my-company-quickhelp-customization ()
   (setq company-quickhelp-delay nil))

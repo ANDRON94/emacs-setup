@@ -16,7 +16,6 @@
 (require 'my-load)
 
 (use-package helm
-  :diminish helm-mode
   :ensure t
   :demand t
   :config
