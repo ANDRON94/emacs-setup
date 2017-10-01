@@ -76,6 +76,10 @@ FILE-RELATIVE-PATH is the path relative to SETUP directory."
    (my--setup-absolute-path "/appearance/setup-flycheck-color-mode-line.el"))
 
   ;; edit
+  'general-edit
+  (my-load-make-setup-options
+   (my--setup-absolute-path "/edit/general-edit.el"))
+
   'irony
   (my-load-make-setup-options
    (my--setup-absolute-path "/edit/c++/setup-irony.el"))

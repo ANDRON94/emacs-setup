@@ -25,7 +25,9 @@
   (with-eval-after-load 'autorevert
     (diminish 'auto-revert-mode))
   (with-eval-after-load 'abbrev
-    (diminish 'abbrev-mode)))
+    (diminish 'abbrev-mode))
+  ;; Run ediff control panel in the current frame
+  (setq ediff-window-setup-function 'ediff-setup-windows-plain))
 
 (defun my-nlinum-customization ()
   (add-hook 'org-mode-hook (lambda () (nlinum-mode -1))))
@@ -42,6 +44,12 @@
   (load-theme 'solarized-light t))
 
 ;; -- Edit
+(defun my-general-edit-customization ()
+  ;; Always end a file with a newline
+  (setq require-final-newline t)
+  ;; Always allow narrowing
+  (put 'narrow-to-region 'disabled nil))
+
 (defun my-slime-customization ()
   ;; Path to compiler.
   (setq inferior-lisp-program "/usr/local/bin/sbcl")
@@ -225,6 +233,8 @@
 
 (my-load-set-customization-func 'solarized-theme
                                 'my-solarized-theme-customization)
+
+(my-load-set-customization-func 'general-edit 'my-general-edit-customization)
 
 (my-load-set-customization-func 'slime 'my-slime-customization)
 
