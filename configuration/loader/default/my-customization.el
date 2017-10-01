@@ -20,7 +20,12 @@
   ;; Make 'bell signal' a visible.
   (setq visible-bell t)
   ;; Disable tool bar.
-  (tool-bar-mode -1))
+  (tool-bar-mode -1)
+  ;; Hide minor modes from mode line
+  (with-eval-after-load 'autorevert
+    (diminish 'auto-revert-mode))
+  (with-eval-after-load 'abbrev
+    (diminish 'abbrev-mode)))
 
 (defun my-nlinum-customization ()
   (add-hook 'org-mode-hook (lambda () (nlinum-mode -1))))
@@ -50,6 +55,10 @@
 
 (defun my-markdown-mode-customization ()
   (setq markdown-command "multimarkdown"))
+
+(defun my-smartparens-customization ()
+  (with-eval-after-load 'smartparens
+    (diminish 'smartparens-mode)))
 
 (defun my-web-mode-customization ()
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
@@ -220,6 +229,9 @@
 
 (my-load-set-customization-func 'markdown-mode
                                 'my-markdown-mode-customization)
+
+(my-load-set-customization-func 'smartparens
+                                'my-smartparens-customization)
 
 (my-load-set-customization-func 'web-mode 'my-web-mode-customization)
 
