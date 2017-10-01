@@ -137,7 +137,18 @@
         helm-swoop-speed-or-color t))
 
 ;; -- Syntax checking
-;; TODO!!!
+(defun my-flycheck-customization ()
+  ;; (add-hook 'javascript-mode-hook 'flycheck-mode)
+  ;; (add-hook 'python-mode-hook 'flycheck-mode)
+  ;; (add-hook 'sql-mode-hook 'flycheck-mode)
+  ;; (add-hook 'web-mode-hook 'flycheck-mode)
+  ;; (add-hook 'lisp-mode-hook 'flycheck-mode)
+  ;; (add-hook 'web-mode-hook 'flycheck-mode)
+  ;;   ;; Integrate flycheck with Web
+  ;; (flycheck-add-mode 'html-tidy 'web-mode)
+  (add-hook 'c-mode-hook 'flycheck-mode)
+  (add-hook 'c++-mode-hook 'flycheck-mode)
+  (add-hook 'emacs-lisp-mode-hook 'flycheck-mode))
 
 ;; -- Task managment
 (defun my-org-customization ()
@@ -219,6 +230,8 @@
                                 'my-helm-projectile-customization)
 
 (my-load-set-customization-func 'helm-swoop 'my-helm-swoop-customization)
+
+(my-load-set-customization-func 'flycheck 'my-flycheck-customization)
 
 (my-load-set-customization-func 'org 'my-org-customization)
 

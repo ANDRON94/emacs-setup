@@ -125,6 +125,11 @@ FILE-RELATIVE-PATH is the path relative to SETUP directory."
   (my-load-make-setup-options
    (my--setup-absolute-path "/search/setup-highlight-symbol.el"))
 
+  ;; syntax-checking
+  'flycheck
+  (my-load-make-setup-options
+   (my--setup-absolute-path "/syntax-checking/setup-flycheck.el"))
+
   ;; task-managment
   'org
   (my-load-make-setup-options
@@ -170,8 +175,6 @@ FILE-RELATIVE-PATH is the path relative to SETUP directory."
 
 ;; ;; package-managment
 ;; ;; TODO: 'auto-package-update (my-load-make-setup-options)
-;; ;; syntax-checking
-;; 'flycheck (my-load-make-setup-options)
 
 ;; Define and load 'configuration loader' file.
 (require 'my-custom-loader-dispatcher nil t)
