@@ -81,6 +81,9 @@
   ;; man support.
   (add-to-list 'helm-sources-using-default-as-input 'helm-source-man-pages))
 
+(defun my-company-quickhelp-customization ()
+  (setq company-quickhelp-delay nil))
+
 ;; -- Navigate
 (defun my-helm-gtags-customization ()
   ;; (add-hook 'dired-mode-hook 'helm-gtags-mode)
@@ -183,6 +186,9 @@
 (my-load-set-customization-func 'web-mode 'my-web-mode-customization)
 
 (my-load-set-customization-func 'helm 'my-helm-customization)
+
+(my-load-set-customization-func 'company-quickhelp
+                                'my-company-quickhelp-customization)
 
 (my-load-set-customization-func 'helm-gtags 'my-helm-gtags-customization)
 

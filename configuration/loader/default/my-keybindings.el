@@ -15,6 +15,9 @@
 (require 'my-load)
 
 ;; Define keybindings.
+;; -- Appearance
+;; TODO!!!
+
 ;; -- Edit
 (defun my-smartparens-keybindings ()
   (bind-keys :map smartparens-mode-map
@@ -32,6 +35,7 @@
 
 ;; -- Interface enchancement
 (defun my-helm-keybindings ()
+  ;; (global-set-key (kbd "C-h SPC") 'helm-all-mark-rings)
   (bind-keys ("M-x" . helm-M-x)
              ("M-y" . helm-show-kill-ring)
              ("C-x b" . helm-mini)
@@ -41,7 +45,10 @@
              ("[tab]" . helm-execute-persistent-action)
              ("C-i" . helm-execute-persistent-action)
              ("C-z" . helm-select-action)))
-;; (global-set-key (kbd "C-h SPC") 'helm-all-mark-rings)
+
+(defun my-company-quickhelp-keybindings ()
+  (bind-keys :map company-active-map
+             ("M-h" . company-quickhelp-manual-begin)))
 
 ;; -- Navigate
 (defun my-helm-gtags-keybindings ()
@@ -55,6 +62,12 @@
 
 (defun my-sr-speedbar-keybindings ()
   (bind-keys ([f2] . sr-speedbar-toggle)))
+
+;; -- Package managment
+;; TODO!!!
+
+;; -- Project managment
+;; TODO!!!
 
 ;; -- Search
 (defun my-helm-swoop-keybindings ()
@@ -76,12 +89,18 @@
             ("C-c n p" . highlight-symbol-prev)
             ("C-c n r" . highlight-symbol-query-replace)))
 
+;; -- Syntax checking
+;; TODO!!!
+
 ;; -- Task managment
 (defun my-org-keybindings ()
   (bind-keys ("C-c l" . org-store-link)
              ("C-c c" . org-capture)
              ("C-c a" . org-agenda)
              ("C-c o u" . org-table-iterate-buffer-tables)))
+
+;; -- Type
+;; TODO!!!
 
 ;; -- Version control
 (defun my-diff-hl-keybindings ()
@@ -98,9 +117,12 @@
              ("C-c d c" . magit-clone)))
 
 ;; Attach keybindings to corresponding setup files.
+(my-load-set-keybindings-func 'smartparens 'my-smartparens-keybindings)
+
 (my-load-set-keybindings-func 'helm 'my-helm-keybindings)
 
-(my-load-set-keybindings-func 'smartparens 'my-smartparens-keybindings)
+(my-load-set-keybindings-func 'company-quickhelp
+                              'my-company-quickhelp-keybindings)
 
 (my-load-set-keybindings-func 'helm-gtags 'my-helm-gtags-keybindings)
 
