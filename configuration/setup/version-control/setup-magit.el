@@ -20,7 +20,6 @@
   :demand t
   :config
   (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
-  (use-package magit-svn :ensure t :demand t)
   ;; Custom keybindings
   (my-apply-if-exist (my-load-get-keybindings-func 'magit) nil)
   ;; Custom settings

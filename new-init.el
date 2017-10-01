@@ -137,7 +137,10 @@ FILE-RELATIVE-PATH is the path relative to SETUP directory."
   'magit
   (my-load-make-setup-options
    (my--setup-absolute-path "/version-control/setup-magit.el"))
-  ))
+
+  'magit-svn
+  (my-load-make-setup-options
+   (my--setup-absolute-path "/version-control/setup-magit-svn.el"))))
 
 ;; ;; package-managment
 ;; ;; TODO: 'auto-package-update (my-load-make-setup-options)
