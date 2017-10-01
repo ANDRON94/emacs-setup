@@ -161,6 +161,12 @@
   (setf (car (member 'company-capf company-backends))
         '(company-capf company-dabbrev)))
 
+(defun my-company-irony-customization ()
+  (add-to-list 'company-backends 'company-irony))
+
+(defun my-company-irony-c-headers-customization ()
+  (add-to-list 'company-backends 'company-irony-c-headers))
+
 ;; -- Version control
 ;; TODO!!!
 
@@ -202,6 +208,12 @@
 (my-load-set-customization-func 'org 'my-org-customization)
 
 (my-load-set-customization-func 'company 'my-company-customization)
+
+(my-load-set-customization-func 'company-irony
+                                'my-company-irony-customization)
+
+(my-load-set-customization-func 'company-irony-c-headers
+                                'my-company-irony-c-headers-customization)
 
 (provide 'my-customization)
 

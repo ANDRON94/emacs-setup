@@ -135,6 +135,14 @@ FILE-RELATIVE-PATH is the path relative to SETUP directory."
   (my-load-make-setup-options
    (my--setup-absolute-path "/type/setup-company.el"))
 
+  'company-irony
+  (my-load-make-setup-options
+   (my--setup-absolute-path "/type/c++/setup-company-irony.el"))
+
+  'company-irony-c-headers
+  (my-load-make-setup-options
+   (my--setup-absolute-path "/type/c++/setup-company-irony-c-headers.el"))
+
   ;; version-control
   'diff-hl
   (my-load-make-setup-options
