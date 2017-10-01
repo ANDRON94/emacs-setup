@@ -167,6 +167,13 @@
 (defun my-company-irony-c-headers-customization ()
   (add-to-list 'company-backends 'company-irony-c-headers))
 
+(defun my-slime-company-customization ()
+  (with-eval-after-load 'company
+    (add-to-list 'company-backends 'company-slime))
+  (with-eval-after-load 'slime
+    (unless (slime-find-contrib 'slime-fuzzy)
+      (setq slime-company-completion 'simple))))
+
 (defun my-yasnippet-customization ()
   ;; Disable yasnippet in terminal mode
   (add-hook 'term-mode-hook (lambda() (yas-minor-mode -1)))
@@ -222,6 +229,9 @@
 
 (my-load-set-customization-func 'company-irony-c-headers
                                 'my-company-irony-c-headers-customization)
+
+(my-load-set-customization-func 'slime-company
+                                'my-slime-company-customization)
 
 (my-load-set-customization-func 'yasnippet 'my-yasnippet-customization)
 
