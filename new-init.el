@@ -71,6 +71,10 @@ FILE-RELATIVE-PATH is the path relative to SETUP directory."
   (my-load-make-setup-options
    (my--setup-absolute-path "/appearance/setup-solarized-theme.el"))
 
+  'flycheck-color-mode-line
+  (my-load-make-setup-options
+   (my--setup-absolute-path "/appearance/setup-flycheck-color-mode-line.el"))
+
   ;; edit
   'irony
   (my-load-make-setup-options
