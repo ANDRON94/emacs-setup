@@ -41,7 +41,8 @@
   ;; Path to compiler.
   (setq inferior-lisp-program "/usr/local/bin/sbcl")
   ;; Path to local hyperspec copy.
-  ;; (setq common-lisp-hyperspec-root "file:///files/Documents/Library/HyperSpec-7-0/HyperSpec/")
+  ;; (setq common-lisp-hyperspec-root
+  ;;       "file:///files/Documents/Library/HyperSpec-7-0/HyperSpec/")
   ;; TODO: Do I need it?
   ;; (unbind-key "M-p" slime-mode-map)
   ;; (unbind-key "M-n" slime-mode-map)
@@ -109,6 +110,9 @@
         ;; Put on left side
         sr-speedbar-right-side nil))
 
+;; -- Package managment
+;; TODO!!!
+
 ;; -- Project managment
 (defun my-helm-projectile-customization ()
   ;; (setq projectile-enable-caching t)
@@ -122,10 +126,15 @@
   ;; (setq helm-multi-swoop-edit-save t)
   (setq ;; If this value is t, split window inside the current window
         helm-swoop-split-with-multiple-windows t
-        ;; Split direcion. 'split-window-vertically or 'split-window-horizontally
+        ;; Split direcion. 'split-window-vertically
+        ;; or 'split-window-horizontally
         helm-swoop-split-direction 'split-window-vertically
-        ;; If nil, you can slightly boost invoke speed in exchange for text color
+        ;; If nil, you can slightly boost invoke speed
+        ;; in exchange for text color
         helm-swoop-speed-or-color t))
+
+;; -- Syntax checking
+;; TODO!!!
 
 ;; -- Task managment
 (defun my-org-customization ()
@@ -140,6 +149,17 @@
   (setq org-directory (my-emacs-absolute-path "org"))
   (setq org-agenda-files (list (my-emacs-absolute-path "org/gtd.org")))
   (load-file (my-emacs-absolute-path "org/init.el")))
+
+;; -- Type
+(defun my-company-customization ()
+  ;; Disable downcasing of autocompletes with dabbrev
+  ;; (setq company-dabbrev-downcase nil)
+  ;; Merge results of capf and dabbrev backends
+  (setf (car (member 'company-capf company-backends))
+        '(company-capf company-dabbrev)))
+
+;; -- Version control
+;; TODO!!!
 
 ;; Attach customizations to corresponding setup files.
 (my-load-set-customization-func 'general-appearance
@@ -157,7 +177,8 @@
 
 (my-load-set-customization-func 'slime 'my-slime-customization)
 
-(my-load-set-customization-func 'markdown-mode 'my-markdown-mode-customization)
+(my-load-set-customization-func 'markdown-mode
+                                'my-markdown-mode-customization)
 
 (my-load-set-customization-func 'web-mode 'my-web-mode-customization)
 
@@ -173,6 +194,8 @@
 (my-load-set-customization-func 'helm-swoop 'my-helm-swoop-customization)
 
 (my-load-set-customization-func 'org 'my-org-customization)
+
+(my-load-set-customization-func 'company 'my-company-customization)
 
 (provide 'my-customization)
 

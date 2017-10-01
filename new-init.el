@@ -125,6 +125,11 @@ FILE-RELATIVE-PATH is the path relative to SETUP directory."
   (my-load-make-setup-options
    (my--setup-absolute-path "/task-managment/setup-org.el"))
 
+  ;; type
+  'company
+  (my-load-make-setup-options
+   (my--setup-absolute-path "/type/setup-company.el"))
+
   ;; version-control
   'diff-hl
   (my-load-make-setup-options
