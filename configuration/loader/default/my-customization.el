@@ -41,7 +41,7 @@
 
 (defun my-solarized-theme-customization ()
   (setq solarized-high-contrast-mode-line t)
-  (load-theme 'solarized-light t))
+  (load-theme 'solarized-dark t))
 
 ;; -- Edit
 (defun my-general-edit-customization ()
