@@ -115,6 +115,11 @@
              ("C-c d c" . magit-clone)))
 
 ;; -- Visual
+(my-load-set-keybindings-func
+ 'general-visual
+ (lambda ()
+   (bind-keys ("C-c w" . whitespace-mode))))
+
 (defun my-highlight-symbol-keybindings ()
  (bind-keys ("C-c n h" . highlight-symbol)
             ("C-c n n" . highlight-symbol-next)
