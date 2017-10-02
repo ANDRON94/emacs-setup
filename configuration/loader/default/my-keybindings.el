@@ -87,12 +87,6 @@
              ;; When doing isearch, hand the word over to helm-swoop
              ("M-i" . helm-swoop-from-isearch)))
 
-(defun my-highlight-symbol-keybindings ()
- (bind-keys ("C-c n h" . highlight-symbol)
-            ("C-c n n" . highlight-symbol-next)
-            ("C-c n p" . highlight-symbol-prev)
-            ("C-c n r" . highlight-symbol-query-replace)))
-
 ;; -- Syntax checking
 ;; TODO!!!
 
@@ -120,6 +114,13 @@
              ("C-c d i" . magit-init)
              ("C-c d c" . magit-clone)))
 
+;; -- Visual
+(defun my-highlight-symbol-keybindings ()
+ (bind-keys ("C-c n h" . highlight-symbol)
+            ("C-c n n" . highlight-symbol-next)
+            ("C-c n p" . highlight-symbol-prev)
+            ("C-c n r" . highlight-symbol-query-replace)))
+
 ;; Attach keybindings to corresponding setup files.
 (my-load-set-keybindings-func 'smartparens 'my-smartparens-keybindings)
 
@@ -136,9 +137,6 @@
 
 (my-load-set-keybindings-func 'helm-swoop 'my-helm-swoop-keybindings)
 
-(my-load-set-keybindings-func 'highlight-symbol
-                              'my-highlight-symbol-keybindings)
-
 (my-load-set-keybindings-func 'org 'my-org-keybindings)
 
 (my-load-set-keybindings-func 'diff-hl 'my-diff-hl-keybindings)
@@ -146,6 +144,9 @@
 (my-load-set-keybindings-func 'git-messenger 'my-git-messenger-keybindings)
 
 (my-load-set-keybindings-func 'magit 'my-magit-keybindings)
+
+(my-load-set-keybindings-func 'highlight-symbol
+                              'my-highlight-symbol-keybindings)
 
 (provide 'my-keybindings)
 

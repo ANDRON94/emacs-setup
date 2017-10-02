@@ -148,10 +148,6 @@ FILE-RELATIVE-PATH is the path relative to SETUP directory."
   (my-load-make-setup-options
    (my--setup-absolute-path "/search/setup-helm-swoop.el"))
 
-  'highlight-symbol
-  (my-load-make-setup-options
-   (my--setup-absolute-path "/search/setup-highlight-symbol.el"))
-
   ;; syntax-checking
   'flycheck
   (my-load-make-setup-options
@@ -202,7 +198,12 @@ FILE-RELATIVE-PATH is the path relative to SETUP directory."
 
   'magit-svn
   (my-load-make-setup-options
-   (my--setup-absolute-path "/version-control/setup-magit-svn.el"))))
+   (my--setup-absolute-path "/version-control/setup-magit-svn.el"))
+
+  ;; visual
+  'highlight-symbol
+  (my-load-make-setup-options
+   (my--setup-absolute-path "/visual/setup-highlight-symbol.el"))))
 
 ;; Define and load 'configuration loader' file.
 (require 'my-custom-loader-dispatcher nil t)
