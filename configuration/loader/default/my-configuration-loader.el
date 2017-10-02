@@ -37,7 +37,7 @@
 (require 'my-customization my--customization-file-path)
 
 ;; Load necessary setup files.
-(my-load-load-except '(material-theme markdown-mode))
+(my-load-load-except '(solarized-theme markdown-mode))
 
 (provide 'my-configuration-loader)
 
