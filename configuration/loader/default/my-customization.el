@@ -162,18 +162,23 @@
         helm-swoop-speed-or-color t))
 
 ;; -- Syntax checking
-(defun my-flycheck-customization ()
-  ;; (add-hook 'javascript-mode-hook 'flycheck-mode)
-  ;; (add-hook 'python-mode-hook 'flycheck-mode)
-  ;; (add-hook 'sql-mode-hook 'flycheck-mode)
-  ;; (add-hook 'web-mode-hook 'flycheck-mode)
-  ;; (add-hook 'lisp-mode-hook 'flycheck-mode)
-  ;; (add-hook 'web-mode-hook 'flycheck-mode)
-  ;;   ;; Integrate flycheck with Web
-  ;; (flycheck-add-mode 'html-tidy 'web-mode)
-  (add-hook 'c-mode-hook 'flycheck-mode)
-  (add-hook 'c++-mode-hook 'flycheck-mode)
-  (add-hook 'emacs-lisp-mode-hook 'flycheck-mode))
+(my-load-set-customization-func
+ 'flycheck
+ (lambda ()
+   ;; (add-hook 'javascript-mode-hook 'flycheck-mode)
+   ;; (add-hook 'python-mode-hook 'flycheck-mode)
+   ;; (add-hook 'sql-mode-hook 'flycheck-mode)
+   ;; (add-hook 'web-mode-hook 'flycheck-mode)
+   ;; (add-hook 'lisp-mode-hook 'flycheck-mode)
+   ;; (add-hook 'web-mode-hook 'flycheck-mode)
+   ;;   ;; Integrate flycheck with Web
+   ;; (flycheck-add-mode 'html-tidy 'web-mode)
+   ;; Enable flycheck for next modes:
+   (add-hook 'c-mode-hook 'flycheck-mode)
+   (add-hook 'c++-mode-hook 'flycheck-mode)
+   (add-hook 'emacs-lisp-mode-hook 'flycheck-mode)
+   ;; Use Emacs `load-path' for checking elisp files.
+   (setq flycheck-emacs-lisp-load-path 'inherit)))
 
 (defun my-flycheck-irony-customization ()
   (add-hook 'flycheck-mode-hook 'flycheck-irony-setup))
@@ -300,8 +305,6 @@
                                 'my-helm-projectile-customization)
 
 (my-load-set-customization-func 'helm-swoop 'my-helm-swoop-customization)
-
-(my-load-set-customization-func 'flycheck 'my-flycheck-customization)
 
 (my-load-set-customization-func 'flycheck-irony
                                 'my-flycheck-irony-customization)
