@@ -133,6 +133,10 @@ FILE-RELATIVE-PATH is the path relative to SETUP directory."
   (my-load-make-setup-options
    (my--setup-absolute-path "/navigate/setup-sr-speedbar.el"))
 
+  'my-scroll
+  (my-load-make-setup-options
+   (my--setup-absolute-path "/navigate/setup-my-scroll.el"))
+
   ;; package-managment
   'spu
   (my-load-make-setup-options

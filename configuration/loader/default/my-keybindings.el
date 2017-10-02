@@ -67,6 +67,12 @@
 (defun my-sr-speedbar-keybindings ()
   (bind-keys ([f2] . sr-speedbar-toggle)))
 
+(my-load-set-keybindings-func
+ 'my-scroll
+ (lambda ()
+   (bind-keys ("M-n" . my-scroll-up-one-line)
+              ("M-p" . my-scroll-down-one-line))))
+
 ;; -- Package managment
 ;; TODO!!!
 
