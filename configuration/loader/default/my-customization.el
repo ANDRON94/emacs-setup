@@ -193,33 +193,48 @@
   (load-file (my-emacs-absolute-path "org/init.el")))
 
 ;; -- Type
-(defun my-company-customization ()
-  ;; Disable downcasing of autocompletes with dabbrev
-  ;; (setq company-dabbrev-downcase nil)
-  ;; Merge results of capf and dabbrev backends
-  (setf (car (member 'company-capf company-backends))
-        '(company-capf company-dabbrev)))
+(my-load-set-customization-func
+ 'company
+ (lambda ()
+   ;; Disable downcasing of autocompletes with dabbrev.
+   ;; (setq company-dabbrev-downcase nil)
+   ;; Merge results of capf and dabbrev backends.
+   (setf (car (member 'company-capf company-backends))
+         '(company-capf company-dabbrev))))
 
-(defun my-company-irony-customization ()
-  (add-to-list 'company-backends 'company-irony))
+(my-load-set-customization-func
+ 'company-irony
+ (lambda ()
+   ;; Add autocompletion for C++ language.
+   (add-to-list 'company-backends 'company-irony)))
 
-(defun my-company-irony-c-headers-customization ()
-  (add-to-list 'company-backends 'company-irony-c-headers))
+(my-load-set-customization-func
+ 'company-irony-c-headers
+ (lambda ()
+   ;; Add autocompletion for C/C++ headers.
+   (add-to-list 'company-backends 'company-irony-c-headers)))
 
-(defun my-slime-company-customization ()
-  (with-eval-after-load 'company
-    (add-to-list 'company-backends 'company-slime))
-  (with-eval-after-load 'slime
-    (unless (slime-find-contrib 'slime-fuzzy)
-      (setq slime-company-completion 'simple))))
+(my-load-set-customization-func
+ 'slime-company
+ (lambda ()
+   ;; Add autocompletion for Common Lisp language.
+   (with-eval-after-load 'company
+     (add-to-list 'company-backends 'company-slime))
+   ;; Just display the completion candidate.
+   (with-eval-after-load 'slime
+     (unless (slime-find-contrib 'slime-fuzzy)
+       (setq slime-company-completion 'simple)))))
 
-(defun my-yasnippet-customization ()
-  ;; Disable yasnippet in terminal mode
-  (add-hook 'term-mode-hook (lambda() (yas-minor-mode -1)))
-  (setf (car (member 'company-irony company-backends))
-        '(company-irony :with company-yasnippet)
-        (car (member '(company-capf company-dabbrev) company-backends))
-        '(company-capf company-dabbrev  :with company-yasnippet)))
+(my-load-set-customization-func
+ 'yasnippet
+ (lambda ()
+   ;; Disable yasnippet in terminal mode.
+   (add-hook 'term-mode-hook (lambda() (yas-minor-mode -1)))
+   ;; Add autocompletion for snippets.
+   (setf (car (member 'company-irony company-backends))
+         '(company-irony :with company-yasnippet)
+         (car (member '(company-capf company-dabbrev) company-backends))
+         '(company-capf company-dabbrev  :with company-yasnippet))))
 
 ;; -- Version control
 ;; TODO!!!
@@ -292,19 +307,6 @@
                                 'my-flycheck-irony-customization)
 
 (my-load-set-customization-func 'org 'my-org-customization)
-
-(my-load-set-customization-func 'company 'my-company-customization)
-
-(my-load-set-customization-func 'company-irony
-                                'my-company-irony-customization)
-
-(my-load-set-customization-func 'company-irony-c-headers
-                                'my-company-irony-c-headers-customization)
-
-(my-load-set-customization-func 'slime-company
-                                'my-slime-company-customization)
-
-(my-load-set-customization-func 'yasnippet 'my-yasnippet-customization)
 
 (provide 'my-customization)
 
