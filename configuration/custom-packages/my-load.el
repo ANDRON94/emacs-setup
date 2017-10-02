@@ -48,7 +48,10 @@ OPTION-NAME is the name of desired option."
 OPTION-NAME is the name of desired option.
 OPTION-VALUE is the value of desired option."
   (let ((setup-options (plist-get my-load--central-registry unique-key)))
-    (plist-put setup-options option-name option-value)))
+    (setq setup-options
+          (plist-put setup-options option-name option-value))
+    (setq my-load--central-registry
+          (plist-put my-load--central-registry unique-key setup-options))))
 
 (defconst my-load--success-load-format-msg
   "Load setup file with identifier '%s'."
