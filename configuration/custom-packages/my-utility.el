@@ -43,7 +43,7 @@ code that should be executed on each iteration."
 (defun my-apply-if-exist (function &rest arguments)
   "Call function FUNCTION with arguments ARGUMENTS if it's defined.
 Return result of the function or nil otherwise."
-  (when (fboundp function)
+  (when (functionp function)
     (apply 'apply function arguments)))
 
 (defun my-mboundp (symbol)
