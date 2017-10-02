@@ -1,4 +1,4 @@
-;;; new-init.el --- Loads appropriate Emacs configuration.  -*- lexical-binding: t; -*-
+;;; init.el --- Loads appropriate Emacs configuration.  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2017  Andrii Tymchuk
 
@@ -235,4 +235,4 @@ If custom loader isn't specified by user returns default loader path."
 
 (require 'my-configuration-loader (my-get-loader-path))
 
-;;; new-init.el ends here
+;;; init.el ends here
