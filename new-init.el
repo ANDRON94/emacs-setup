@@ -201,6 +201,10 @@ FILE-RELATIVE-PATH is the path relative to SETUP directory."
    (my--setup-absolute-path "/version-control/setup-magit-svn.el"))
 
   ;; visual
+  'general-visual
+  (my-load-make-setup-options
+   (my--setup-absolute-path "/visual/general-visual.el"))
+
   'highlight-symbol
   (my-load-make-setup-options
    (my--setup-absolute-path "/visual/setup-highlight-symbol.el"))))
