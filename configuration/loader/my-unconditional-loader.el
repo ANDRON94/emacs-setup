@@ -12,8 +12,9 @@
 
 ;;; Code:
 
-;; Remote package archive setup.
 (require 'package)
+
+;; Remote package archive setup.
 (setq package-enable-at-startup nil)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 ;; (add-to-list 'package-archives

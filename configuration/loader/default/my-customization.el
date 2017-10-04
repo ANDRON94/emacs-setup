@@ -16,18 +16,22 @@
 
 ;; Define customization.
 ;; -- Appearance
-(defun my-general-appearance-customization ()
-  ;; Make 'bell signal' a visible.
-  (setq visible-bell t)
-  ;; Disable tool bar.
-  (tool-bar-mode -1)
-  ;; Hide minor modes from mode line
-  (with-eval-after-load 'autorevert
-    (diminish 'auto-revert-mode))
-  (with-eval-after-load 'abbrev
-    (diminish 'abbrev-mode))
-  ;; Run ediff control panel in the current frame
-  (setq ediff-window-setup-function 'ediff-setup-windows-plain))
+(my-load-set-customization-func
+ 'general-appearance
+ (lambda ()
+   ;; Make 'bell signal' a visible.
+   (setq visible-bell t)
+   ;; Disable tool bar.
+   (tool-bar-mode -1)
+   ;; Hide minor modes from mode line
+   (with-eval-after-load 'autorevert
+     (diminish 'auto-revert-mode))
+   (with-eval-after-load 'abbrev
+     (diminish 'abbrev-mode))
+   ;; Run ediff control panel in the current frame
+   (setq ediff-window-setup-function 'ediff-setup-windows-plain)
+   ;; Show scroll bar at right side of window.
+   (set-scroll-bar-mode 'right)))
 
 (defun my-nlinum-customization ()
   (add-hook 'org-mode-hook (lambda () (nlinum-mode -1))))
@@ -261,9 +265,6 @@
    (setq-default indent-tabs-mode nil)))
 
 ;; Attach customizations to corresponding setup files.
-(my-load-set-customization-func 'general-appearance
-                                'my-general-appearance-customization)
-
 (my-load-set-customization-func 'nlinum 'my-nlinum-customization)
 
 (my-load-set-customization-func 'powerline 'my-powerline-customization)
