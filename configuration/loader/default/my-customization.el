@@ -58,7 +58,9 @@
    ;; Use space to indent by default.
    (setq-default indent-tabs-mode nil)
    ;; Use 4 spaces indentation for C++.
-   (add-to-list 'c-default-style '(c++-mode . "stroustrup"))))
+   (add-hook 'c++-mode-hook
+             (lambda ()
+               (c-set-style "stroustrup")))))
 
 (defun my-slime-customization ()
   ;; Path to compiler.
