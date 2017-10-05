@@ -48,11 +48,17 @@
   (load-theme 'solarized-dark t))
 
 ;; -- Edit
-(defun my-general-edit-customization ()
-  ;; Always end a file with a newline
-  (setq require-final-newline t)
-  ;; Always allow narrowing
-  (put 'narrow-to-region 'disabled nil))
+(my-load-set-customization-func
+ 'general-edit
+ (lambda ()
+   ;; Always end a file with a newline
+   (setq require-final-newline t)
+   ;; Always allow narrowing
+   (put 'narrow-to-region 'disabled nil)
+   ;; Use space to indent by default.
+   (setq-default indent-tabs-mode nil)
+   ;; Use 4 spaces indentation for C++.
+   (add-to-list 'c-default-style '(c++-mode . "stroustrup"))))
 
 (defun my-slime-customization ()
   ;; Path to compiler.
@@ -254,15 +260,10 @@
  (lambda ()
    ;; ;; Set appearance of a tab that is represented by 4 spaces.
    ;; (setq-default tab-width 4)
-   ;; ;; Set default indent.
-   ;; (defvaralias 'c-basic-offset 'tab-width)
-   ;; (defvaralias 'cperl-indent-level 'tab-width)
    ;; Show unnecessary whitespace that can mess up diff.
    (add-hook 'prog-mode-hook
              (lambda () (interactive)
-               (setq show-trailing-whitespace 1)))
-   ;; Use space to indent by default.
-   (setq-default indent-tabs-mode nil)))
+               (setq show-trailing-whitespace 1)))))
 
 ;; Attach customizations to corresponding setup files.
 (my-load-set-customization-func 'nlinum 'my-nlinum-customization)
@@ -274,8 +275,6 @@
 
 (my-load-set-customization-func 'solarized-theme
                                 'my-solarized-theme-customization)
-
-(my-load-set-customization-func 'general-edit 'my-general-edit-customization)
 
 (my-load-set-customization-func 'slime 'my-slime-customization)
 
