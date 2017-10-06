@@ -32,11 +32,14 @@
 ;; Default configuration loader doesn't extend setup files registry.
 ;; It uses main setup files.
 
-;; 2. Load customizations.
+;; 2. Load customizations. If you want to load several
+;; customization files then put most specific files after
+;; the general ones. In such case, most specific customizations
+;; will override settings from general files.
 (require 'my-keybindings my--keybindings-file-path)
 (require 'my-customization my--customization-file-path)
 
-;; Load necessary setup files.
+;; 3. Load necessary setup files.
 (my-load-load-except '(material-theme markdown-mode))
 
 (provide 'my-configuration-loader)
