@@ -33,14 +33,14 @@
    ;; Show scroll bar at right side of window.
    (set-scroll-bar-mode 'right)))
 
-(defun my-disable-nlinum-mode ()
+(defun my--disable-nlinum-mode ()
   "Disable nlinum mode."
   (nlinum-mode -1))
 
 (my-load-set-customization-func
  'nlinum
  (lambda ()
-   (add-hook 'org-mode-hook 'my-disable-nlinum-mode)))
+   (add-hook 'org-mode-hook 'my--disable-nlinum-mode)))
 
 (my-load-set-customization-func
  'powerline
@@ -60,6 +60,10 @@
    (load-theme 'solarized-dark t)))
 
 ;; -- Edit
+(defun my--set-c++-code-style ()
+  "Set code style for C++ language."
+  (c-set-style "stroustrup"))
+
 (my-load-set-customization-func
  'general-edit
  (lambda ()
@@ -70,9 +74,7 @@
    ;; Use space to indent by default.
    (setq-default indent-tabs-mode nil)
    ;; Use 4 spaces indentation for C++.
-   (add-hook 'c++-mode-hook
-             (lambda ()
-               (c-set-style "stroustrup")))))
+   (add-hook 'c++-mode-hook 'my--set-c++-code-style)))
 
 (my-load-set-customization-func
  'slime
@@ -282,11 +284,15 @@
      (unless (slime-find-contrib 'slime-fuzzy)
        (setq slime-company-completion 'simple)))))
 
+(defun my--disable-yasnippet-mode ()
+  "Disable yasnippet mode."
+  (yas-minor-mode -1))
+
 (my-load-set-customization-func
  'yasnippet
  (lambda ()
    ;; Disable yasnippet in terminal mode.
-   (add-hook 'term-mode-hook (lambda() (yas-minor-mode -1)))
+   (add-hook 'term-mode-hook 'my--disable-yasnippet-mode)
    ;; Add autocompletion for snippets.
    (setf (car (member 'company-irony company-backends))
          '(company-irony :with company-yasnippet)
@@ -297,15 +303,18 @@
 ;; TODO!!!
 
 ;; -- Visual
+(defun my--show-trailing-whitespace ()
+  "Show trailing whitespace."
+  (interactive)
+  (setq show-trailing-whitespace 1))
+
 (my-load-set-customization-func
  'general-visual
  (lambda ()
    ;; ;; Set appearance of a tab that is represented by 4 spaces.
    ;; (setq-default tab-width 4)
    ;; Show unnecessary whitespace that can mess up diff.
-   (add-hook 'prog-mode-hook
-             (lambda () (interactive)
-               (setq show-trailing-whitespace 1)))))
+   (add-hook 'prog-mode-hook 'my--show-trailing-whitespace)))
 
 (provide 'my-customization)
 
