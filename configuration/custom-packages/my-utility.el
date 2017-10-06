@@ -35,10 +35,10 @@ code that should be executed on each iteration."
   (let ((curr-elem (make-symbol "curr-elem")))
     `(let ((,curr-elem ,plist))
        (while ,curr-elem
-      (let ((,key (car ,curr-elem))
-            (,value (cadr ,curr-elem)))
-        ,@body
-        (setq ,curr-elem (cddr ,curr-elem)))))))
+         (let ((,key (car ,curr-elem))
+               (,value (cadr ,curr-elem)))
+           ,@body
+           (setq ,curr-elem (cddr ,curr-elem)))))))
 
 (defun my-apply-if-exist (function &rest arguments)
   "Call function FUNCTION with arguments ARGUMENTS if it's defined.
@@ -61,21 +61,34 @@ Return the macro expansion or nil otherwise."
   (when (my-mboundp (car form))
     (macroexpand form environment)))
 
-(defmacro my-macro-with-arg-factory (macro-name arguments-factory)
-  "Expand macro with name MACRO-NAME and with arguments produced by function.
-ARGUMENTS-FACTORY is the arguments factory function.  It should return list
-of valid macro arguments."
-  `(,macro-name ,@(funcall arguments-factory)))
+(let ((fail-msg "Symbol '%s' is unbound, setq ignored!"))
+  (defmacro my-setq-when-bound (&rest sym-val)
+    "Like setq macro but with the bound check for each symbol from SYM-VAL.
+SYM-VAL is a list of symbols and values exactly like in setq."
+    (let (setq-claues)
+      (my-doplist symbol value sym-val
+                  (push
+                   `(if (boundp ',symbol)
+                        (setq ,symbol ,value)
+                      (display-warning 'my-utility (format ,fail-msg ',symbol)))
+                   setq-claues))
+      `(progn ,@(nreverse setq-claues)))))
 
-(defmacro my-apply-at-expansion (function &rest arguments)
-  "Call function FUNCTION with arguments ARGUMENTS at expansion time."
-  `,(my-apply-if-exist function arguments))
+;; (defmacro my-macro-with-arg-factory (macro-name arguments-factory)
+;;   "Expand macro with name MACRO-NAME and with arguments produced by function.
+;; ARGUMENTS-FACTORY is the arguments factory function.  It should return list
+;; of valid macro arguments."
+;;   `(,macro-name ,@(funcall arguments-factory)))
 
-(defmacro my-apply-at-expansion2 (factory factory-args &rest arguments)
-  "FACTORY return function name that should be called at expansion time.
-FACTORY-ARGS is list of arguments that used by FACTORY function.
-ARGUMENTS is list of arguments that used by produced function."
-  `(my-apply-at-expansion ,(apply factory factory-args) ,@arguments))
+;; (defmacro my-apply-at-expansion (function &rest arguments)
+;;   "Call function FUNCTION with arguments ARGUMENTS at expansion time."
+;;   `,(my-apply-if-exist function arguments))
+
+;; (defmacro my-apply-at-expansion2 (factory factory-args &rest arguments)
+;;   "FACTORY return function name that should be called at expansion time.
+;; FACTORY-ARGS is list of arguments that used by FACTORY function.
+;; ARGUMENTS is list of arguments that used by produced function."
+;;   `(my-apply-at-expansion ,(apply factory factory-args) ,@arguments))
 
 (provide 'my-utility)
 
