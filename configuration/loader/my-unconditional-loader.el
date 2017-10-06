@@ -35,14 +35,6 @@
 (require 'diminish)
 (require 'bind-key)
 
-;; Use 'my-utility' package that contains useful functions and macros.
-(require 'my-utility (expand-file-name
-                      "../custom-packages/my-utility.el"
-                      (file-name-directory load-file-name)))
-;; Use 'my-load' package that helps to organize setup files and their
-;; customizations in the simple fashion.
-(require 'my-load (my-this-absolute-path "../custom-packages/my-load.el"))
-
 (provide 'my-unconditional-loader)
 
 ;;; my-unconditional-loader.el ends here

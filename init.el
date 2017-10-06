@@ -16,6 +16,7 @@
 ;;; Code:
 
 ;; Configure load path
+;(package-initialize)
 (defconst my--config-dir-path
   (expand-file-name "./configuration" user-emacs-directory)
   "The path to the main configuration directory.
@@ -40,14 +41,16 @@ describe configuration for it.")
 FILE-RELATIVE-PATH is the path relative to SETUP directory."
   (concat my--setup-dir-path file-relative-path))
 
-(add-to-list 'load-path my--loader-dir-path)
 (add-to-list 'load-path my--custom-packages-dir-path)
+(add-to-list 'load-path my--loader-dir-path)
 
 ;; Load all packages that necessary for
 ;; successful configuration setup.
 (require 'my-unconditional-loader)
 
 ;; Define main setup files registry.
+(require 'my-load)
+
 (my-load-add-setup-files
  (list
   ;; appearance
