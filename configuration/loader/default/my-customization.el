@@ -13,9 +13,15 @@
 ;;; Code:
 
 (require 'my-load)
+(require 'my-utility)
 
 ;; Define customization.
 ;; -- Appearance
+(defun my-use-ediff-plain-windows ()
+  "Show all ediff windows in one frame."
+  (my-setq-when-bound ediff-window-setup-function
+                      'ediff-setup-windows-plain))
+
 (my-load-set-customization-func
  'general-appearance
  (lambda ()
@@ -29,7 +35,7 @@
    (with-eval-after-load 'abbrev
      (diminish 'abbrev-mode))
    ;; Run ediff control panel in the current frame
-   (setq ediff-window-setup-function 'ediff-setup-windows-plain)
+   (add-hook 'ediff-load-hook 'my-use-ediff-plain-windows)
    ;; Show scroll bar at right side of window.
    (set-scroll-bar-mode 'right)))
 
@@ -86,19 +92,19 @@
  'slime
  (lambda ()
    ;; Path to compiler.
-   (setq inferior-lisp-program "/usr/local/bin/sbcl")
+   (my-setq-when-bound inferior-lisp-program "/usr/local/bin/sbcl")
    ;; TODO: Path to local hyperspec copy.
    ;; (setq common-lisp-hyperspec-root
    ;;       "file:///files/Documents/Library/HyperSpec-7-0/HyperSpec/")
-   (setq slime-contribs '(slime-fancy))))
    ;; TODO: Do I need it? (unbind-key "M-p" slime-mode-map)
    ;; TODO: Do I need it? (unbind-key "M-n" slime-mode-map)
+   (my-setq-when-bound slime-contribs '(slime-fancy))))
 
 (my-load-set-customization-func
  'markdown-mode
  (lambda ()
-   (setq markdown-command "multimarkdown")))
    ;; Set name of markdown processor.
+   (my-setq-when-bound markdown-command "multimarkdown")))
 
 (my-load-set-customization-func
  'smartparens
@@ -116,9 +122,11 @@
    (add-to-list 'auto-mode-alist '("\\.scss\\'" . web-mode))
    (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
    (add-to-list 'auto-mode-alist '("\\.tpl\\'" . web-mode))
-   (setq web-mode-markup-indent-offset 2)
-   (setq web-mode-css-indent-offset 2)))
    ;; Setup HTML, CSS and script indentation.
+   (my-setq-when-bound
+    web-mode-markup-indent-offset 2
+    web-mode-css-indent-offset 2
+    web-mode-code-indent-offset 2)))
 
 ;; -- Interface enchancement
 (my-load-set-customization-func
@@ -130,34 +138,38 @@
 (my-load-set-customization-func
  'helm
  (lambda ()
-   (setq ;; Open helm buffer inside current window,
-    ;; Open helm buffer inside current window,
-    ;; not occupy whole other window.
-    helm-split-window-in-side-p t
-    ;; Move to end or beginning of source
-    ;; when reaching top or bottom of source.
-    helm-move-to-line-cycle-in-source nil
-    ;; Search for library in `require' and `declare-function' sexp.
-    helm-ff-search-library-in-sexp t
-    ;; Scroll 8 lines other window using M-<next>/M-<prior>
-    helm-scroll-amount 8
-    helfm-f-file-name-history-use-recentf t
-    ;; Follow results.
-    helm-follow-mode-persistent t)
-   ;; Search in Google.
-   (when (executable-find "curl")
-     (setq helm-google-suggest-use-curl-p t))
-   ;; man support.
-   (add-to-list 'helm-sources-using-default-as-input 'helm-source-man-pages)
-   ;; Hide helm from mode line.
    (with-eval-after-load 'helm-mode
-     (diminish 'helm-mode))))
+     (progn
+       (my-setq-when-bound
+        ;; TODO: helm-ff-file-name-history-use-recentf t
+        ;; Open helm buffer inside current window,
+        ;; not occupy whole other window.
+        helm-split-window-in-side-p t
+        ;; Move to end or beginning of source
+        ;; when reaching top or bottom of source.
+        helm-move-to-line-cycle-in-source nil
+        ;; Scroll 8 lines other window using M-<next>/M-<prior>.
+        helm-scroll-amount 8
+        ;; Search for library in `require' and `declare-function' sexp.
+        helm-ff-search-library-in-sexp t
+        ;; Follow results.
+        helm-follow-mode-persistent t)
+       ;; Hide helm from mode line.
+       (diminish 'helm-mode)))
+   ;; Search in Google.
+   (with-eval-after-load 'helm-net
+     (when (executable-find "curl")
+       (my-setq-when-bound helm-net-prefer-curl t)))
+   ;; man support.
+   (if (boundp 'helm-sources-using-default-as-input)
+       (add-to-list 'helm-sources-using-default-as-input
+                    'helm-source-man-pages))))
 
 (my-load-set-customization-func
  'company-quickhelp
  (lambda ()
-   (setq company-quickhelp-delay nil)))
    ;; Don't show quickhelp popup automatically.
+   (my-setq-when-bound company-quickhelp-delay nil)))
 
 ;; -- Navigate
 (my-load-set-customization-func
@@ -172,14 +184,14 @@
    ;; Use helm-gtags for next file modes.
    (add-hook 'c++-mode-hook 'helm-gtags-mode)
    (add-hook 'c-mode-hook 'helm-gtags-mode)
-   (setq
+   (my-setq-when-bound
     ;; TODO: helm-gtags-prefix-key "\C-cg"
     ;; TODO: helm-gtags-suggested-key-mapping t
     ;; Ignore case for searching flag.
     helm-gtags-ignore-case t
     ;; If this variable is non-nil,
     ;; TAG file is updated after saving buffer.
-    helm-gtags-auto-uptdate t
+    helm-gtags-auto-update t
     ;; Use word at cursor as input if this value is non-nil.
     helm-gtags-use-input-at-cursor t
     ;; If this variable is non-nil,
@@ -189,7 +201,7 @@
 (my-load-set-customization-func
  'sr-speedbar
  (lambda ()
-   (setq
+   (my-setq-when-bound
     ;; TODO: Use text for buttons (setq speedbar-use-images nil)
     ;; Don't show matching directories.
     speedbar-directory-unshown-regexp
@@ -203,18 +215,20 @@
 (my-load-set-customization-func
  'spu
  (lambda ()
-   (setq spu-require-confirm-upgrade-package t)))
    ;; Ask for confirmation before upgrade.
+   (my-setq-when-bound spu-require-confirm-upgrade-package t)))
 
 ;; -- Project managment
 (my-load-set-customization-func
  'helm-projectile
  (lambda ()
-   (add-to-list 'projectile-globally-ignored-files "GPATH")
-   (add-to-list 'projectile-globally-ignored-files "GTAGS")
-   (add-to-list 'projectile-globally-ignored-files "GRTAGS")))
    ;; TODO: (setq projectile-enable-caching t)
    ;; Ignore next files for all projects.
+   (if (boundp 'projectile-globally-ignored-files)
+       (progn
+         (add-to-list 'projectile-globally-ignored-files "GPATH")
+         (add-to-list 'projectile-globally-ignored-files "GTAGS")
+         (add-to-list 'projectile-globally-ignored-files "GRTAGS")))))
 
 ;; -- Search
 (my-load-set-customization-func
@@ -222,7 +236,7 @@
  (lambda ()
    ;; TODO: Save buffer when helm-multi-swoop-edit complete.
    ;; (setq helm-multi-swoop-edit-save t)
-   (setq ;; If this value is t, split window inside the current window
+   (my-setq-when-bound
     ;; If this value is t, split window inside the current window.
     helm-swoop-split-with-multiple-windows t
     ;; Split direcion: 'split-window-vertically
@@ -249,7 +263,7 @@
    (add-hook 'c++-mode-hook 'flycheck-mode)
    (add-hook 'emacs-lisp-mode-hook 'flycheck-mode)
    ;; Use Emacs `load-path' for checking elisp files.
-   (setq flycheck-emacs-lisp-load-path 'inherit)))
+   (my-setq-when-bound flycheck-emacs-lisp-load-path 'inherit)))
 
 (my-load-set-customization-func
  'flycheck-irony
@@ -258,31 +272,35 @@
    (add-hook 'flycheck-mode-hook 'flycheck-irony-setup)))
 
 ;; -- Task managment
+(defun my-org-capture-templates ()
+  "Return list of custom org capture templates."
+  (let ((todo
+         "* TODO %^{Task} %^g\n SCHEDULED: %^T\n Captured: %<%Y-%m-%d %H:%M>")
+        (note
+         "* %^{Note} %^g\n SCHEDULED: %^T\n Captured: %<%Y-%m-%d %H:%M>"))
+    (list `("t" "Simple TODO task" entry
+            (file+headline "gtd.org" "TASKS")
+            ,todo)
+          `("n" "Get a Note" entry
+            (file+headline "gtd.org" "NOTES")
+            ,note))))
+
 (my-load-set-customization-func
  'org
  (lambda ()
-   (let
-       ((todo-template
-         "* TODO %^{Task} %^g\n SCHEDULED: %^T\n Captured: %<%Y-%m-%d %H:%M>")
-        (note-template
-         "* %^{Note} %^g\n SCHEDULED: %^T\n Captured: %<%Y-%m-%d %H:%M>"))
-     (setq
-      ;; Information to record when a task moves to the DONE state.
-      org-log-done 'time
-      ;; Templates for capture items. For example, todo task,
-      ;; note, journal entry, etc.
-      org-capture-templates `(("t" "Simple TODO task" entry
-                               (file+headline "gtd.org" "TASKS")
-                               ,todo-template)
-                              ("n" "Get a Note" entry
-                               (file+headline "gtd.org" "NOTES")
-                               ,note-template))
-      ;; List of export backends.
-      org-export-backends '(ascii html icalendar latex md)
-      ;; Directory with org files.
-      org-directory (my-emacs-absolute-path "org")
-      ;; List of agenda files.
-      org-agenda-files (list (my-emacs-absolute-path "org/gtd.org"))))
+   ;; Templates for capture items. For example, todo task,
+   ;; note, journal entry, etc.
+   (with-eval-after-load 'org-capture
+     (my-setq-when-bound org-capture-templates (my-org-capture-templates)))
+   (my-setq-when-bound
+    ;; Information to record when a task moves to the DONE state.
+    org-log-done 'time
+    ;; List of export backends.
+    org-export-backends '(ascii html icalendar latex md)
+    ;; Directory with org files.
+    org-directory (my-emacs-absolute-path "org")
+    ;; List of agenda files.
+    org-agenda-files (list (my-emacs-absolute-path "org/gtd.org")))
    ;; Load file with personal setup options for org mode.
    (load-file (my-emacs-absolute-path "org/init.el"))))
 
@@ -293,31 +311,34 @@
    ;; TODO: Disable downcasing of autocompletes with dabbrev.
    ;; (setq company-dabbrev-downcase nil)
    ;; Merge results of capf and dabbrev backends.
-   (setf (car (member 'company-capf company-backends))
-         '(company-capf company-dabbrev))))
+   (if (boundp 'company-backends)
+       (setf (car (member 'company-capf company-backends))
+             '(company-capf company-dabbrev)))))
 
 (my-load-set-customization-func
  'company-irony
  (lambda ()
    ;; Add autocompletion for C++ language.
-   (add-to-list 'company-backends 'company-irony)))
+   (if (boundp 'company-backends)
+       (add-to-list 'company-backends 'company-irony))))
 
 (my-load-set-customization-func
  'company-irony-c-headers
  (lambda ()
    ;; Add autocompletion for C/C++ headers.
-   (add-to-list 'company-backends 'company-irony-c-headers)))
+   (if (boundp 'company-backends)
+       (add-to-list 'company-backends 'company-irony-c-headers))))
 
 (my-load-set-customization-func
  'slime-company
  (lambda ()
    ;; Add autocompletion for Common Lisp language.
-   (with-eval-after-load 'company
-     (add-to-list 'company-backends 'company-slime))
+   (if (boundp 'company-backends)
+       (add-to-list 'company-backends 'company-slime))
    ;; Just display the completion candidate.
    (with-eval-after-load 'slime
      (unless (slime-find-contrib 'slime-fuzzy)
-       (setq slime-company-completion 'simple)))))
+       (my-setq-when-bound slime-company-completion 'simple)))))
 
 (defun my--disable-yasnippet-mode ()
   "Disable yasnippet mode."
@@ -329,10 +350,11 @@
    ;; Disable yasnippet in terminal mode.
    (add-hook 'term-mode-hook 'my--disable-yasnippet-mode)
    ;; Add autocompletion for snippets.
-   (setf (car (member 'company-irony company-backends))
-         '(company-irony :with company-yasnippet)
-         (car (member '(company-capf company-dabbrev) company-backends))
-         '(company-capf company-dabbrev  :with company-yasnippet))))
+   (if (boundp 'company-backends)
+       (setf (car (member 'company-irony company-backends))
+             '(company-irony :with company-yasnippet)
+             (car (member '(company-capf company-dabbrev) company-backends))
+             '(company-capf company-dabbrev  :with company-yasnippet)))))
 
 ;; -- Version control
 ;; TODO!!!
