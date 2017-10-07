@@ -135,6 +135,10 @@
    ;; Use y or n instead of yes or not.
    (fset 'yes-or-no-p 'y-or-n-p)))
 
+(defun my-browse-url-chrome-incognito (url &optional _ignore)
+  "Browse URL in Google Chrome incognito mode."
+  (helm-generic-browser url "google-chrome" "--incognito"))
+
 (my-load-set-customization-func
  'helm
  (lambda ()
@@ -156,10 +160,13 @@
         helm-follow-mode-persistent t)
        ;; Hide helm from mode line.
        (diminish 'helm-mode)))
-   ;; Search in Google.
    (with-eval-after-load 'helm-net
      (when (executable-find "curl")
-       (my-setq-when-bound helm-net-prefer-curl t)))
+       ;; Use curl to fetch candidates from Google.
+       (my-setq-when-bound helm-net-prefer-curl t))
+     ;; Open search result in Chrome incognito mode.
+     (my-setq-when-bound helm-google-suggest-default-browser-function
+                         'my-browse-url-chrome-incognito))
    ;; man support.
    (if (boundp 'helm-sources-using-default-as-input)
        (add-to-list 'helm-sources-using-default-as-input
