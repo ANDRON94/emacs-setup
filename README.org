@@ -1,0 +1,33 @@
+* TODO Introduction
+* TODO How To
+* Installation
+1. [required] Install [[https://www.gnu.org/software/emacs/][Emacs]].
+   + I use versions 24.4 and 25.3.
+   + Most GNU/Linux distributions provide GNU Emacs in their repositories.
+     And installation process can be easy as 'sudo apt-get install emacs' =)
+2. [required] Get configuration.
+   + Just clone or download this repository to your Emacs directory:
+     #+BEGIN_SRC sh
+     git clone https://github.com/andron94/emacs-setup <Emacs directory>
+     #+END_SRC
+3. [optional] Install [[https://www.gnu.org/software/global/][GNU Global]]. It is used for source code navigation.
+   + I also recommend to install [[http://pygments.org/][pygments]] plugin.
+     It supports more languages out of the box than GNU Global.
+   + You can also create gtags database for external libraries.
+     + Set path to gtags database. Add it to '~/.profile'(or whatever you use).
+       #+BEGIN_SRC sh
+       export GTAGSLIBPATH=<path to gtags database. For example, $HOME/.gtags/>
+       #+END_SRC
+     + Create/Update database.
+       #+BEGIN_SRC sh
+       # Create directory. You need it only once.
+       mkdir ~/.gtags
+       # Link any libraries you wish. You can add more in the future.
+       ln -s /LIBRARY PATH1/ /NAME1/
+       ln -s /LIBRARY PATH2/ /NAME2/
+       ...
+       # Create or update gtags database.
+       gtags -c
+       #+END_SRC
+4. [required] Run Emacs :) [[https://github.com/jwiegley/use-package][use-package]] will download and setup
+   all packages automatically.
