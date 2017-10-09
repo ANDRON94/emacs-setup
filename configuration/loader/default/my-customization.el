@@ -315,8 +315,8 @@
 (my-load-set-customization-func
  'company
  (lambda ()
-   ;; TODO: Disable downcasing of autocompletes with dabbrev.
-   ;; (setq company-dabbrev-downcase nil)
+   ;; Disable downcasing of complete candidates.
+   (my-setq-when-bound company-dabbrev-downcase nil)
    ;; Merge results of capf and dabbrev backends.
    (if (boundp 'company-backends)
        (setf (car (member 'company-capf company-backends))
