@@ -331,7 +331,8 @@
  'company
  (lambda ()
    ;; Disable downcasing of complete candidates.
-   (my-setq-when-bound company-dabbrev-downcase nil)
+   (with-eval-after-load 'company-dabbrev
+     (my-setq-when-bound company-dabbrev-downcase nil))
    ;; Merge results of capf and dabbrev backends.
    (if (boundp 'company-backends)
        (setf (car (member 'company-capf company-backends))
