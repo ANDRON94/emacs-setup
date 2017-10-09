@@ -40,7 +40,7 @@
 (require 'my-customization my--customization-file-path)
 
 ;; 3. Load necessary setup files.
-(my-load-load-except '(material-theme markdown-mode))
+(my-load-load-except '(solarized-theme doom-themes markdown-mode))
 
 (provide 'my-configuration-loader)
 
