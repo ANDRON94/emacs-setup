@@ -250,7 +250,11 @@
        (progn
          (add-to-list 'projectile-globally-ignored-files "GPATH")
          (add-to-list 'projectile-globally-ignored-files "GTAGS")
-         (add-to-list 'projectile-globally-ignored-files "GRTAGS")))))
+         (add-to-list 'projectile-globally-ignored-files "GRTAGS")))
+   (my-setq-when-bound
+    ;; Format mode line indecator for projectile.
+    projectile-mode-line
+    '(:eval (format " Proj[%s]" (projectile-project-name))))))
 
 ;; -- Search
 (my-load-set-customization-func
