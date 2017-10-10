@@ -15,7 +15,13 @@
 
 ;;; Code:
 
-;; Configure load path
+;; Configure init file and emacs directory.
+;; It helps to easily switch between different
+;; configurations or Emacs versions.
+(setq user-init-file (or load-file-name (buffer-file-name)))
+(setq user-emacs-directory (file-name-directory user-init-file))
+
+;; Configure load path.
 ;(package-initialize)
 (defconst my--config-dir-path
   (expand-file-name "./configuration" user-emacs-directory)
