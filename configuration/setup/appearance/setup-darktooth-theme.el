@@ -15,7 +15,7 @@
 (require 'my-load)
 
 (use-package darktooth-theme
-  :ensure t
+  :load-path "configuration/custom-packages/emacs-theme-darktooth"
   :config
   ;; Custom keybindings
   (my-apply-if-exist (my-load-get-keybindings-func 'darktooth-theme) nil)
