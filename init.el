@@ -15,7 +15,11 @@
 
 ;;; Code:
 
-;; Configure init file and emacs directory.
+;; Define configuration version.
+(defconst my-config-version "2.0.0"
+  "Version number of this configuration.")
+
+;; Configure init file and emacs directory path.
 ;; It helps to easily switch between different
 ;; configurations or Emacs versions.
 (setq user-init-file (or load-file-name (buffer-file-name)))
