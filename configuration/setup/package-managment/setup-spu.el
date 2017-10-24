@@ -20,10 +20,11 @@
   :ensure t
   :defer 5
   :config
-  (spu-package-upgrade-daily)
-  ;; Custom keybindings
+  ;; Custom keybindings.
   (my-apply-if-exist (my-load-get-keybindings-func 'spu) nil)
-  ;; Custom settings
-  (my-apply-if-exist (my-load-get-customization-func 'spu) nil))
+  ;; Custom settings.
+  (my-apply-if-exist (my-load-get-customization-func 'spu) nil)
+  ;; Start daily upgrade process.
+  (spu-package-upgrade-daily))
 
 ;;; setup-spu.el ends here
