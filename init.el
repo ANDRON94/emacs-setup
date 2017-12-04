@@ -16,7 +16,7 @@
 ;;; Code:
 
 ;; Define configuration version.
-(defconst my-config-version "2.0.1"
+(defconst my-config-version "2.0.2"
   "Version number of this configuration.")
 
 ;; Configure init file and emacs directory path.
