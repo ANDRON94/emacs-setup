@@ -68,3 +68,5 @@ situations.
        #+END_SRC
 4. [required] Run Emacs :) [[https://github.com/jwiegley/use-package][use-package]] will download and setup
    all packages automatically.
+5. [optional] I also recommend using Emacs in daemon mode.
+   More about it you can find in [[https://www.emacswiki.org/emacs/EmacsAsDaemon][EmacsWiki]].
