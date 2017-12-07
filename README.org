@@ -1,5 +1,27 @@
-* TODO Introduction
-* TODO How To
+* Introduction
+It's yet another custom Emacs configuration =) I hope, it will be the helpful
+starting point for an Emacs beginner. All configuration files and options
+are split into several different categories, for example, "appearance",
+"edit", "search", "version control". Such approach helps to understand and
+extend configuration more easily.
+Also, there are two types of configuration files: setup files and customization
+files. The first one contains information about package installation
+and some basic configuration steps. And the second one contains more detailed
+personal customizations for the package(s). It helps to leave the configuration
+core unchanged but at the same time define new customizations for different
+situations.
+*  How To
+** Learn Emacs
+*** Useful links
++ [[https://github.com/emacs-tw/awesome-emacs][Awesome Emacs]] is a community driven list of useful Emacs packages,
+  libraries and others.
++ [[https://www.gnu.org/software/emacs/manual/html_node/emacs/index.html][Emacs Manual]] is an official online manual.
++ [[https://www.emacswiki.org/][EmacsWiki]] is the collection of tutorials, source code, question and answers.
+*** Useful articles
++ [[http://tuhdo.github.io/helm-intro.html][A Package in a league of its own: Helm.]]
++ [[http://tuhdo.github.io/helm-projectile.html][Exploring large projects with Projectile and Helm Projectile.]]
++ [[http://tuhdo.github.io/c-ide.html][C/C++ Development Environment for Emacs.]]
++ [[http://syamajala.github.io/c-ide.html][Emacs as C++ IDE.]]
 * Installation
 1. [required] Install [[https://www.gnu.org/software/emacs/][Emacs]].
    + I use versions 24.4 and 25.3.
