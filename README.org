@@ -4,12 +4,52 @@ starting point for an Emacs beginner. All configuration files and options
 are split into several different categories, for example, "appearance",
 "edit", "search", "version control". Such approach helps to understand and
 extend configuration more easily.
+
 Also, there are two types of configuration files: setup files and customization
 files. The first one contains information about package installation
 and some basic configuration steps. And the second one contains more detailed
 personal customizations for the package(s). It helps to leave the configuration
 core unchanged but at the same time define new customizations for different
-situations.
+situations. See more details below.
+** Features list
++ Appearance
+  + [[https://github.com/emacsfodder/emacs-theme-darktooth][Darktooth theme.]]
+  + [[https://github.com/flycheck/flycheck-color-mode-line][Coloring the mode line]] according to the [[http://www.flycheck.org/en/latest/][Flycheck]]
+    state of the current buffer.
+  + [[https://elpa.gnu.org/packages/nlinum.html][Displaying line numbers]] in a buffer.
+  + [[https://github.com/milkypostman/powerline][Better-looking, more functional]] Emacs mode line.
++ Edit
+  + [[https://github.com/Sarcasm/irony-mode][Improving the editing experience]] for the C, C++.
+  + [[https://common-lisp.net/project/slime/][Common Lisp IDE.]]
+  + [[https://github.com/Fuco1/smartparens][Dealing with pairs.]]
+  + [[http://web-mode.org/][Web support.]]
++ Interface enchancement
+  + [[https://github.com/emacs-helm/helm][Incremental completions and narrowing selections.]]
+  + [[https://github.com/expez/company-quickhelp][Documentation popup]] for [[http://company-mode.github.io/][Company.]]
+  + Displaying [[http://www.flycheck.org/en/latest/][Flycheck]] errors in [[https://github.com/flycheck/flycheck-pos-tip][tooltip.]]
++ Navigate
+  + GNU GLOBAL [[https://github.com/syohex/emacs-helm-gtags][helm interface.]]
+  + [[https://github.com/emacsmirror/sr-speedbar][Buffer explorer.]]
++ Package managment
+  + [[https://github.com/mola-T/SPU][Silent package upgrader.]]
++ Project managment
+  + [[https://github.com/bbatsov/projectile][Project]] [[https://github.com/bbatsov/helm-projectile][interaction library.]]
++ Search
+  + [[https://github.com/ShingoFukuyama/helm-swoop][Efficiently hopping squeezed lines.]]
++ Syntax checking
+  + On the [[http://www.flycheck.org/en/latest/][fly syntax checking.]]
++ Task managment
+  + [[http://orgmode.org/][Keeping notes, maintaining TODO lists, planning projects.]]
++ Type
+  + A text [[http://company-mode.github.io/][completion.]]
+  + A template system(a code [[https://github.com/joaotavora/yasnippet][snippets]]).
++ Version control
+  + [[https://github.com/dgutov/diff-hl][Highlighting uncommitted]] changes.
+  + Popup [[https://github.com/syohex/emacs-git-messenger][commit message]] at the current line.
+  + Interface to the version control system Git: [[https://magit.vc/][Magit!!!]]
+  + [[https://github.com/magit/magit-svn][Git-Svn extension]] for [[https://magit.vc/][Magit!!!]]
++ Visual
+  + Automatic and manual [[https://github.com/nschum/highlight-symbol.el][symbol highlighting.]]
 *  How To
 ** Learn Emacs
 *** Useful links
