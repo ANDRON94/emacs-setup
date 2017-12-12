@@ -15,15 +15,17 @@
 ;;; Code:
 
 (require 'my-utility)
+(require 'my-configuration-directories)
+(require 'my-load)
 
 ;; Implementation
 
 (defconst my--keybindings-file-path
-  (my-this-absolute-path "./my-keybindings.el")
+  (concat my-loader-dir-path "/default/my-keybindings.el")
   "The path to the file with keybindings customization.")
 
 (defconst my--customization-file-path
-  (my-this-absolute-path "./my-customization.el")
+  (concat my-loader-dir-path "/default/my-customization.el")
   "The path to the file with general customization.")
 
 ;; Interface

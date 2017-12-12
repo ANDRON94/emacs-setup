@@ -15,8 +15,10 @@
 
 ;;; Code:
 
+;(package-initialize)
+
 ;; Define configuration version.
-(defconst my-config-version "2.0.5"
+(defconst my-config-version "2.1.5"
   "Version number of this configuration.")
 
 ;; Configure init file and emacs directory path.
@@ -25,34 +27,20 @@
 (setq user-init-file (or load-file-name (buffer-file-name)))
 (setq user-emacs-directory (file-name-directory user-init-file))
 
+;; Define infrastructure directory path. This directory
+;; defines all necessary paths and optional custom loader.
+(defconst my-infrastructure-dir-path
+  (expand-file-name "./infrastructure" user-emacs-directory)
+  "The path to the helper directory.
+It holds files which define configuration structure.")
+
 ;; Configure load path.
-;(package-initialize)
-(defconst my--config-dir-path
-  (expand-file-name "./configuration" user-emacs-directory)
-  "The path to the main configuration directory.
-It holds all configuration related files, features, functions.")
+(add-to-list 'load-path my-infrastructure-dir-path)
 
-(defconst my--custom-packages-dir-path
-  (concat my--config-dir-path "/custom-packages")
-  "The path to the directory that contains custom user packages.")
+(require 'my-configuration-directories)
 
-(defconst my--loader-dir-path
-  (concat my--config-dir-path "/loader")
-  "The path to the directory that contains configuration loaders.")
-
-(defconst my--setup-dir-path
-  (concat my--config-dir-path "/setup")
-  "The path to the directory that contains setup files.
-Setup files are the files that install external/custom package and
-describe configuration for it.")
-
-(defun my--setup-absolute-path (file-relative-path)
-  "Return absolute path for FILE-RELATIVE-PATH.
-FILE-RELATIVE-PATH is the path relative to SETUP directory."
-  (concat my--setup-dir-path file-relative-path))
-
-(add-to-list 'load-path my--custom-packages-dir-path)
-(add-to-list 'load-path my--loader-dir-path)
+(add-to-list 'load-path my-custom-packages-dir-path)
+(add-to-list 'load-path my-loader-dir-path)
 
 ;; Load all packages that necessary for
 ;; successful configuration setup.
@@ -66,186 +54,179 @@ FILE-RELATIVE-PATH is the path relative to SETUP directory."
   ;; appearance
   'general-appearance
   (my-load-make-setup-options
-   (my--setup-absolute-path "/appearance/general-appearance.el"))
+   (my-setup-absolute-path "/appearance/general-appearance.el"))
 
   'nlinum
   (my-load-make-setup-options
-   (my--setup-absolute-path "/appearance/setup-nlinum.el"))
+   (my-setup-absolute-path "/appearance/setup-nlinum.el"))
 
   'powerline
   (my-load-make-setup-options
-   (my--setup-absolute-path "/appearance/setup-powerline.el"))
+   (my-setup-absolute-path "/appearance/setup-powerline.el"))
 
   'material-theme
   (my-load-make-setup-options
-   (my--setup-absolute-path "/appearance/setup-material-theme.el"))
+   (my-setup-absolute-path "/appearance/setup-material-theme.el"))
 
   'solarized-theme
   (my-load-make-setup-options
-   (my--setup-absolute-path "/appearance/setup-solarized-theme.el"))
+   (my-setup-absolute-path "/appearance/setup-solarized-theme.el"))
 
   'doom-themes
   (my-load-make-setup-options
-   (my--setup-absolute-path "/appearance/setup-doom-themes.el"))
+   (my-setup-absolute-path "/appearance/setup-doom-themes.el"))
 
   'darktooth-theme
   (my-load-make-setup-options
-   (my--setup-absolute-path "/appearance/setup-darktooth-theme.el"))
+   (my-setup-absolute-path "/appearance/setup-darktooth-theme.el"))
 
   'flycheck-color-mode-line
   (my-load-make-setup-options
-   (my--setup-absolute-path "/appearance/setup-flycheck-color-mode-line.el"))
+   (my-setup-absolute-path "/appearance/setup-flycheck-color-mode-line.el"))
 
   ;; edit
   'general-edit
   (my-load-make-setup-options
-   (my--setup-absolute-path "/edit/general-edit.el"))
+   (my-setup-absolute-path "/edit/general-edit.el"))
 
   'irony
   (my-load-make-setup-options
-   (my--setup-absolute-path "/edit/c++/setup-irony.el"))
+   (my-setup-absolute-path "/edit/c++/setup-irony.el"))
 
   'slime
   (my-load-make-setup-options
-   (my--setup-absolute-path "/edit/common-lisp/setup-slime.el"))
+   (my-setup-absolute-path "/edit/common-lisp/setup-slime.el"))
 
   'markdown-mode
   (my-load-make-setup-options
-   (my--setup-absolute-path "/edit/setup-markdown-mode.el"))
+   (my-setup-absolute-path "/edit/setup-markdown-mode.el"))
 
   'smartparens
   (my-load-make-setup-options
-   (my--setup-absolute-path "/edit/setup-smartparens.el"))
+   (my-setup-absolute-path "/edit/setup-smartparens.el"))
 
   'web-mode
   (my-load-make-setup-options
-   (my--setup-absolute-path "/edit/web/setup-web-mode.el"))
+   (my-setup-absolute-path "/edit/web/setup-web-mode.el"))
 
   ;; interface-enchancement
   'general-interface-enchancement
   (my-load-make-setup-options
-   (my--setup-absolute-path
+   (my-setup-absolute-path
     "/interface-enchancement/general-interface-enchancement.el"))
 
   'helm
   (my-load-make-setup-options
-   (my--setup-absolute-path "/interface-enchancement/setup-helm.el"))
+   (my-setup-absolute-path "/interface-enchancement/setup-helm.el"))
 
   'helm-flycheck
   (my-load-make-setup-options
-   (my--setup-absolute-path "/interface-enchancement/setup-helm-flycheck.el"))
+   (my-setup-absolute-path "/interface-enchancement/setup-helm-flycheck.el"))
 
   'company-quickhelp
   (my-load-make-setup-options
-   (my--setup-absolute-path
+   (my-setup-absolute-path
     "/interface-enchancement/setup-company-quickhelp.el"))
 
   'flycheck-pos-tip
   (my-load-make-setup-options
-   (my--setup-absolute-path
+   (my-setup-absolute-path
     "/interface-enchancement/setup-flycheck-pos-tip.el"))
 
   ;; navigate
   'helm-gtags
   (my-load-make-setup-options
-   (my--setup-absolute-path "/navigate/setup-helm-gtags.el"))
+   (my-setup-absolute-path "/navigate/setup-helm-gtags.el"))
 
   'sr-speedbar
   (my-load-make-setup-options
-   (my--setup-absolute-path "/navigate/setup-sr-speedbar.el"))
+   (my-setup-absolute-path "/navigate/setup-sr-speedbar.el"))
 
   'my-scroll
   (my-load-make-setup-options
-   (my--setup-absolute-path "/navigate/setup-my-scroll.el"))
+   (my-setup-absolute-path "/navigate/setup-my-scroll.el"))
 
   ;; package-managment
   'spu
   (my-load-make-setup-options
-   (my--setup-absolute-path "/package-managment/setup-spu.el"))
+   (my-setup-absolute-path "/package-managment/setup-spu.el"))
 
   ;; project-managment
   'helm-projectile
   (my-load-make-setup-options
-   (my--setup-absolute-path "/project-managment/setup-helm-projectile.el"))
+   (my-setup-absolute-path "/project-managment/setup-helm-projectile.el"))
 
   ;; search
   'helm-swoop
   (my-load-make-setup-options
-   (my--setup-absolute-path "/search/setup-helm-swoop.el"))
+   (my-setup-absolute-path "/search/setup-helm-swoop.el"))
 
   ;; syntax-checking
   'flycheck
   (my-load-make-setup-options
-   (my--setup-absolute-path "/syntax-checking/setup-flycheck.el"))
+   (my-setup-absolute-path "/syntax-checking/setup-flycheck.el"))
 
   'flycheck-irony
   (my-load-make-setup-options
-   (my--setup-absolute-path "/syntax-checking/c++/setup-flycheck-irony.el"))
+   (my-setup-absolute-path "/syntax-checking/c++/setup-flycheck-irony.el"))
 
   ;; task-managment
   'org
   (my-load-make-setup-options
-   (my--setup-absolute-path "/task-managment/setup-org.el"))
+   (my-setup-absolute-path "/task-managment/setup-org.el"))
 
   ;; type
   'company
   (my-load-make-setup-options
-   (my--setup-absolute-path "/type/setup-company.el"))
+   (my-setup-absolute-path "/type/setup-company.el"))
 
   'company-irony
   (my-load-make-setup-options
-   (my--setup-absolute-path "/type/c++/setup-company-irony.el"))
+   (my-setup-absolute-path "/type/c++/setup-company-irony.el"))
 
   'company-irony-c-headers
   (my-load-make-setup-options
-   (my--setup-absolute-path "/type/c++/setup-company-irony-c-headers.el"))
+   (my-setup-absolute-path "/type/c++/setup-company-irony-c-headers.el"))
 
   'slime-company
   (my-load-make-setup-options
-   (my--setup-absolute-path "/type/common-lisp/setup-slime-company.el"))
+   (my-setup-absolute-path "/type/common-lisp/setup-slime-company.el"))
 
   'yasnippet
   (my-load-make-setup-options
-   (my--setup-absolute-path "/type/setup-yasnippet.el"))
+   (my-setup-absolute-path "/type/setup-yasnippet.el"))
 
   ;; version-control
   'diff-hl
   (my-load-make-setup-options
-   (my--setup-absolute-path "/version-control/setup-diff-hl.el"))
+   (my-setup-absolute-path "/version-control/setup-diff-hl.el"))
 
   'git-messenger
   (my-load-make-setup-options
-   (my--setup-absolute-path "/version-control/setup-git-messenger.el"))
+   (my-setup-absolute-path "/version-control/setup-git-messenger.el"))
 
   'magit
   (my-load-make-setup-options
-   (my--setup-absolute-path "/version-control/setup-magit.el"))
+   (my-setup-absolute-path "/version-control/setup-magit.el"))
 
   'magit-svn
   (my-load-make-setup-options
-   (my--setup-absolute-path "/version-control/setup-magit-svn.el"))
+   (my-setup-absolute-path "/version-control/setup-magit-svn.el"))
 
   ;; visual
   'general-visual
   (my-load-make-setup-options
-   (my--setup-absolute-path "/visual/general-visual.el"))
+   (my-setup-absolute-path "/visual/general-visual.el"))
 
   'highlight-symbol
   (my-load-make-setup-options
-   (my--setup-absolute-path "/visual/setup-highlight-symbol.el"))))
+   (my-setup-absolute-path "/visual/setup-highlight-symbol.el"))))
 
 ;; Define and load 'configuration loader' file.
 (require 'my-custom-loader-dispatcher nil t)
 
 (defconst my-custom-loader-p (featurep 'my-custom-loader-dispatcher)
   "The predicate variable which specifies if custom loader was used or not.")
-
-(defconst my-default-configuration-loader-path
-  (concat my--loader-dir-path "/default/my-configuration-loader.el")
-  "The path to the default configuration loader.
-The default configuration loader is used
-when user doesn't specify custom loader
-\(MY-CUSTOM-LOADER-DISPATCHER feature is missing\).")
 
 (defun my-get-loader-path ()
   "Helper function which return custom loader path.
