@@ -323,6 +323,12 @@
     org-log-done 'time
     ;; List of export backends.
     org-export-backends '(ascii html icalendar latex md)
+    ;; Indent the code inside "src" block according to a mode.
+    org-src-tab-acts-natively t
+    ;; Fontify the code inside "src" block according to a mode.
+    org-src-fontify-natively t
+    ;; Preserve indents of the code inside "src" block on export.
+    org-src-preserve-indentation t
     ;; Directory with org files.
     org-directory (my-emacs-absolute-path "org")
     ;; List of agenda files.
