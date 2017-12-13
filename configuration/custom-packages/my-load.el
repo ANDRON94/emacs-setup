@@ -67,6 +67,15 @@ because it doesn't exist in central registry!"
 because it's in the exception list."
   "This message is shown to user when 'my-load' skips loading of setup file.")
 
+(defun my-load--load-setup-file (unique-key path-to-file)
+  "Load setup file with UNIQUE-KEY identifier and PATH-TO-FILE path."
+  (if path-to-file
+      (progn
+        (message my-load--success-load-format-msg unique-key)
+        (load-file path-to-file))
+    (display-warning 'my-load
+                     (format my-load--failure-load-format-msg unique-key))))
+
 ;; Interface
 
 (defun my-load-make-setup-options (file-path &optional keybindings-func
@@ -122,26 +131,22 @@ For all entries from ONLY-KEYS list that ain't exist in central registry print
 warning message to user."
   (dolist (key only-keys)
     (let ((path-to-setup-file (my-load--get-setup-option key :path)))
-      (if path-to-setup-file
-          (progn
-            (message my-load--success-load-format-msg key)
-            (load-file path-to-setup-file))
-        (display-warning 'my-load
-                         (format my-load--failure-load-format-msg key))))))
+      (my-load--load-setup-file key path-to-setup-file))))
 
 (defun my-load-load-all ()
   "Load all setup files from central registry."
   (my-doplist setup-identifier setup-options my-load--central-registry
-              (message my-load--success-load-format-msg setup-identifier)
-              (load-file (plist-get setup-options :path))))
+              (let ((path-to-setup-file (plist-get setup-options :path)))
+                (my-load--load-setup-file setup-identifier
+                                          path-to-setup-file))))
 
 (defun my-load-load-except (except-keys)
   "Load setup files from central registry that ain't in EXCEPT-KEYS list."
   (my-doplist setup-identifier setup-options my-load--central-registry
               (if (not (member setup-identifier except-keys))
-                  (progn
-                    (message my-load--success-load-format-msg setup-identifier)
-                    (load-file (plist-get setup-options :path)))
+                  (let ((path-to-setup-file (plist-get setup-options :path)))
+                    (my-load--load-setup-file setup-identifier
+                                              path-to-setup-file))
                 (message my-load--skip-load-format-msg setup-identifier))))
 
 (provide 'my-load)
