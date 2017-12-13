@@ -57,34 +57,34 @@
    ;; Mode line separator.
    (my-setq-when-bound powerline-default-separator 'wave)))
 
-(my-load-set-customization-func
- 'material-theme
- (lambda ()
-   ;; Activate theme.
-   (load-theme 'material t)))
+;; (my-load-set-customization-func
+;;  'material-theme
+;;  (lambda ()
+;;    ;; Activate theme.
+;;    (load-theme 'material t)))
 
-(my-load-set-customization-func
- 'solarized-theme
- (lambda ()
-   ;; Made mode line more contrast.
-   (my-setq-when-bound solarized-high-contrast-mode-line t)
-   ;; Activate theme.
-   (load-theme 'solarized-dark t)))
+;; (my-load-set-customization-func
+;;  'solarized-theme
+;;  (lambda ()
+;;    ;; Made mode line more contrast.
+;;    (my-setq-when-bound solarized-high-contrast-mode-line t)
+;;    ;; Activate theme.
+;;    (load-theme 'solarized-dark t)))
 
-(my-load-set-customization-func
- 'doom-themes
- (lambda ()
-   (my-setq-when-bound
-    ;; If nil, bold is universally disabled.
-    doom-themes-enable-bold t
-    ;; If nil, italics is universally disabled.
-    doom-themes-enable-italic t)
-   ;; Activate theme.
-   (load-theme 'doom-one t)
-   ;; Enable flashing mode-line on errors.
-   (doom-themes-visual-bell-config)
-   ;; Corrects (and improves) org-mode's native fontification.
-   (doom-themes-org-config)))
+;; (my-load-set-customization-func
+;;  'doom-themes
+;;  (lambda ()
+;;    (my-setq-when-bound
+;;     ;; If nil, bold is universally disabled.
+;;     doom-themes-enable-bold t
+;;     ;; If nil, italics is universally disabled.
+;;     doom-themes-enable-italic t)
+;;    ;; Activate theme.
+;;    (load-theme 'doom-one t)
+;;    ;; Enable flashing mode-line on errors.
+;;    (doom-themes-visual-bell-config)
+;;    ;; Corrects (and improves) org-mode's native fontification.
+;;    (doom-themes-org-config)))
 
 ;; -- Edit
 (defun my--set-c++-code-style ()

@@ -42,8 +42,7 @@
 (require 'my-customization my--customization-file-path)
 
 ;; 3. Load necessary setup files.
-(my-load-load-except '(material-theme solarized-theme doom-themes markdown-mode))
-
+(my-load-load-except '(markdown-mode))
 (provide 'my-configuration-loader)
 
 ;;; my-configuration-loader.el ends here

@@ -18,7 +18,7 @@
 ;(package-initialize)
 
 ;; Define configuration version.
-(defconst my-config-version "2.1.7"
+(defconst my-config-version "2.1.8"
   "Version number of this configuration.")
 
 ;; Configure init file and emacs directory path.
@@ -64,17 +64,17 @@ It holds files which define configuration structure.")
   (my-load-make-setup-options
    (my-setup-absolute-path "/appearance/setup-powerline.el"))
 
-  'material-theme
-  (my-load-make-setup-options
-   (my-setup-absolute-path "/appearance/setup-material-theme.el"))
+  ;; 'material-theme
+  ;; (my-load-make-setup-options
+  ;;  (my-setup-absolute-path "/appearance/setup-material-theme.el"))
 
-  'solarized-theme
-  (my-load-make-setup-options
-   (my-setup-absolute-path "/appearance/setup-solarized-theme.el"))
+  ;; 'solarized-theme
+  ;; (my-load-make-setup-options
+  ;;  (my-setup-absolute-path "/appearance/setup-solarized-theme.el"))
 
-  'doom-themes
-  (my-load-make-setup-options
-   (my-setup-absolute-path "/appearance/setup-doom-themes.el"))
+  ;; 'doom-themes
+  ;; (my-load-make-setup-options
+  ;;  (my-setup-absolute-path "/appearance/setup-doom-themes.el"))
 
   'darktooth-theme
   (my-load-make-setup-options

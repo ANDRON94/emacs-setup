@@ -26,5 +26,4 @@
   ;; Custom settings
   (my-apply-if-exist (my-load-get-customization-func 'highlight-symbol) nil))
 
-
 ;;; setup-highlight-symbol.el ends here
