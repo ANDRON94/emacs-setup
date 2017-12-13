@@ -406,6 +406,6 @@
    ;; Show unnecessary whitespace that can mess up diff.
    (add-hook 'prog-mode-hook 'my--show-trailing-whitespace)))
 
-(provide 'my-customization)
+(provide 'my-default-customization)
 
 ;;; my-customization.el ends here

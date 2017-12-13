@@ -20,11 +20,11 @@
 
 ;; Implementation
 
-(defconst my--keybindings-file-path
+(defconst my--default-keybindings-file-path
   (concat my-loader-dir-path "/default/my-keybindings.el")
   "The path to the file with keybindings customization.")
 
-(defconst my--customization-file-path
+(defconst my--default-customization-file-path
   (concat my-loader-dir-path "/default/my-customization.el")
   "The path to the file with general customization.")
 
@@ -38,8 +38,8 @@
 ;; customization files then put most specific files after
 ;; the general ones. In such case, most specific customizations
 ;; will override settings from general files.
-(require 'my-keybindings my--keybindings-file-path)
-(require 'my-customization my--customization-file-path)
+(require 'my-default-keybindings my--default-keybindings-file-path)
+(require 'my-default-customization my--default-customization-file-path)
 
 ;; 3. Load necessary setup files.
 (my-load-load-except '(markdown-mode))

@@ -156,6 +156,6 @@
               ("C-c n n" . highlight-symbol-next)
               ("C-c n p" . highlight-symbol-prev))))
 
-(provide 'my-keybindings)
+(provide 'my-default-keybindings)
 
 ;;; my-keybindings.el ends here
