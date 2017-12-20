@@ -1,4 +1,4 @@
-;;; my-custom-loader-dispatcher.el --- Return path to a proper Emacs configuration loader.  -*- lexical-binding: t; -*-
+;;; my-custom-loader-dispatcher-example.el --- Return path to a proper Emacs configuration loader.  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2017  Andrii Tymchuk
 
@@ -35,4 +35,4 @@
 
 (provide 'my-custom-loader-dispatcher)
 
-;;; my-custom-loader-dispatcher.el ends here
+;;; my-custom-loader-dispatcher-example.el ends here

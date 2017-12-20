@@ -19,11 +19,9 @@
 (use-package markdown-mode
   :ensure t
   :demand t
-  :commands (markdown-mode gfm-mode)
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
-  ;; :init (setq markdown-command "multimarkdown")
   :config
   ;; Custom keybindings
   (my-apply-if-exist (my-load-get-keybindings-func 'markdown-mode) nil)
