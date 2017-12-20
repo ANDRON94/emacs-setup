@@ -18,7 +18,7 @@
 ;(package-initialize)
 
 ;; Define configuration version.
-(defconst my-config-version "2.2.14"
+(defconst my-config-version "2.3.14"
   "Version number of this configuration.")
 
 ;; Configure init file and emacs directory path.
@@ -173,6 +173,11 @@ It holds files which define configuration structure.")
   'flycheck-irony
   (my-load-make-setup-options
    (my-setup-absolute-path "/syntax-checking/c++/setup-flycheck-irony.el"))
+
+  ;; system
+  'docker
+  (my-load-make-setup-options
+   (my-setup-absolute-path "/system/setup-docker.el"))
 
   ;; task-managment
   'org
