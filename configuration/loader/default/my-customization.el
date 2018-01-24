@@ -29,7 +29,7 @@
    (setq visible-bell t)
    ;; Disable tool bar.
    (tool-bar-mode -1)
-   ;; Hide minor modes from mode line
+   ;; Hide minor modes from mode line.
    (with-eval-after-load 'autorevert
      (diminish 'auto-revert-mode))
    (with-eval-after-load 'abbrev
