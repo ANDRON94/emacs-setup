@@ -19,6 +19,8 @@
   :ensure t
   :demand t
   :config
+  ;; Load the official collection of snippets.
+  (use-package yasnippet-snippets :ensure t :demand t)
   ;; Custom keybindings
   (my-apply-if-exist (my-load-get-keybindings-func 'yasnippet) nil)
   ;; Custom settings
