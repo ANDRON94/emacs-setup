@@ -337,6 +337,26 @@
    (load-file (my-emacs-absolute-path "org/init.el"))))
 
 ;; -- Type
+
+(defun my--set-c++-company-backends ()
+  "Set the list of company backends for C++ locally."
+  (if (boundp 'company-backends)
+      (setq-local company-backends
+                  '((company-irony
+                     company-irony-c-headers
+                     :separate
+                     company-dabbrev
+                     company-yasnippet)))))
+
+(defun my--set-lisp-company-backends ()
+  "Set the list of company backends for Common Lisp locally."
+  (if (boundp 'company-backends)
+      (setq-local company-backends
+                  '((company-slime
+                     :separate
+                     company-dabbrev
+                     company-yasnippet)))))
+
 (my-load-set-customization-func
  'company
  (lambda ()
@@ -346,28 +366,14 @@
    ;; Merge results of capf and dabbrev backends.
    (if (boundp 'company-backends)
        (setf (car (member 'company-capf company-backends))
-             '(company-capf company-dabbrev)))))
-
-(my-load-set-customization-func
- 'company-irony
- (lambda ()
-   ;; Add autocompletion for C++ language.
-   (if (boundp 'company-backends)
-       (add-to-list 'company-backends 'company-irony))))
-
-(my-load-set-customization-func
- 'company-irony-c-headers
- (lambda ()
-   ;; Add autocompletion for C/C++ headers.
-   (if (boundp 'company-backends)
-       (add-to-list 'company-backends 'company-irony-c-headers))))
+             '(company-capf company-dabbrev)))
+   ;; Define company backends for the next modes:
+   (add-hook 'c++-mode-hook 'my--set-c++-company-backends)
+   (add-hook 'lisp-mode-hook 'my--set-lisp-company-backends)))
 
 (my-load-set-customization-func
  'slime-company
  (lambda ()
-   ;; Add autocompletion for Common Lisp language.
-   (if (boundp 'company-backends)
-       (add-to-list 'company-backends 'company-slime))
    ;; Just display the completion candidate.
    (with-eval-after-load 'slime
      (unless (slime-find-contrib 'slime-fuzzy)
@@ -381,13 +387,7 @@
  'yasnippet
  (lambda ()
    ;; Disable yasnippet in terminal mode.
-   (add-hook 'term-mode-hook 'my--disable-yasnippet-mode)
-   ;; Add autocompletion for snippets.
-   (if (boundp 'company-backends)
-       (setf (car (member 'company-irony company-backends))
-             '(company-irony :with company-yasnippet)
-             (car (member '(company-capf company-dabbrev) company-backends))
-             '(company-capf company-dabbrev  :with company-yasnippet)))))
+   (add-hook 'term-mode-hook 'my--disable-yasnippet-mode)))
 
 ;; -- Version control
 ;; TODO!!!
