@@ -311,15 +311,18 @@
 
 (defun my-org-capture-templates ()
   "Return list of custom org capture templates."
-  (let ((todo
-         "* TODO %^{Task} %^g\n SCHEDULED: %^T\n Captured: %<%Y-%m-%d %H:%M>")
-        (note
-         "* %^{Note} %^g\n SCHEDULED: %^T\n Captured: %<%Y-%m-%d %H:%M>"))
-    (list `("t" "Simple TODO task" entry
-            (file+headline "gtd.org" "TASKS")
+  (let* ((capture-format "%<%Y-%b-%d %H:%M>")
+         (todo
+          (format "* TODO %%^{Task} %%^g\n SCHEDULED: %%^T\n Captured: %s"
+                  capture-format))
+         (note
+          (format "* %%^{Note} %%^g\n SCHEDULED: %%^T\n Captured: %s"
+                  capture-format)))
+    (list `("t" "Create TODO" entry
+            (function my--org-capture-find-target)
             ,todo)
           `("n" "Get a Note" entry
-            (file+headline "gtd.org" "NOTES")
+            (function my--org-capture-find-target)
             ,note))))
 
 (my-load-set-customization-func
