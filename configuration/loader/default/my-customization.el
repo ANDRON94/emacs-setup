@@ -298,6 +298,17 @@
    (add-hook 'flycheck-mode-hook 'flycheck-irony-setup)))
 
 ;; -- Task managment
+(defun my--org-capture-find-target ()
+  "Find and jump to the user selected headline of the user selected org file."
+  (let* ((path-to-target-file (completing-read "Choose target file: "
+                                               org-agenda-files nil t))
+         (target-buffer (find-file-noselect path-to-target-file))
+         (target (org-refile-get-location "Choose target headline: "
+                                          target-buffer t))
+         (pos (nth 3 target)))
+    (set-buffer target-buffer)
+    (goto-char pos)))
+
 (defun my-org-capture-templates ()
   "Return list of custom org capture templates."
   (let ((todo
