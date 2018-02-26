@@ -345,6 +345,12 @@
     org-src-preserve-indentation t
     ;; Directory with org files.
     org-directory (my-emacs-absolute-path "org")
+    ;; Show full outline path at once.
+    org-outline-path-complete-in-steps nil
+    ;; Provide refile targets as paths.
+    org-refile-use-outline-path t
+    ;; Use headlines with level 2 or less as refile targets.
+    org-refile-targets '((nil . (:maxlevel . 2)))
     ;; List of agenda files.
     org-agenda-files (list (my-emacs-absolute-path "org/gtd.org")))
    ;; Load file with personal setup options for org mode.
