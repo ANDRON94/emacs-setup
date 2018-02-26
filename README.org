@@ -21,6 +21,8 @@ situations. See more details below.
 + Edit
   + [[https://github.com/Sarcasm/irony-mode][Improving the editing experience]] for the C, C++.
   + [[https://common-lisp.net/project/slime/][Common Lisp IDE.]]
+  + [[https://github.com/spotify/dockerfile-mode][Dockerfile support.]]
+  + [[https://github.com/magnars/multiple-cursors.el][Multiple cursors for Emacs.]]
   + [[https://github.com/Fuco1/smartparens][Dealing with pairs.]]
   + [[http://web-mode.org/][Web support.]]
 + Interface enchancement
@@ -38,8 +40,11 @@ situations. See more details below.
   + [[https://github.com/ShingoFukuyama/helm-swoop][Efficiently hopping squeezed lines.]]
 + Syntax checking
   + On the [[http://www.flycheck.org/en/latest/][fly syntax checking.]]
++ System
+  + [[https://github.com/Silex/docker.el][Manage docker from Emacs.]]
 + Task managment
   + [[http://orgmode.org/][Keeping notes, maintaining TODO lists, planning projects.]]
+  + [[https://github.com/IvanMalison/org-projectile][Manage org-mode TODOs for your projectile projects.]]
 + Type
   + A text [[http://company-mode.github.io/][completion.]]
   + A template system(a code [[https://github.com/joaotavora/yasnippet][snippets]]).
