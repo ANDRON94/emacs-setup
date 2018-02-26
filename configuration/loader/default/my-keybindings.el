@@ -20,6 +20,14 @@
 
 ;; -- Edit
 (my-load-set-keybindings-func
+ 'multiple-cursors
+ (lambda ()
+   (bind-keys ("C-S-c C-S-c" . mc/edit-lines)
+              ("C->" . mc/mark-next-like-this)
+              ("C-<" . mc/mark-previous-like-this)
+              ("C-c C-<" . mc/mark-all-like-this))))
+
+(my-load-set-keybindings-func
  'smartparens
  (lambda ()
    (bind-keys :map smartparens-mode-map
