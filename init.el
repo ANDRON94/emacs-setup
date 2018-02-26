@@ -18,7 +18,7 @@
 ;(package-initialize)
 
 ;; Define configuration version.
-(defconst my-config-version "2.8.16"
+(defconst my-config-version "2.9.16"
   "Version number of this configuration.")
 
 ;; Configure init file and emacs directory path.
@@ -183,6 +183,10 @@ It holds files which define configuration structure.")
   'org
   (my-load-make-setup-options
    (my-setup-absolute-path "/task-managment/setup-org.el"))
+
+  'org-projectile-helm
+  (my-load-make-setup-options
+   (my-setup-absolute-path "/task-managment/setup-org-projectile-helm.el"))
 
   ;; type
   'company

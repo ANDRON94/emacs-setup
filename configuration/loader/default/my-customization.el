@@ -356,6 +356,16 @@
    ;; Load file with personal setup options for org mode.
    (load-file (my-emacs-absolute-path "org/init.el"))))
 
+(my-load-set-customization-func
+ 'org-projectile-helm
+ (lambda ()
+   (org-projectile-per-project)
+   (my-setq-when-bound org-projectile-per-project-filepath "work.org")
+   (my-setq-when-bound org-agenda-files
+                       (append org-agenda-files
+                               (seq-filter 'file-exists-p
+                                           (org-projectile-todo-files))))))
+
 ;; -- Type
 
 (defun my--set-c++-company-backends ()
