@@ -1,4 +1,4 @@
-;;; setup-markdown-mode.el --- Setup dockerfile package.  -*- lexical-binding: t; -*-
+;;; setup-dockerfile-mode.el --- Setup dockerfile package.  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2017  Andrii Tymchuk
 

@@ -18,7 +18,7 @@
 ;(package-initialize)
 
 ;; Define configuration version.
-(defconst my-config-version "2.10.18"
+(defconst my-config-version "2.11.18"
   "Version number of this configuration.")
 
 ;; Configure init file and emacs directory path.
@@ -237,7 +237,11 @@ It holds files which define configuration structure.")
 
   'highlight-symbol
   (my-load-make-setup-options
-   (my-setup-absolute-path "/visual/setup-highlight-symbol.el"))))
+   (my-setup-absolute-path "/visual/setup-highlight-symbol.el"))
+
+  'pulse
+  (my-load-make-setup-options
+   (my-setup-absolute-path "/visual/setup-pulse.el"))))
 
 ;; Define and load 'configuration loader' file.
 (require 'my-custom-loader-dispatcher nil t)
