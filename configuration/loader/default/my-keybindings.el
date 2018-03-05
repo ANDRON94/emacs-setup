@@ -73,6 +73,12 @@
 
 ;; -- Navigate
 (my-load-set-keybindings-func
+ 'rtags
+ (lambda ()
+   (bind-keys ("M-." . rtags-find-symbol-at-point)
+              ("M-," . rtags-find-references-at-point))))
+
+(my-load-set-keybindings-func
  'helm-gtags
  (lambda ()
    (bind-keys :map helm-gtags-mode-map

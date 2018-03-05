@@ -18,7 +18,7 @@
 ;(package-initialize)
 
 ;; Define configuration version.
-(defconst my-config-version "2.11.18"
+(defconst my-config-version "2.12.18"
   "Version number of this configuration.")
 
 ;; Configure init file and emacs directory path.
@@ -123,6 +123,10 @@ It holds files which define configuration structure.")
    (my-setup-absolute-path
     "/interface-enchancement/general-interface-enchancement.el"))
 
+  'helm-rtags
+  (my-load-make-setup-options
+   (my-setup-absolute-path "/interface-enchancement/c++/setup-helm-rtags.el"))
+
   'helm
   (my-load-make-setup-options
    (my-setup-absolute-path "/interface-enchancement/setup-helm.el"))
@@ -142,6 +146,10 @@ It holds files which define configuration structure.")
     "/interface-enchancement/setup-flycheck-pos-tip.el"))
 
   ;; navigate
+  'rtags
+  (my-load-make-setup-options
+   (my-setup-absolute-path "/navigate/c++/setup-rtags.el"))
+
   'helm-gtags
   (my-load-make-setup-options
    (my-setup-absolute-path "/navigate/setup-helm-gtags.el"))

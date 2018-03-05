@@ -195,6 +195,26 @@
    (my-setq-when-bound company-quickhelp-delay nil)))
 
 ;; -- Navigate
+(defun my-pulse-line-hook-function (&optional prefix)
+  "Wrapper around `pulse-line-hook-function' with the ignored PREFIX argument.
+It is used as advice for several `rtags' functions."
+  (ignore prefix)
+  (pulse-line-hook-function))
+
+(my-load-set-customization-func
+ 'rtags
+ (lambda ()
+   (my-setq-when-bound
+    ;; Set installation path for RTags server.
+    rtags-install-path (my-emacs-absolute-path "rtags")
+    ;; Integrate RTags with Helm.
+    rtags-display-result-backend 'helm)
+   ;; Add line pulsing for `rtags' search functions:
+   (advice-add 'rtags-find-symbol-at-point
+               :after 'my-pulse-line-hook-function)
+   (advice-add 'rtags-find-references-at-point
+               :after 'my-pulse-line-hook-function)))
+
 (my-load-set-customization-func
  'helm-gtags
  (lambda ()
@@ -205,8 +225,8 @@
    ;; TODO: (add-hook 'javascript-mode-hook 'helm-gtags-mode)
    ;; TODO: (add-hook 'python-mode-hook 'helm-gtags-mode)
    ;; Use helm-gtags for next file modes.
-   (add-hook 'c++-mode-hook 'helm-gtags-mode)
-   (add-hook 'c-mode-hook 'helm-gtags-mode)
+   ;; (add-hook 'c++-mode-hook 'helm-gtags-mode)
+   ;; (add-hook 'c-mode-hook 'helm-gtags-mode)
    (my-setq-when-bound
     ;; TODO: helm-gtags-prefix-key "\C-cg"
     ;; TODO: helm-gtags-suggested-key-mapping t
