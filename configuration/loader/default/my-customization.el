@@ -420,7 +420,8 @@ It is used as advice for several `rtags' functions."
              '(company-capf company-dabbrev)))
    ;; Define company backends for the next modes:
    (add-hook 'c++-mode-hook 'my--set-c++-company-backends)
-   (add-hook 'lisp-mode-hook 'my--set-lisp-company-backends)))
+   (add-hook 'lisp-mode-hook 'my--set-lisp-company-backends)
+   (add-hook 'slime-repl-mode-hook 'my--set-lisp-company-backends)))
 
 (my-load-set-customization-func
  'slime-company
