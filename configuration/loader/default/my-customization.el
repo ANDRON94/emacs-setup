@@ -381,7 +381,7 @@ It is used as advice for several `rtags' functions."
  'org-projectile-helm
  (lambda ()
    (org-projectile-per-project)
-   (my-setq-when-bound org-projectile-per-project-filepath "work.org")
+   (my-setq-when-bound org-projectile-per-project-filepath "gtd.org")
    (my-setq-when-bound org-agenda-files
                        (append org-agenda-files
                                (seq-filter 'file-exists-p
