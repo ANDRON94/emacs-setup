@@ -383,9 +383,8 @@ It is used as advice for several `rtags' functions."
    (org-projectile-per-project)
    (my-setq-when-bound org-projectile-per-project-filepath "gtd.org")
    (my-setq-when-bound org-agenda-files
-                       (append org-agenda-files
-                               (seq-filter 'file-exists-p
-                                           (org-projectile-todo-files))))))
+                       (seq-filter 'file-exists-p
+                                   (org-projectile-todo-files)))))
 
 ;; -- Type
 
