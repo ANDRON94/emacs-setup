@@ -14,6 +14,7 @@
 
 (require 'my-utility)
 (require 'my-load)
+(require 'whitespace)
 
 ;; Custom keybindings
 (my-apply-if-exist (my-load-get-keybindings-func 'general-visual) nil)
