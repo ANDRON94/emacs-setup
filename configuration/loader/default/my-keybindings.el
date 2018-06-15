@@ -75,7 +75,11 @@
 (my-load-set-keybindings-func
  'rtags
  (lambda ()
-   (bind-keys ("M-." . rtags-find-symbol-at-point)
+   (bind-keys :map c-mode-map
+              ("M-." . rtags-find-symbol-at-point)
+              ("M-," . rtags-find-references-at-point))
+   (bind-keys :map c++-mode-map
+              ("M-." . rtags-find-symbol-at-point)
               ("M-," . rtags-find-references-at-point))))
 
 (my-load-set-keybindings-func
