@@ -20,6 +20,14 @@
 
 ;; -- Edit
 (my-load-set-keybindings-func
+ 'omnisharp
+ (lambda ()
+   (bind-keys :map csharp-mode-map
+              ("M-." . omnisharp-go-to-definition)
+              ("M-?" . omnisharp-helm-find-usages)
+              ("C-c r" . omnisharp-run-code-action-refactoring))))
+
+(my-load-set-keybindings-func
  'multiple-cursors
  (lambda ()
    (bind-keys ("C-S-c C-S-c" . mc/edit-lines)

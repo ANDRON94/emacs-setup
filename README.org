@@ -19,6 +19,7 @@ situations. See more details below.
   + [[https://elpa.gnu.org/packages/nlinum.html][Displaying line numbers]] in a buffer.
   + [[https://github.com/milkypostman/powerline][Better-looking, more functional]] Emacs mode line.
 + Edit
+  + [[http://www.omnisharp.net/][IDE-like features for editing files]] in C# solutions in Emacs.
   + [[https://github.com/Sarcasm/irony-mode][Improving the editing experience]] for the C, C++.
   + [[https://common-lisp.net/project/slime/][Common Lisp IDE.]]
   + [[https://github.com/spotify/dockerfile-mode][Dockerfile support.]]

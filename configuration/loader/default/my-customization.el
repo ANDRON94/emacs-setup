@@ -104,6 +104,12 @@
    (add-hook 'c++-mode-hook 'my--set-c++-code-style)))
 
 (my-load-set-customization-func
+ 'omnisharp
+ (lambda ()
+   ;; Use custom version of omnisharp server.
+   (my-setq-when-bound omnisharp-expected-server-version "1.30.1")))
+
+(my-load-set-customization-func
  'slime
  (lambda ()
    ;; Path to compiler.
@@ -309,6 +315,7 @@ It is used as advice for several `rtags' functions."
    (add-hook 'c-mode-hook 'flycheck-mode)
    (add-hook 'c++-mode-hook 'flycheck-mode)
    (add-hook 'emacs-lisp-mode-hook 'flycheck-mode)
+   (add-hook 'csharp-mode-hook 'flycheck-mode)
    ;; Use Emacs `load-path' for checking elisp files.
    (my-setq-when-bound flycheck-emacs-lisp-load-path 'inherit)))
 
@@ -407,6 +414,15 @@ It is used as advice for several `rtags' functions."
                      company-dabbrev
                      company-yasnippet)))))
 
+(defun my--set-csharp-company-backends ()
+  "Set the list of company backends for C# locally."
+  (if (boundp 'company-backends)
+      (setq-local company-backends
+                  '((company-omnisharp
+                     :separate
+                     company-dabbrev
+                     company-yasnippet)))))
+
 (my-load-set-customization-func
  'company
  (lambda ()
@@ -420,7 +436,8 @@ It is used as advice for several `rtags' functions."
    ;; Define company backends for the next modes:
    (add-hook 'c++-mode-hook 'my--set-c++-company-backends)
    (add-hook 'lisp-mode-hook 'my--set-lisp-company-backends)
-   (add-hook 'slime-repl-mode-hook 'my--set-lisp-company-backends)))
+   (add-hook 'slime-repl-mode-hook 'my--set-lisp-company-backends)
+   (add-hook 'csharp-mode-hook 'my--set-csharp-company-backends)))
 
 (my-load-set-customization-func
  'slime-company

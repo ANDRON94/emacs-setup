@@ -18,7 +18,7 @@
 ;(package-initialize)
 
 ;; Define configuration version.
-(defconst my-config-version "2.13.25"
+(defconst my-config-version "2.14.25"
   "Version number of this configuration.")
 
 ;; Configure init file and emacs directory path.
@@ -88,6 +88,10 @@ It holds files which define configuration structure.")
   'general-edit
   (my-load-make-setup-options
    (my-setup-absolute-path "/edit/general-edit.el"))
+
+  'omnisharp
+  (my-load-make-setup-options
+   (my-setup-absolute-path "/edit/c#/setup-omnisharp.el"))
 
   'irony
   (my-load-make-setup-options
