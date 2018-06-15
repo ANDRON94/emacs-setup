@@ -74,6 +74,19 @@ SYM-VAL is a list of symbols and values exactly like in setq."
                    setq-claues))
       `(progn ,@(nreverse setq-claues)))))
 
+(defun my-refresh-ssh-environment ()
+  "Update ssh related environment variables."
+  (interactive)
+  (let ((ssh-auth-sock-var "SSH_AUTH_SOCK")
+        (ssh-auth-sock-cmd "ls -t $(find /tmp/ssh-* -user $USER -name 'agent.*' 2> /dev/null)")
+        (ssh-agent-pid-var "SSH_AGENT_PID")
+        (ssh-agent-pid-cmd "pgrep ssh-agent"))
+    (setenv ssh-auth-sock-var
+            (car (split-string (shell-command-to-string ssh-auth-sock-cmd))))
+    (setenv ssh-agent-pid-var
+            (car (split-string (shell-command-to-string ssh-agent-pid-cmd))))))
+
+
 ;; (defmacro my-macro-with-arg-factory (macro-name arguments-factory)
 ;;   "Expand macro with name MACRO-NAME and with arguments produced by function.
 ;; ARGUMENTS-FACTORY is the arguments factory function.  It should return list
