@@ -219,6 +219,8 @@ It is used as advice for several `rtags' functions."
    (advice-add 'rtags-find-symbol-at-point
                :after 'my-pulse-line-hook-function)
    (advice-add 'rtags-find-references-at-point
+               :after 'my-pulse-line-hook-function)
+   (advice-add 'rtags-location-stack-back
                :after 'my-pulse-line-hook-function)))
 
 (my-load-set-customization-func

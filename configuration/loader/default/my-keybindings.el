@@ -85,10 +85,12 @@
  (lambda ()
    (bind-keys :map c-mode-map
               ("M-." . rtags-find-symbol-at-point)
-              ("M-," . rtags-find-references-at-point))
+              ("M-?" . rtags-find-references-at-point)
+              ("M-," . rtags-location-stack-back))
    (bind-keys :map c++-mode-map
               ("M-." . rtags-find-symbol-at-point)
-              ("M-," . rtags-find-references-at-point))))
+              ("M-?" . rtags-find-references-at-point)
+              ("M-," . rtags-location-stack-back))))
 
 (my-load-set-keybindings-func
  'helm-gtags
