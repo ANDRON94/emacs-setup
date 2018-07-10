@@ -9,7 +9,7 @@
 
 ;; Setup helm-projectile package.
 ;; This package is designed to group
-;; files into projects. And it allows
+;; files into projects.  And it allows
 ;; to manipulate such projects in easy way.
 
 ;;; Code:
@@ -29,6 +29,6 @@
   (my-apply-if-exist (my-load-get-keybindings-func 'helm-projectile) nil)
   ;; Custom settings
   (my-apply-if-exist (my-load-get-customization-func 'helm-projectile) nil)
-  (projectile-global-mode +1))
+  (projectile-mode +1))
 
 ;;; setup-helm-projectile.el ends here
