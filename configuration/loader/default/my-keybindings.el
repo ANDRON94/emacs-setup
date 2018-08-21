@@ -63,7 +63,7 @@
               ("C-c h o" . helm-occur)
               ("C-c h g" . helm-google-suggest))
    (bind-keys :map helm-map
-              ("[tab]" . helm-execute-persistent-action)
+              ([tab] . helm-execute-persistent-action)
               ("C-i" . helm-execute-persistent-action)
               ("C-z" . helm-select-action))))
 
