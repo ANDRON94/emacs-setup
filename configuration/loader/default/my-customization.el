@@ -101,7 +101,10 @@
    ;; Use space to indent by default.
    (setq-default indent-tabs-mode nil)
    ;; Use 4 spaces indentation for C++.
-   (add-hook 'c++-mode-hook 'my--set-c++-code-style)))
+   (add-hook 'c++-mode-hook 'my--set-c++-code-style)
+   ;; Save all backups in one place.
+   (setq backup-directory-alist `(("" . ,(my-emacs-absolute-path
+                                          ".cache/backup"))))))
 
 (my-load-set-customization-func
  'omnisharp

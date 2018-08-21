@@ -18,7 +18,7 @@
 ;(package-initialize)
 
 ;; Define configuration version.
-(defconst my-config-version "2.14.27"
+(defconst my-config-version "2.15.27"
   "Version number of this configuration.")
 
 ;; Configure init file and emacs directory path.
