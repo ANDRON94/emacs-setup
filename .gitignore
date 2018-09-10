@@ -25,3 +25,4 @@ org/
 snippets/
 spu_log/
 rtags/
+.cache/
