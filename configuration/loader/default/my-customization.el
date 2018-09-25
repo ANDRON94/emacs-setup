@@ -270,7 +270,9 @@ It is used as advice for several `rtags' functions."
  'spu
  (lambda ()
    ;; Ask for confirmation before upgrade.
-   (my-setq-when-bound spu-require-confirm-upgrade-package t)))
+   (my-setq-when-bound spu-require-confirm-upgrade-package t)
+   ;; Move 'SPU' related util files to the common directory.
+   (my-setq-when-bound spu-log-path (my-emacs-absolute-path ".cache/spu/"))))
 
 ;; -- Project managment
 (my-load-set-customization-func
