@@ -104,7 +104,11 @@
    (add-hook 'c++-mode-hook 'my--set-c++-code-style)
    ;; Save all backups in one place.
    (setq backup-directory-alist `(("" . ,(my-emacs-absolute-path
-                                          ".cache/backup"))))))
+                                          ".cache/backup"))))
+   ;; Move 'recentf' related util files to the common directory.
+   (require 'recentf)
+   (my-setq-when-bound recentf-save-file (my-emacs-absolute-path
+                                          ".cache/recentf/recentf"))))
 
 (my-load-set-customization-func
  'omnisharp
