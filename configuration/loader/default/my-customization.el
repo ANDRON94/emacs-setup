@@ -275,6 +275,10 @@ It is used as advice for several `rtags' functions."
    (my-setq-when-bound spu-log-path (my-emacs-absolute-path ".cache/spu/"))))
 
 ;; -- Project managment
+(defun my--projectile-mode-line-fn ()
+  "Report project name."
+  (format " Proj[%s]" (projectile-project-name)))
+
 (my-load-set-customization-func
  'helm-projectile
  (lambda ()
@@ -287,8 +291,7 @@ It is used as advice for several `rtags' functions."
          (add-to-list 'projectile-globally-ignored-files "GRTAGS")))
    (my-setq-when-bound
     ;; Format mode line indecator for projectile.
-    projectile-mode-line
-    '(:eval (format " Proj[%s]" (projectile-project-name))))))
+    projectile-mode-line-fn 'my--projectile-mode-line-fn)))
 
 ;; -- Search
 (my-load-set-customization-func
