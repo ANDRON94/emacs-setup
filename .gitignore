@@ -8,21 +8,9 @@
 *~
 
 # Specific files
-recentf
-bookmarks
-tramp
-projectile-bookmarks.eld
-projectile.cache
-.last-package-update-day
-.mc-lists.el
 
 # Specific folders
 elpa/
-eshell/
-semanticdb/
-irony/
 org/
 snippets/
-spu_log/
-rtags/
 .cache/
