@@ -37,7 +37,8 @@
    ;; Run ediff control panel in the current frame
    (add-hook 'ediff-load-hook 'my-use-ediff-plain-windows)
    ;; Show scroll bar at right side of window.
-   (set-scroll-bar-mode 'right)))
+   (set-scroll-bar-mode 'right)
+   (blink-cursor-mode 0)))
 
 (defun my--disable-nlinum-mode ()
   "Disable nlinum mode."
