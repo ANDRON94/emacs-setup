@@ -25,6 +25,11 @@
   ;; Custom settings
   (my-apply-if-exist (my-load-get-customization-func 'org) nil))
 
+(use-package org-re-reveal
+  :ensure t
+  :after org
+  :config
+  (setq org-re-reveal-root "https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.8.0/"))
 
 ;; (use-package org-alert
 ;;   :demand t
