@@ -15,9 +15,6 @@
 (require 'my-load)
 
 ;; Define keybindings.
-;; -- Appearance
-;; TODO!!!
-
 ;; -- Edit
 (my-load-set-keybindings-func
  'omnisharp

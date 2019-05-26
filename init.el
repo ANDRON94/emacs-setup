@@ -51,39 +51,6 @@ It holds files which define configuration structure.")
 
 (my-load-add-setup-files
  (list
-  ;; appearance
-  'general-appearance
-  (my-load-make-setup-options
-   (my-setup-absolute-path "/appearance/general-appearance.el"))
-
-  'nlinum
-  (my-load-make-setup-options
-   (my-setup-absolute-path "/appearance/setup-nlinum.el"))
-
-  'powerline
-  (my-load-make-setup-options
-   (my-setup-absolute-path "/appearance/setup-powerline.el"))
-
-  ;; 'material-theme
-  ;; (my-load-make-setup-options
-  ;;  (my-setup-absolute-path "/appearance/setup-material-theme.el"))
-
-  ;; 'solarized-theme
-  ;; (my-load-make-setup-options
-  ;;  (my-setup-absolute-path "/appearance/setup-solarized-theme.el"))
-
-  ;; 'doom-themes
-  ;; (my-load-make-setup-options
-  ;;  (my-setup-absolute-path "/appearance/setup-doom-themes.el"))
-
-  'darktooth-theme
-  (my-load-make-setup-options
-   (my-setup-absolute-path "/appearance/setup-darktooth-theme.el"))
-
-  'flycheck-color-mode-line
-  (my-load-make-setup-options
-   (my-setup-absolute-path "/appearance/setup-flycheck-color-mode-line.el"))
-
   ;; edit
   'general-edit
   (my-load-make-setup-options

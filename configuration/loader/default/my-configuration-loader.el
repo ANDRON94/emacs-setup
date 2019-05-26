@@ -42,6 +42,9 @@
 (require 'my-default-customization my--default-customization-file-path)
 
 ;; 3. Load necessary setup files.
+;; load 'layers'
+(load (my-emacs-absolute-path "configuration/layers/appearance/layer-appearance.el"))
+;; old load system
 (my-load-load-except '(markdown-mode))
 (provide 'my-configuration-loader)
 
