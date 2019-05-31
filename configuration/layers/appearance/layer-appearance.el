@@ -36,7 +36,7 @@
 (blink-cursor-mode 0)
 
 (use-package darktooth-theme
-  :load-path "/home/andron94/.emacs.d/configuration/custom-packages/emacs-theme-darktooth")
+  :load-path  "configuration/custom-packages/emacs-theme-darktooth")
 
 (use-package flycheck-color-mode-line
   :ensure t
