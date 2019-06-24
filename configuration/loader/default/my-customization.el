@@ -99,12 +99,6 @@
     web-mode-code-indent-offset 2)))
 
 ;; -- Interface enchancement
-(my-load-set-customization-func
- 'general-interface-enchancement
- (lambda ()
-   ;; Use y or n instead of yes or not.
-   (fset 'yes-or-no-p 'y-or-n-p)))
-
 (defun my-browse-url-chrome-incognito (url &optional _ignore)
   "Browse URL in Google Chrome incognito mode."
   (helm-generic-browser url "google-chrome" "--incognito"))
