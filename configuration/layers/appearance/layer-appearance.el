@@ -1,4 +1,4 @@
-;;; layer-appearance.el --- General interface settings.  -*- lexical-binding: t; -*-
+;;; layer-appearance.el --- Interface appearance settings.  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2019  Andrii Tymchuk
 
