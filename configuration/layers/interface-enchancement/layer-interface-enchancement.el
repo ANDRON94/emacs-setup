@@ -19,7 +19,10 @@
 (use-package multi-compile
   :ensure t
   :config
+  ;; Make "multi-compile-alist" safe as local variable.
+  ;; It's useful for creating ".dir-locals.el".
   (put 'multi-compile-alist 'safe-local-variable #'listp)
+  ;; Set "helm" completion system after "helm" is loaded.
   (with-eval-after-load 'helm
     (setq multi-compile-completion-system 'helm)))
 
