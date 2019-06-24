@@ -16,4 +16,11 @@
 ;; Use "y" or "n" instead of "yes" or "not".
 (fset 'yes-or-no-p 'y-or-n-p)
 
+(use-package multi-compile
+  :ensure t
+  :config
+  (put 'multi-compile-alist 'safe-local-variable #'listp)
+  (with-eval-after-load 'helm
+    (setq multi-compile-completion-system 'helm)))
+
 ;;; layer-interface-enchancement.el ends here
