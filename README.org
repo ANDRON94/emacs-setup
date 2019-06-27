@@ -47,6 +47,7 @@ situations. See more details below.
 + Task managment
   + [[http://orgmode.org/][Keeping notes, maintaining TODO lists, planning projects.]]
   + [[https://github.com/IvanMalison/org-projectile][Manage org-mode TODOs for your projectile projects.]]
+  + [[https://gitlab.com/oer/org-re-reveal][Build HTML presentations with reveal.js]] from Org mode source files.
 + Type
   + A text [[http://company-mode.github.io/][completion.]]
   + A template system(a code [[https://github.com/joaotavora/yasnippet][snippets]]).
