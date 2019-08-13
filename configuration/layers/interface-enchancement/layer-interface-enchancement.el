@@ -30,4 +30,8 @@
   (with-eval-after-load 'helm
     (setq multi-compile-completion-system 'helm)))
 
+(use-package helm-org
+  :ensure t
+  :after (helm))
+
 ;;; layer-interface-enchancement.el ends here
