@@ -1,0 +1,100 @@
+* Common Utils
+** Files
+#+begin_src emacs-lisp :tangle yes
+(defun my-verify-path (path)
+  "LOl omg."
+  (make-directory (file-name-directory path) :parents)
+  path)
+#+end_src
+* Layers
+** Appearance
+*** General
+**** Disable the welcome message
+#+begin_src emacs-lisp :tangle yes
+(setq inhibit-startup-message t)
+#+end_src
+**** Make 'bell signal' a visible
+#+begin_src emacs-lisp :tangle yes
+(setq visible-bell t)
+#+end_src
+**** Disable tool bar
+#+begin_src emacs-lisp :tangle yes
+(tool-bar-mode -1)
+#+end_src
+**** Hide minor modes from mode line???
+ #+begin_src emacs-lisp :tangle yes
+(with-eval-after-load 'autorevert
+  (diminish 'auto-revert-mode))
+(with-eval-after-load 'abbrev
+  (diminish 'abbrev-mode))
+ #+end_src
+**** Run ediff control panel in the current frame
+ #+begin_src emacs-lisp :tangle yes
+(defun my-use-ediff-plain-windows ()
+  "Show all ediff windows in one frame."
+  (setq ediff-window-setup-function
+        'ediff-setup-windows-plain))
+
+(add-hook 'ediff-load-hook 'my-use-ediff-plain-windows)
+  #+end_src
+**** Show scroll bar at right side of window
+ #+begin_src emacs-lisp :tangle yes
+(set-scroll-bar-mode 'right)
+ #+end_src
+**** Turn of cursor blinking
+ #+begin_src emacs-lisp :tangle yes
+(blink-cursor-mode 0)
+ #+end_src
+*** Theme
+ #+begin_src emacs-lisp :tangle yes
+(use-package darktooth-theme
+  :load-path  "configuration/custom-packages/emacs-theme-darktooth")
+ #+end_src
+*** Modeline
+ #+begin_src emacs-lisp :tangle yes
+(use-package powerline
+  :ensure t
+  :config
+  ;; Format of mode line.
+  (powerline-center-theme)
+  ;; Mode line separator.
+  (setq powerline-default-separator 'wave))
+
+(use-package flycheck-color-mode-line
+  :ensure t
+  :hook (flycheck-mode . flycheck-color-mode-line-mode))
+ #+end_src
+*** Lines
+ #+begin_src emacs-lisp :tangle yes
+(use-package nlinum
+  :ensure t
+  :config
+  ;; Toggle Nlinum mode in all buffers.
+  (global-nlinum-mode +1))
+ #+end_src
+** Interface Enchancement
+*** General
+**** Use "y" or "n" instead of "yes" or "not"
+ #+begin_src emacs-lisp :tangle yes
+(fset 'yes-or-no-p 'y-or-n-p)
+ #+end_src
+*** External Commands Execution
+ #+begin_src emacs-lisp :tangle yes
+(use-package multi-compile
+  :ensure t
+  :config
+  ;; Make "multi-compile-alist" safe as local variable.
+  ;; It's useful for creating ".dir-locals.el".
+  (put 'multi-compile-alist 'safe-local-variable #'listp)
+  ;; Move 'multi-compile' related util files to the common directory.
+  ;; TODO: automatically create non-existing directories.
+  (setq multi-compile-history-file (my-emacs-absolute-path
+                                    ".cache/multi-compile/multi-compile.cache"))
+  ;; Set "helm" completion system after "helm" is loaded.
+  (with-eval-after-load 'helm
+    (setq multi-compile-completion-system 'helm)))
+ #+end_src
+*** Incremental Completions
+**** Ido
+**** Helm
+**** Ivy

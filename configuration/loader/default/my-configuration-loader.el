@@ -43,7 +43,7 @@
 
 ;; 3. Load necessary setup files.
 ;; load 'layers'
-(load (my-emacs-absolute-path "configuration/layers/appearance/layer-appearance.el"))
+(org-babel-load-file (my-emacs-absolute-path "configuration/layers/layers.org"))
 (load (my-emacs-absolute-path "configuration/layers/interface-enchancement/layer-interface-enchancement.el"))
 ;; old load system
 (my-load-load-except '(markdown-mode))
