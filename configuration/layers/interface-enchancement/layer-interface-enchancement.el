@@ -13,8 +13,8 @@
 
 ;; general
 
-(use-package helm-org
-  :ensure t
-  :after (helm))
+;; (use-package helm-org
+;;   :ensure t
+;;   :after (helm))
 
 ;;; layer-interface-enchancement.el ends here

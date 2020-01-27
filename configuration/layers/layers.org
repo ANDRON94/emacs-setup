@@ -1,8 +1,9 @@
 * Common Utils
 ** Files
 #+begin_src emacs-lisp :tangle yes
-(defun my-verify-path (path)
-  "LOl omg."
+(defun my-verify-path (path) ;; use better name here?
+  "Check whether all directories in PATH exists
+and if necessary create missing directories."
   (make-directory (file-name-directory path) :parents)
   path)
 #+end_src
