@@ -204,15 +204,6 @@ It is used as advice for several `rtags' functions."
     ;; Put on left side.
     sr-speedbar-right-side nil)))
 
-;; -- Package managment
-(my-load-set-customization-func
- 'spu
- (lambda ()
-   ;; Ask for confirmation before upgrade.
-   (my-setq-when-bound spu-require-confirm-upgrade-package t)
-   ;; Move 'SPU' related util files to the common directory.
-   (my-setq-when-bound spu-log-path (my-emacs-absolute-path ".cache/spu/"))))
-
 ;; -- Project managment
 (defun my--projectile-mode-line-function ()
   "Report project name."

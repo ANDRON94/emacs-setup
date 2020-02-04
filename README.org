@@ -34,8 +34,6 @@ situations. See more details below.
   + [[https://github.com/Andersbakken/rtags][Client/Server indexer]] for C/C++ with integration for Emacs.
   + GNU GLOBAL [[https://github.com/syohex/emacs-helm-gtags][helm interface.]]
   + [[https://github.com/emacsmirror/sr-speedbar][Buffer explorer.]]
-+ Package managment
-  + [[https://github.com/mola-T/SPU][Silent package upgrader.]]
 + Project managment
   + [[https://github.com/bbatsov/projectile][Project]] [[https://github.com/bbatsov/helm-projectile][interaction library.]]
 + Search

@@ -128,11 +128,6 @@ It holds files which define configuration structure.")
   (my-load-make-setup-options
    (my-setup-absolute-path "/navigate/setup-my-scroll.el"))
 
-  ;; package-managment
-  'spu
-  (my-load-make-setup-options
-   (my-setup-absolute-path "/package-managment/setup-spu.el"))
-
   ;; project-managment
   'helm-projectile
   (my-load-make-setup-options
@@ -233,3 +228,17 @@ If custom loader isn't specified by user returns default loader path."
 (require 'my-configuration-loader (my-get-loader-path))
 
 ;;; init.el ends here
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (helm-org autothemer highlight-symbol magit-svn magit git-messenger diff-hl yasnippet-snippets yasnippet slime-company company-irony-c-headers company-irony org-projectile-helm org-re-reveal docker flycheck-irony helm-swoop helm-projectile sr-speedbar helm-gtags flycheck-pos-tip company-quickhelp helm-flycheck helm-rtags web-mode smartparens multiple-cursors dockerfile-mode slime irony omnisharp multi-compile nlinum flycheck-color-mode-line powerline use-package diminish))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
