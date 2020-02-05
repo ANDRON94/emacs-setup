@@ -1,11 +1,16 @@
 * Common Utils
 ** Files
 #+begin_src emacs-lisp :tangle yes
-(defun my-verify-path (path) ;; use better name here?
+(defun my-make-valid-path (path)
   "Check whether all directories in PATH exists
 and if necessary create missing directories."
   (make-directory (file-name-directory path) :parents)
   path)
+
+(defun my-get-full-emacs-path (relative-path)
+  "Return full(absolute) path for RELATIVE-PATH.
+RELATIVE-PATH should be the path relative to user's Emacs directory."
+  (expand-file-name relative-path user-emacs-directory))
 #+end_src
 * Layers
 ** Appearance
