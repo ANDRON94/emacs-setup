@@ -92,7 +92,21 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
 #+begin_src emacs-lisp :tangle yes
 (setq-default indent-tabs-mode nil)
 #+end_src
-****
+*** Multiple cursors
+#+begin_src emacs-lisp :tangle yes
+(use-package multiple-cursors
+  :ensure t
+  :bind
+  ("C-S-c C-S-c" . mc/edit-lines)
+  ("C->" . mc/mark-next-like-this)
+  ("C-<" . mc/mark-previous-like-this)
+  ("C-c C-<" . mc/mark-all-like-this)
+  :config
+  ;; Move 'multiple-cursors' related util files to the common directory.
+  (setq mc/list-file (my-make-valid-path
+                      (my-get-full-emacs-path
+                       ".cache/multiple-cursors/mc-lists.el"))))
+#+end_src
 ** TODO Interface Enchancement
 *** General
 **** Use "y" or "n" instead of "yes" or "not"
@@ -120,7 +134,7 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
 **** Ido
 **** Helm
 **** Ivy
-** Programming languages
+** Languages
 *** C#
 *** C++
 **** General
@@ -133,6 +147,8 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
 (add-hook 'c++-mode-hook 'my--set-c++-code-style)
 #+end_src
 *** Common Lisp
+*** Dockerfile
+*** Markdown
 ** Network
 *** Remote file access
 #+begin_src emacs-lisp :tangle yes

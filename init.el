@@ -72,10 +72,6 @@ It holds files which define configuration structure.")
   (my-load-make-setup-options
    (my-setup-absolute-path "/edit/setup-markdown-mode.el"))
 
-  'multiple-cursors
-  (my-load-make-setup-options
-   (my-setup-absolute-path "/edit/setup-multiple-cursors.el"))
-
   'smartparens
   (my-load-make-setup-options
    (my-setup-absolute-path "/edit/setup-smartparens.el"))

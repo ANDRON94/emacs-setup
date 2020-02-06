@@ -42,13 +42,6 @@
    (my-setq-when-bound markdown-command "multimarkdown")))
 
 (my-load-set-customization-func
- 'multiple-cursors
- (lambda ()
-   ;; Move 'multiple-cursors' related util files to the common directory.
-   (my-setq-when-bound mc/list-file (my-emacs-absolute-path
-                                     ".cache/multiple-cursors/.mc-lists.el"))))
-
-(my-load-set-customization-func
  'smartparens
  (lambda ()
    ;; Hide smartparens from mode line.
