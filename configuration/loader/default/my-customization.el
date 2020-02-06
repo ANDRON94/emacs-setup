@@ -42,13 +42,6 @@
    (my-setq-when-bound markdown-command "multimarkdown")))
 
 (my-load-set-customization-func
- 'smartparens
- (lambda ()
-   ;; Hide smartparens from mode line.
-   (with-eval-after-load 'smartparens
-     (diminish 'smartparens-mode))))
-
-(my-load-set-customization-func
  'web-mode
  (lambda ()
    ;; Associate web-mode with next file types.

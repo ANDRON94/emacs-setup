@@ -24,22 +24,6 @@
               ("M-?" . omnisharp-helm-find-usages)
               ("C-c r" . omnisharp-run-code-action-refactoring))))
 
-(my-load-set-keybindings-func
- 'smartparens
- (lambda ()
-   (bind-keys :map smartparens-mode-map
-              ;; Navigation
-              ;; TODO: setup smarparens navigation
-              ("C-M-f" . sp-forward-sexp)
-              ("C-M-b" . sp-backward-sexp)
-              ;; Manipulation
-              ;; TODO: setup smartparens manipulation
-              ("C-M-k" . sp-kill-sexp)
-              ("C-M-w" . sp-copy-sexp)
-              ("M-<delete>" . sp-unwrap-sexp)
-              ("C-]" . sp-select-next-thing)
-              ("C-M-]" . sp-select-previous-thing))))
-
 ;; -- Interface enchancement
 (my-load-set-keybindings-func
  'helm

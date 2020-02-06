@@ -72,10 +72,6 @@ It holds files which define configuration structure.")
   (my-load-make-setup-options
    (my-setup-absolute-path "/edit/setup-markdown-mode.el"))
 
-  'smartparens
-  (my-load-make-setup-options
-   (my-setup-absolute-path "/edit/setup-smartparens.el"))
-
   'web-mode
   (my-load-make-setup-options
    (my-setup-absolute-path "/edit/web/setup-web-mode.el"))

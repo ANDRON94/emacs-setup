@@ -96,6 +96,7 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
 #+begin_src emacs-lisp :tangle yes
 (use-package multiple-cursors
   :ensure t
+  :demand t
   :bind
   ("C-S-c C-S-c" . mc/edit-lines)
   ("C->" . mc/mark-next-like-this)
@@ -106,6 +107,35 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
   (setq mc/list-file (my-make-valid-path
                       (my-get-full-emacs-path
                        ".cache/multiple-cursors/mc-lists.el"))))
+#+end_src
+*** Parenthesis
+#+begin_src emacs-lisp :tangle yes
+(use-package smartparens
+  :ensure t
+  :demand t
+  :bind
+  (:map smartparens-mode-map
+        ;; Navigation
+        ;; TODO: setup smarparens navigation
+        ("C-M-f" . sp-forward-sexp)
+        ("C-M-b" . sp-backward-sexp)
+        ;; Manipulation
+        ;; TODO: setup smartparens manipulation
+        ("C-M-k" . sp-kill-sexp)
+        ("C-M-w" . sp-copy-sexp)
+        ("M-<delete>" . sp-unwrap-sexp)
+        ("C-]" . sp-select-next-thing)
+        ("C-M-]" . sp-select-previous-thing))
+  :config
+  ;; Enable the default configuration.
+  (require 'smartparens-config)
+  ;; Hide smartparens from mode line.
+  (with-eval-after-load 'smartparens
+    (diminish 'smartparens-mode))
+  ;; Toggle Show-Smartparens mode(highlight parenthesis) in all buffers.
+  (show-smartparens-global-mode +1)
+  ;; Toggle Smartparens mode in all buffers.
+  (smartparens-global-mode +1))
 #+end_src
 ** TODO Interface Enchancement
 *** General
