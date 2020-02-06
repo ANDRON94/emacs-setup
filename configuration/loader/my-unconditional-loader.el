@@ -31,8 +31,8 @@
 
 ;; Enable `use-package'
 (eval-when-compile
-  (defvar use-package-verbose t)
-  (require 'use-package))
+  (require 'use-package)
+  (setq use-package-verbose t))
 (require 'diminish)
 (require 'bind-key)
 
