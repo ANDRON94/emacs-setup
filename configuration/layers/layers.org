@@ -36,12 +36,12 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
  #+end_src
 **** Run ediff control panel in the current frame
  #+begin_src emacs-lisp :tangle yes
-(defun my-use-ediff-plain-windows ()
+(defun my--use-ediff-plain-windows ()
   "Show all ediff windows in one frame."
   (setq ediff-window-setup-function
         'ediff-setup-windows-plain))
 
-(add-hook 'ediff-load-hook 'my-use-ediff-plain-windows)
+(add-hook 'ediff-load-hook 'my--use-ediff-plain-windows)
   #+end_src
 **** Show scroll bar at right side of window
  #+begin_src emacs-lisp :tangle yes
@@ -78,7 +78,22 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
   ;; Toggle Nlinum mode in all buffers.
   (global-nlinum-mode +1))
  #+end_src
-** Interface Enchancement
+** TODO Edit
+*** General
+**** Always end a file with a newline
+#+begin_src emacs-lisp :tangle yes
+(setq require-final-newline t)
+#+end_src
+**** Always allow region narrowing
+#+begin_src emacs-lisp :tangle yes
+(put 'narrow-to-region 'disabled nil)
+#+end_src
+**** Use space to indent by default
+#+begin_src emacs-lisp :tangle yes
+(setq-default indent-tabs-mode nil)
+#+end_src
+****
+** TODO Interface Enchancement
 *** General
 **** Use "y" or "n" instead of "yes" or "not"
  #+begin_src emacs-lisp :tangle yes
@@ -105,3 +120,44 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
 **** Ido
 **** Helm
 **** Ivy
+** Programming languages
+*** C#
+*** C++
+**** General
+***** Use 4 spaces indentation for C++
+#+begin_src emacs-lisp :tangle yes
+(defun my--set-c++-code-style ()
+  "Set code style for C++ language."
+  (c-set-style "stroustrup"))
+
+(add-hook 'c++-mode-hook 'my--set-c++-code-style)
+#+end_src
+*** Common Lisp
+** Network
+*** Remote file access
+#+begin_src emacs-lisp :tangle yes
+(use-package tramp
+  :ensure t
+  :config
+  ;; Move 'tramp' related util files to the common directory.
+  (setq tramp-persistency-file-name (my-make-valid-path
+                                     (my-get-full-emacs-path
+                                      ".cache/tramp/tramp"))))
+#+end_src
+** Miscellaneous
+*** General
+**** Save all backups in one place
+#+begin_src emacs-lisp :tangle yes
+(setq backup-directory-alist
+      `(("" . ,(my-make-valid-path (my-get-full-emacs-path ".cache/backup")))))
+#+end_src
+**** Configure recent files list
+#+begin_src emacs-lisp :tangle yes
+(use-package recentf
+  :ensure t
+  :config
+  ;; Move 'recentf' related util files to the common directory
+  (setq recentf-save-file (my-make-valid-path
+                           (my-get-full-emacs-path
+                            ".cache/recentf/recentf"))))
+#+end_src

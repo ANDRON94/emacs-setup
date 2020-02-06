@@ -52,10 +52,6 @@ It holds files which define configuration structure.")
 (my-load-add-setup-files
  (list
   ;; edit
-  'general-edit
-  (my-load-make-setup-options
-   (my-setup-absolute-path "/edit/general-edit.el"))
-
   'omnisharp
   (my-load-make-setup-options
    (my-setup-absolute-path "/edit/c#/setup-omnisharp.el"))

@@ -17,33 +17,6 @@
 
 ;; Define customization.
 ;; -- Edit
-(defun my--set-c++-code-style ()
-  "Set code style for C++ language."
-  (c-set-style "stroustrup"))
-
-(my-load-set-customization-func
- 'general-edit
- (lambda ()
-   ;; Always end a file with a newline.
-   (setq require-final-newline t)
-   ;; Always allow narrowing.
-   (put 'narrow-to-region 'disabled nil)
-   ;; Use space to indent by default.
-   (setq-default indent-tabs-mode nil)
-   ;; Use 4 spaces indentation for C++.
-   (add-hook 'c++-mode-hook 'my--set-c++-code-style)
-   ;; Save all backups in one place.
-   (setq backup-directory-alist `(("" . ,(my-emacs-absolute-path
-                                          ".cache/backup"))))
-   ;; Move 'recentf' related util files to the common directory.
-   (require 'recentf)
-   (my-setq-when-bound recentf-save-file (my-emacs-absolute-path
-                                          ".cache/recentf/recentf"))
-   ;; Move 'tramp' related util files to the common directory.
-   (require 'tramp)
-   (my-setq-when-bound tramp-persistency-file-name (my-emacs-absolute-path
-                                                    ".cache/tramp/tramp"))))
-
 (my-load-set-customization-func
  'omnisharp
  (lambda ()
