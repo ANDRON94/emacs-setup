@@ -182,7 +182,6 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
 (use-package dockerfile-mode
   :ensure t)
 #+end_src
-*** Markdown
 ** Network
 *** Remote file access
 #+begin_src emacs-lisp :tangle yes

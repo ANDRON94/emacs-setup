@@ -36,12 +36,6 @@
    (my-setq-when-bound slime-contribs '(slime-fancy))))
 
 (my-load-set-customization-func
- 'markdown-mode
- (lambda ()
-   ;; Set name of markdown processor.
-   (my-setq-when-bound markdown-command "multimarkdown")))
-
-(my-load-set-customization-func
  'web-mode
  (lambda ()
    ;; Associate web-mode with next file types.
