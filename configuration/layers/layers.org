@@ -130,8 +130,7 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
   ;; Enable the default configuration.
   (require 'smartparens-config)
   ;; Hide smartparens from mode line.
-  (with-eval-after-load 'smartparens
-    (diminish 'smartparens-mode))
+  (diminish 'smartparens-mode)
   ;; Toggle Show-Smartparens mode(highlight parenthesis) in all buffers.
   (show-smartparens-global-mode +1)
   ;; Toggle Smartparens mode in all buffers.
