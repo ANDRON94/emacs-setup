@@ -15,15 +15,6 @@
 (require 'my-load)
 
 ;; Define keybindings.
-;; -- Edit
-(my-load-set-keybindings-func
- 'omnisharp
- (lambda ()
-   (bind-keys :map csharp-mode-map
-              ("M-." . omnisharp-go-to-definition)
-              ("M-?" . omnisharp-helm-find-usages)
-              ("C-c r" . omnisharp-run-code-action-refactoring))))
-
 ;; -- Interface enchancement
 (my-load-set-keybindings-func
  'helm
