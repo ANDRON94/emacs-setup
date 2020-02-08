@@ -64,10 +64,6 @@ It holds files which define configuration structure.")
   (my-load-make-setup-options
    (my-setup-absolute-path "/edit/common-lisp/setup-slime.el"))
 
-  'dockerfile-mode
-  (my-load-make-setup-options
-   (my-setup-absolute-path "/edit/setup-dockerfile-mode.el"))
-
   'markdown-mode
   (my-load-make-setup-options
    (my-setup-absolute-path "/edit/setup-markdown-mode.el"))
