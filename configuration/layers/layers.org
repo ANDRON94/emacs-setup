@@ -165,6 +165,7 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
 **** Ivy
 ** Languages
 *** C#
+**** Navigation, autocomplete, syntax checking
 #+begin_src emacs-lisp :tangle yes
 (defun my--set-csharp-company-backends ()
   "Set the list of company backends for C# locally."
@@ -191,7 +192,7 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
   ;; Use flycheck for C#.
   (with-eval-after-load 'flycheck
     (add-hook 'csharp-mode-hook 'flycheck-mode)))
-#+end_src
+ #+end_src
 *** C++
 **** General
 ***** Use 4 spaces indentation for C++
@@ -201,6 +202,98 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
   (c-set-style "stroustrup"))
 
 (add-hook 'c++-mode-hook 'my--set-c++-code-style)
+#+end_src
+**** Navigation, autocomplete, syntax checking
+#+begin_src emacs-lisp :tangle yes
+(defun my--pulse-line-hook-function (&optional prefix)
+  "Wrapper around `pulse-line-hook-function' with the ignored PREFIX argument.
+It is used as advice for several `rtags' functions."
+  (ignore prefix)
+  (pulse-line-hook-function))
+
+(use-package rtags
+  :ensure t
+  :bind
+  (:map c-mode-map
+        ("M-." . rtags-find-symbol-at-point)
+        ("M-?" . rtags-find-references-at-point)
+        ("M-," . rtags-location-stack-back)
+   :map c++-mode-map
+        ("M-." . rtags-find-symbol-at-point)
+        ("M-?" . rtags-find-references-at-point)
+        ("M-," . rtags-location-stack-back))
+  :config
+  ;; Set installation path for RTags server.
+  (setq rtags-install-path (my-make-valid-path
+                            (my-get-full-emacs-path
+                             ".cache/rtags")))
+  ;; Add line pulsing for `rtags' search functions:
+  (advice-add 'rtags-find-symbol-at-point
+              :after 'my--pulse-line-hook-function)
+  (advice-add 'rtags-find-references-at-point
+              :after 'my--pulse-line-hook-function)
+  (advice-add 'rtags-location-stack-back
+              :after 'my--pulse-line-hook-function))
+
+(use-package helm-rtags
+  :ensure t
+  :after (helm rtags)
+  :config
+  ;; Integrate RTags with Helm.
+  (with-eval-after-load 'helm
+    (setq rtags-display-result-backend 'helm)))
+
+(defun my--irony-setup-completion-functions ()
+  "Replace the `completion-at-point' and `complete-symbol' bindings
+in irony-mode's buffers by irony-mode's function."
+  (define-key irony-mode-map [remap completion-at-point]
+    'irony-completion-at-point-async)
+  (define-key irony-mode-map [remap complete-symbol]
+    'irony-completion-at-point-async))
+
+(use-package irony
+  :ensure t
+  :hook ((c-mode c++-mode) . irony-mode)
+  :config
+  ;; Rebind completion functions for irony mode.
+  (add-hook 'irony-mode-hook 'my--irony-setup-completion-functions)
+  ;; Setup C++ completion database(according to compile options).
+  (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
+
+(use-package company-irony
+  :ensure t
+  :after (company irony)
+  :config
+  ;; Integrate company with irony.
+  (add-hook 'irony-mode-hook 'company-irony-setup-begin-commands))
+
+(defun my--set-c++-company-backends ()
+  "Set the list of company backends for C++ locally."
+  (if (boundp 'company-backends)
+      (setq-local company-backends
+                  '((company-irony
+                     company-irony-c-headers
+                     :separate
+                     company-dabbrev
+                     company-yasnippet)))))
+
+(use-package company-irony-c-headers
+  :ensure t
+  :after (company-irony company irony)
+  :config
+  ;; Define company backends for C++.
+  (add-hook 'c++-mode-hook 'my--set-c++-company-backends))
+
+(use-package flycheck-irony
+  :ensure t
+  :after (flycheck irony)
+  :config
+  ;; Use flycheck for C.
+  (add-hook 'c-mode-hook 'flycheck-mode)
+  ;; Use flycheck for C++.
+  (add-hook 'c++-mode-hook 'flycheck-mode)
+  ;; Integrate flycheck with irony.
+  (add-hook 'flycheck-mode-hook 'flycheck-irony-setup))
 #+end_src
 *** Common Lisp
 *** Dockerfile

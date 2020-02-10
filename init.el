@@ -52,10 +52,6 @@ It holds files which define configuration structure.")
 (my-load-add-setup-files
  (list
   ;; edit
-  'irony
-  (my-load-make-setup-options
-   (my-setup-absolute-path "/edit/c++/setup-irony.el"))
-
   'slime
   (my-load-make-setup-options
    (my-setup-absolute-path "/edit/common-lisp/setup-slime.el"))
@@ -65,10 +61,6 @@ It holds files which define configuration structure.")
    (my-setup-absolute-path "/edit/web/setup-web-mode.el"))
 
   ;; interface-enchancement
-  'helm-rtags
-  (my-load-make-setup-options
-   (my-setup-absolute-path "/interface-enchancement/c++/setup-helm-rtags.el"))
-
   'helm
   (my-load-make-setup-options
    (my-setup-absolute-path "/interface-enchancement/setup-helm.el"))
@@ -88,10 +80,6 @@ It holds files which define configuration structure.")
     "/interface-enchancement/setup-flycheck-pos-tip.el"))
 
   ;; navigate
-  'rtags
-  (my-load-make-setup-options
-   (my-setup-absolute-path "/navigate/c++/setup-rtags.el"))
-
   'helm-gtags
   (my-load-make-setup-options
    (my-setup-absolute-path "/navigate/setup-helm-gtags.el"))
@@ -119,10 +107,6 @@ It holds files which define configuration structure.")
   (my-load-make-setup-options
    (my-setup-absolute-path "/syntax-checking/setup-flycheck.el"))
 
-  'flycheck-irony
-  (my-load-make-setup-options
-   (my-setup-absolute-path "/syntax-checking/c++/setup-flycheck-irony.el"))
-
   ;; system
   'docker
   (my-load-make-setup-options
@@ -141,14 +125,6 @@ It holds files which define configuration structure.")
   'company
   (my-load-make-setup-options
    (my-setup-absolute-path "/type/setup-company.el"))
-
-  'company-irony
-  (my-load-make-setup-options
-   (my-setup-absolute-path "/type/c++/setup-company-irony.el"))
-
-  'company-irony-c-headers
-  (my-load-make-setup-options
-   (my-setup-absolute-path "/type/c++/setup-company-irony-c-headers.el"))
 
   'slime-company
   (my-load-make-setup-options
@@ -204,17 +180,3 @@ If custom loader isn't specified by user returns default loader path."
 (require 'my-configuration-loader (my-get-loader-path))
 
 ;;; init.el ends here
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (helm-org autothemer highlight-symbol magit-svn magit git-messenger diff-hl yasnippet-snippets yasnippet slime-company company-irony-c-headers company-irony org-projectile-helm org-re-reveal docker flycheck-irony helm-swoop helm-projectile sr-speedbar helm-gtags flycheck-pos-tip company-quickhelp helm-flycheck helm-rtags web-mode smartparens multiple-cursors dockerfile-mode slime irony omnisharp multi-compile nlinum flycheck-color-mode-line powerline use-package diminish))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )

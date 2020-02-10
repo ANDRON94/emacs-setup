@@ -90,28 +90,6 @@
    (my-setq-when-bound company-quickhelp-delay nil)))
 
 ;; -- Navigate
-(defun my-pulse-line-hook-function (&optional prefix)
-  "Wrapper around `pulse-line-hook-function' with the ignored PREFIX argument.
-It is used as advice for several `rtags' functions."
-  (ignore prefix)
-  (pulse-line-hook-function))
-
-(my-load-set-customization-func
- 'rtags
- (lambda ()
-   (my-setq-when-bound
-    ;; Set installation path for RTags server.
-    rtags-install-path (my-emacs-absolute-path "rtags")
-    ;; Integrate RTags with Helm.
-    rtags-display-result-backend 'helm)
-   ;; Add line pulsing for `rtags' search functions:
-   (advice-add 'rtags-find-symbol-at-point
-               :after 'my-pulse-line-hook-function)
-   (advice-add 'rtags-find-references-at-point
-               :after 'my-pulse-line-hook-function)
-   (advice-add 'rtags-location-stack-back
-               :after 'my-pulse-line-hook-function)))
-
 (my-load-set-customization-func
  'helm-gtags
  (lambda ()
@@ -122,7 +100,6 @@ It is used as advice for several `rtags' functions."
    ;; TODO: (add-hook 'javascript-mode-hook 'helm-gtags-mode)
    ;; TODO: (add-hook 'python-mode-hook 'helm-gtags-mode)
    ;; Use helm-gtags for next file modes.
-   ;; (add-hook 'c++-mode-hook 'helm-gtags-mode)
    ;; (add-hook 'c-mode-hook 'helm-gtags-mode)
    (my-setq-when-bound
     ;; TODO: helm-gtags-prefix-key "\C-cg"
@@ -199,17 +176,9 @@ It is used as advice for several `rtags' functions."
    ;; TODO: Integrate flycheck with Web
    ;; (flycheck-add-mode 'html-tidy 'web-mode)
    ;; Use flycheck for next file modes:
-   (add-hook 'c-mode-hook 'flycheck-mode)
-   (add-hook 'c++-mode-hook 'flycheck-mode)
    (add-hook 'emacs-lisp-mode-hook 'flycheck-mode)
    ;; Use Emacs `load-path' for checking elisp files.
    (my-setq-when-bound flycheck-emacs-lisp-load-path 'inherit)))
-
-(my-load-set-customization-func
- 'flycheck-irony
- (lambda ()
-   ;; Integrate flycheck with irony.
-   (add-hook 'flycheck-mode-hook 'flycheck-irony-setup)))
 
 ;; -- Task managment
 (defun my--org-capture-find-target ()
@@ -280,17 +249,6 @@ It is used as advice for several `rtags' functions."
                                    (org-projectile-todo-files)))))
 
 ;; -- Type
-
-(defun my--set-c++-company-backends ()
-  "Set the list of company backends for C++ locally."
-  (if (boundp 'company-backends)
-      (setq-local company-backends
-                  '((company-irony
-                     company-irony-c-headers
-                     :separate
-                     company-dabbrev
-                     company-yasnippet)))))
-
 (defun my--set-lisp-company-backends ()
   "Set the list of company backends for Common Lisp locally."
   (if (boundp 'company-backends)
@@ -311,7 +269,6 @@ It is used as advice for several `rtags' functions."
        (setf (car (member 'company-capf company-backends))
              '(company-capf company-dabbrev)))
    ;; Define company backends for the next modes:
-   (add-hook 'c++-mode-hook 'my--set-c++-company-backends)
    (add-hook 'lisp-mode-hook 'my--set-lisp-company-backends)
    (add-hook 'slime-repl-mode-hook 'my--set-lisp-company-backends)))
 
