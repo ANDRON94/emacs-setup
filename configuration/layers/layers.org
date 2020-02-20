@@ -296,6 +296,34 @@ in irony-mode's buffers by irony-mode's function."
   (add-hook 'flycheck-mode-hook 'flycheck-irony-setup))
 #+end_src
 *** Common Lisp
+**** Navigation, autocomplete, syntax checking
+#+begin_src emacs-lisp :tangle yes
+(use-package slime
+  :ensure t
+  :config
+  ;; Use common contrib extensions.
+  (setq slime-contribs '(slime-fancy)))
+
+(defun my--set-lisp-company-backends ()
+  "Set the list of company backends for Common Lisp locally."
+  (if (boundp 'company-backends)
+      (setq-local company-backends
+                  '((company-slime
+                     :separate
+                     company-dabbrev
+                     company-yasnippet)))))
+
+(use-package slime-company
+  :ensure t
+  :after (slime company)
+  :config
+  ;; Just display the completion candidate.
+  (unless (slime-find-contrib 'slime-fuzzy)
+    (setq slime-company-completion 'simple))
+  ;; Define company backends for Common Lisp.
+  (add-hook 'lisp-mode-hook 'my--set-lisp-company-backends)
+  (add-hook 'slime-repl-mode-hook 'my--set-lisp-company-backends))
+#+end_src
 *** Dockerfile
 #+begin_src emacs-lisp :tangle yes
 (use-package dockerfile-mode

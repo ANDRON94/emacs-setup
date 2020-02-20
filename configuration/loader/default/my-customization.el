@@ -18,18 +18,6 @@
 ;; Define customization.
 ;; -- Edit
 (my-load-set-customization-func
- 'slime
- (lambda ()
-   ;; Path to compiler.
-   (my-setq-when-bound inferior-lisp-program "/usr/local/bin/sbcl")
-   ;; TODO: Path to local hyperspec copy.
-   ;; (setq common-lisp-hyperspec-root
-   ;;       "file:///files/Documents/Library/HyperSpec-7-0/HyperSpec/")
-   ;; TODO: Do I need it? (unbind-key "M-p" slime-mode-map)
-   ;; TODO: Do I need it? (unbind-key "M-n" slime-mode-map)
-   (my-setq-when-bound slime-contribs '(slime-fancy))))
-
-(my-load-set-customization-func
  'web-mode
  (lambda ()
    ;; Associate web-mode with next file types.
@@ -249,15 +237,6 @@
                                    (org-projectile-todo-files)))))
 
 ;; -- Type
-(defun my--set-lisp-company-backends ()
-  "Set the list of company backends for Common Lisp locally."
-  (if (boundp 'company-backends)
-      (setq-local company-backends
-                  '((company-slime
-                     :separate
-                     company-dabbrev
-                     company-yasnippet)))))
-
 (my-load-set-customization-func
  'company
  (lambda ()
@@ -267,18 +246,7 @@
    ;; Merge results of capf and dabbrev backends.
    (if (boundp 'company-backends)
        (setf (car (member 'company-capf company-backends))
-             '(company-capf company-dabbrev)))
-   ;; Define company backends for the next modes:
-   (add-hook 'lisp-mode-hook 'my--set-lisp-company-backends)
-   (add-hook 'slime-repl-mode-hook 'my--set-lisp-company-backends)))
-
-(my-load-set-customization-func
- 'slime-company
- (lambda ()
-   ;; Just display the completion candidate.
-   (with-eval-after-load 'slime
-     (unless (slime-find-contrib 'slime-fuzzy)
-       (my-setq-when-bound slime-company-completion 'simple)))))
+             '(company-capf company-dabbrev)))))
 
 (defun my--disable-yasnippet-mode ()
   "Disable yasnippet mode."

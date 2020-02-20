@@ -52,10 +52,6 @@ It holds files which define configuration structure.")
 (my-load-add-setup-files
  (list
   ;; edit
-  'slime
-  (my-load-make-setup-options
-   (my-setup-absolute-path "/edit/common-lisp/setup-slime.el"))
-
   'web-mode
   (my-load-make-setup-options
    (my-setup-absolute-path "/edit/web/setup-web-mode.el"))
@@ -125,10 +121,6 @@ It holds files which define configuration structure.")
   'company
   (my-load-make-setup-options
    (my-setup-absolute-path "/type/setup-company.el"))
-
-  'slime-company
-  (my-load-make-setup-options
-   (my-setup-absolute-path "/type/common-lisp/setup-slime-company.el"))
 
   'yasnippet
   (my-load-make-setup-options
