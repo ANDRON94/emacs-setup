@@ -305,7 +305,7 @@ in irony-mode's buffers by irony-mode's function."
 
 (use-package sly
   :ensure t
-  :configure
+  :config
   (with-eval-after-load 'company
     (add-hook 'lisp-mode-hook 'my--set-lisp-company-backends)
     (add-hook 'sly-mrepl-hook 'my--set-lisp-company-backends)))
