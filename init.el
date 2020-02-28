@@ -122,10 +122,6 @@ It holds files which define configuration structure.")
   (my-load-make-setup-options
    (my-setup-absolute-path "/type/setup-company.el"))
 
-  'yasnippet
-  (my-load-make-setup-options
-   (my-setup-absolute-path "/type/setup-yasnippet.el"))
-
   ;; version-control
   'diff-hl
   (my-load-make-setup-options

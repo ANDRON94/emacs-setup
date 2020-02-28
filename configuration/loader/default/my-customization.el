@@ -248,16 +248,6 @@
        (setf (car (member 'company-capf company-backends))
              '(company-capf company-dabbrev)))))
 
-(defun my--disable-yasnippet-mode ()
-  "Disable yasnippet mode."
-  (yas-minor-mode -1))
-
-(my-load-set-customization-func
- 'yasnippet
- (lambda ()
-   ;; Disable yasnippet in terminal mode.
-   (add-hook 'term-mode-hook 'my--disable-yasnippet-mode)))
-
 ;; -- Version control
 ;; TODO!!!
 

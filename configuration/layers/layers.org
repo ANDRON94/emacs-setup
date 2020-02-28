@@ -136,6 +136,30 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
   ;; Toggle Smartparens mode in all buffers.
   (smartparens-global-mode +1))
 #+end_src
+*** Snippets
+#+begin_src emacs-lisp :tangle yes
+(defun my--disable-yasnippet-mode ()
+  "Disable yasnippet mode."
+  (yas-minor-mode -1))
+
+(use-package yasnippet
+  :ensure t
+  :config
+  ;; Move 'yasnippet' related util files to the common directory.
+  (setq yas-snippet-dirs (list (my-make-valid-path
+                                (my-get-full-emacs-path
+                                 ".cache/yasnippet/snippets/"))))
+  ;; Disable yasnippet in terminal mode.
+  (add-hook 'term-mode-hook 'my--disable-yasnippet-mode)
+  ;; Activate yasnippet mode globally.
+  (yas-global-mode +1))
+
+(use-package yasnippet-snippets
+  :ensure t
+  :after (yasnippet)
+  :config
+  (yasnippet-snippets-initialize))
+#+end_src
 ** TODO Interface Enchancement
 *** General
 **** Use "y" or "n" instead of "yes" or "not"
