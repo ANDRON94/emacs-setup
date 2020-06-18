@@ -348,7 +348,9 @@ in irony-mode's buffers by irony-mode's function."
   ;; Move 'tramp' related util files to the common directory.
   (setq tramp-persistency-file-name (my-make-valid-path
                                      (my-get-full-emacs-path
-                                      ".cache/tramp/tramp"))))
+                                      ".cache/tramp/tramp")))
+  ;; It seems that "ssh" method is faster than the default method "scp".
+  (setq tramp-default-method "ssh"))
 #+end_src
 ** Miscellaneous
 *** General
