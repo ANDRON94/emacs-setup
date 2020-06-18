@@ -25,4 +25,8 @@
   ;; Custom settings
   (my-apply-if-exist (my-load-get-customization-func 'magit) nil))
 
+(use-package magit-lfs
+  :ensure t
+  :after (magit))
+
 ;;; setup-magit.el ends here
