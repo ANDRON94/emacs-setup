@@ -54,6 +54,7 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
 *** Theme
  #+begin_src emacs-lisp :tangle yes
 (use-package darktooth-theme
+  :init (setq custom--inhibit-theme-enable nil)
   :load-path  "configuration/custom-packages/emacs-theme-darktooth")
  #+end_src
 *** Modeline
