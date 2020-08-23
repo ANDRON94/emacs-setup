@@ -79,7 +79,7 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
   ;; Toggle Nlinum mode in all buffers.
   (global-nlinum-mode +1))
  #+end_src
-** TODO Edit
+** Edit
 *** General
 **** Always end a file with a newline
 #+begin_src emacs-lisp :tangle yes
@@ -109,7 +109,7 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
                       (my-get-full-emacs-path
                        ".cache/multiple-cursors/mc-lists.el"))))
 #+end_src
-*** Parenthesis
+*** TODO Parenthesis
 #+begin_src emacs-lisp :tangle yes
 (use-package smartparens
   :ensure t
@@ -339,6 +339,22 @@ in irony-mode's buffers by irony-mode's function."
 #+begin_src emacs-lisp :tangle yes
 (use-package dockerfile-mode
   :ensure t)
+#+end_src
+*** TODO Web
+#+begin_src emacs-lisp :tangle yes
+(use-package web-mode
+  :ensure t
+  :mode ("\\.html?\\'" "\\.xml?\\'" "\\.css\\'"
+         "\\.scss\\'" "\\.js\\'" "\\.tpl\\'")
+  :config
+  ;; Setup HTML, CSS and script indentation.
+  (setq web-mode-markup-indent-offset 2
+        web-mode-css-indent-offset 2
+        web-mode-code-indent-offset 2)
+  ;; TODO: (add-hook 'web-mode-hook 'flycheck-mode)
+  ;; TODO: Integrate flycheck with Web
+  ;; (flycheck-add-mode 'html-tidy 'web-mode)
+  )
 #+end_src
 ** Network
 *** Remote file access

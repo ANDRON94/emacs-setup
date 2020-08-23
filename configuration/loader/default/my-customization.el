@@ -16,23 +16,6 @@
 (require 'my-utility)
 
 ;; Define customization.
-;; -- Edit
-(my-load-set-customization-func
- 'web-mode
- (lambda ()
-   ;; Associate web-mode with next file types.
-   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-   (add-to-list 'auto-mode-alist '("\\.xml?\\'" . web-mode))
-   (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
-   (add-to-list 'auto-mode-alist '("\\.scss\\'" . web-mode))
-   (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
-   (add-to-list 'auto-mode-alist '("\\.tpl\\'" . web-mode))
-   ;; Setup HTML, CSS and script indentation.
-   (my-setq-when-bound
-    web-mode-markup-indent-offset 2
-    web-mode-css-indent-offset 2
-    web-mode-code-indent-offset 2)))
-
 ;; -- Interface enchancement
 (defun my-browse-url-chrome-incognito (url &optional _ignore)
   "Browse URL in Google Chrome incognito mode."
@@ -158,11 +141,7 @@
    ;; TODO: (add-hook 'javascript-mode-hook 'flycheck-mode)
    ;; TODO: (add-hook 'python-mode-hook 'flycheck-mode)
    ;; TODO: (add-hook 'sql-mode-hook 'flycheck-mode)
-   ;; TODO: (add-hook 'web-mode-hook 'flycheck-mode)
    ;; TODO: (add-hook 'lisp-mode-hook 'flycheck-mode)
-   ;; TODO: (add-hook 'web-mode-hook 'flycheck-mode)
-   ;; TODO: Integrate flycheck with Web
-   ;; (flycheck-add-mode 'html-tidy 'web-mode)
    ;; Use flycheck for next file modes:
    (add-hook 'emacs-lisp-mode-hook 'flycheck-mode)
    ;; Use Emacs `load-path' for checking elisp files.

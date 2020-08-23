@@ -51,11 +51,6 @@ It holds files which define configuration structure.")
 
 (my-load-add-setup-files
  (list
-  ;; edit
-  'web-mode
-  (my-load-make-setup-options
-   (my-setup-absolute-path "/edit/web/setup-web-mode.el"))
-
   ;; interface-enchancement
   'helm
   (my-load-make-setup-options
