@@ -162,6 +162,24 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
   :config
   (yasnippet-snippets-initialize))
 #+end_src
+*** Autocomplete
+#+begin_src emacs-lisp :tangle yes
+(use-package company
+  :ensure t
+  :config
+  ;; Activate company mode globally.
+  (global-company-mode +1))
+
+(use-package company-dabbrev
+  :after (company)
+  :config
+  ;; Disable downcasing of complete candidates.
+  (setq company-dabbrev-downcase nil
+        company-dabbrev-ignore-case t)
+  ;; Merge results of capf and dabbrev backends.
+  (setf (car (member 'company-capf company-backends))
+        '(company-capf company-dabbrev)))
+#+end_src
 ** Interface Enchancement
 *** General
 **** Use "y" or "n" instead of "yes" or "not"

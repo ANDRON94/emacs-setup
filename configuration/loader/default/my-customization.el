@@ -178,19 +178,6 @@
                        (seq-filter 'file-exists-p
                                    (org-projectile-todo-files)))))
 
-;; -- Type
-(my-load-set-customization-func
- 'company
- (lambda ()
-   ;; Disable downcasing of complete candidates.
-   (with-eval-after-load 'company-dabbrev
-     (my-setq-when-bound company-dabbrev-downcase nil)
-     (my-setq-when-bound company-dabbrev-ignore-case t))
-   ;; Merge results of capf and dabbrev backends.
-   (if (boundp 'company-backends)
-       (setf (car (member 'company-capf company-backends))
-             '(company-capf company-dabbrev)))))
-
 ;; -- Version control
 ;; TODO!!!
 
