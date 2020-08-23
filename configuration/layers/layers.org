@@ -274,8 +274,15 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
   :config
   ;; Don't show quickhelp popup automatically.
   (setq company-quickhelp-delay nil)
-  ;; Activate company-quickhelp mode globally.
+  ;; Activate `company-quickhelp' mode globally.
   (company-quickhelp-mode +1))
+
+(use-package flycheck-pos-tip
+  :ensure t
+  :after (flycheck)
+  :config
+  ;; Activate `flycheck-pos-tip-mode' mode globally.
+  (flycheck-pos-tip-mode +1))
 #+end_src
 ** Languages
 *** C#

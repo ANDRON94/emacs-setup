@@ -56,11 +56,6 @@ It holds files which define configuration structure.")
   (my-load-make-setup-options
    (my-setup-absolute-path "/interface-enchancement/setup-helm-flycheck.el"))
 
-  'flycheck-pos-tip
-  (my-load-make-setup-options
-   (my-setup-absolute-path
-    "/interface-enchancement/setup-flycheck-pos-tip.el"))
-
   ;; navigate
   'helm-gtags
   (my-load-make-setup-options
