@@ -29,10 +29,12 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
 #+end_src
 **** TODO Hide minor modes from mode line
  #+begin_src emacs-lisp :tangle yes
-(with-eval-after-load 'autorevert
-  (diminish 'auto-revert-mode))
-(with-eval-after-load 'abbrev
-  (diminish 'abbrev-mode))
+(use-package autorevert
+  :ensure t
+  :diminish auto-revert-mode)
+
+(use-package abbrev
+  :diminish abbrev-mode)
  #+end_src
 **** Run ediff control panel in the current frame
  #+begin_src emacs-lisp :tangle yes
@@ -127,11 +129,10 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
         ("M-<delete>" . sp-unwrap-sexp)
         ("C-]" . sp-select-next-thing)
         ("C-M-]" . sp-select-previous-thing))
+  :diminish smartparens-mode
   :config
   ;; Enable the default configuration.
   (require 'smartparens-config)
-  ;; Hide smartparens from mode line.
-  (diminish 'smartparens-mode)
   ;; Toggle Show-Smartparens mode(highlight parenthesis) in all buffers.
   (show-smartparens-global-mode +1)
   ;; Toggle Smartparens mode in all buffers.
