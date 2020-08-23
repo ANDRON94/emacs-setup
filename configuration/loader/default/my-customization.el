@@ -18,31 +18,6 @@
 ;; Define customization.
 ;; -- Navigate
 (my-load-set-customization-func
- 'helm-gtags
- (lambda ()
-   ;; TODO: (add-hook 'dired-mode-hook 'helm-gtags-mode)
-   ;; TODO: (add-hook 'eshell-mode-hook 'helm-gtags-mode)
-   ;; TODO: (add-hook 'asm-mode-hook 'helm-gtags-mode)
-   ;; TODO: (add-hook 'java-mode-hook 'helm-gtags-mode)
-   ;; TODO: (add-hook 'javascript-mode-hook 'helm-gtags-mode)
-   ;; TODO: (add-hook 'python-mode-hook 'helm-gtags-mode)
-   ;; Use helm-gtags for next file modes.
-   ;; (add-hook 'c-mode-hook 'helm-gtags-mode)
-   (my-setq-when-bound
-    ;; TODO: helm-gtags-prefix-key "\C-cg"
-    ;; TODO: helm-gtags-suggested-key-mapping t
-    ;; Ignore case for searching flag.
-    helm-gtags-ignore-case t
-    ;; If this variable is non-nil,
-    ;; TAG file is updated after saving buffer.
-    helm-gtags-auto-update t
-    ;; Use word at cursor as input if this value is non-nil.
-    helm-gtags-use-input-at-cursor t
-    ;; If this variable is non-nil,
-    ;; pulse at point after jumping.
-    helm-gtags-pulse-at-cursor t)))
-
-(my-load-set-customization-func
  'sr-speedbar
  (lambda ()
    (my-setq-when-bound

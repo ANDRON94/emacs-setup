@@ -17,17 +17,6 @@
 ;; Define keybindings.
 ;; -- Navigate
 (my-load-set-keybindings-func
- 'helm-gtags
- (lambda ()
-   (bind-keys :map helm-gtags-mode-map
-              ("C-c g a" . helm-gtags-tags-in-this-function)
-              ("C-j" . helm-gtags-select)
-              ("M-." . helm-gtags-dwim)
-              ("M-," . helm-gtags-pop-stack)
-              ("C-c <" . helm-gtags-previous-history)
-              ("C-c >" . helm-gtags-next-history))))
-
-(my-load-set-keybindings-func
  'sr-speedbar
  (lambda ()
    (bind-keys ([f2] . sr-speedbar-toggle))))
