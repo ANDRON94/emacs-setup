@@ -52,10 +52,6 @@ It holds files which define configuration structure.")
 (my-load-add-setup-files
  (list
   ;; navigate
-  'sr-speedbar
-  (my-load-make-setup-options
-   (my-setup-absolute-path "/navigate/setup-sr-speedbar.el"))
-
   'my-scroll
   (my-load-make-setup-options
    (my-setup-absolute-path "/navigate/setup-my-scroll.el"))

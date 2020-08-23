@@ -16,20 +16,6 @@
 (require 'my-utility)
 
 ;; Define customization.
-;; -- Navigate
-(my-load-set-customization-func
- 'sr-speedbar
- (lambda ()
-   (my-setq-when-bound
-    ;; TODO: Use text for buttons (setq speedbar-use-images nil)
-    ;; Don't show matching directories.
-    speedbar-directory-unshown-regexp
-    "^\\(CVS\\|RCS\\|SCCS\\|\\.\\.*$\\)\\'"
-    ;;  Show all files.
-    speedbar-show-unknown-files t
-    ;; Put on left side.
-    sr-speedbar-right-side nil)))
-
 ;; -- Project managment
 (defun my--projectile-mode-line-function ()
   "Report project name."

@@ -17,11 +17,6 @@
 ;; Define keybindings.
 ;; -- Navigate
 (my-load-set-keybindings-func
- 'sr-speedbar
- (lambda ()
-   (bind-keys ([f2] . sr-speedbar-toggle))))
-
-(my-load-set-keybindings-func
  'my-scroll
  (lambda ()
    (bind-keys ("M-N" . my-scroll-up-one-line)
