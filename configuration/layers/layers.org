@@ -161,7 +161,7 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
   :config
   (yasnippet-snippets-initialize))
 #+end_src
-** TODO Interface Enchancement
+** Interface Enchancement
 *** General
 **** Use "y" or "n" instead of "yes" or "not"
  #+begin_src emacs-lisp :tangle yes
@@ -186,7 +186,63 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
  #+end_src
 *** Incremental Completions
 **** Ido
-**** Helm
+**** TODO Helm
+#+begin_src emacs-lisp :tangle yes
+;; (defun my-browse-url-chrome-incognito (url &optional _ignore)
+;;   "Browse URL in Google Chrome incognito mode."
+;;   (helm-generic-browser url "google-chrome" "--incognito"))
+;; (with-eval-after-load 'helm-net
+;;      (when (executable-find "curl")
+;;        ;; Use curl to fetch candidates from Google.
+;;        (my-setq-when-bound helm-net-prefer-curl t))
+;;      ;; Open search result in Chrome incognito mode.
+;;      (my-setq-when-bound helm-google-suggest-default-browser-function
+;;                          'my-browse-url-chrome-incognito))
+;; bind keys
+;; ("C-c h g" . helm-google-suggest)
+
+;; (if (boundp 'helm-sources-using-default-as-input)
+;;        (add-to-list 'helm-sources-using-default-as-input
+;;                     'helm-source-man-pages))
+
+(use-package helm
+  :ensure t
+  :bind
+  ("M-x" . helm-M-x)
+  ("M-y" . helm-show-kill-ring)
+  ("C-x b" . helm-mini)
+  ("C-x C-f" . helm-find-files)
+  ("C-c h o" . helm-occur)
+  (:map helm-map
+        ([tab] . helm-execute-persistent-action)
+        ("C-i" . helm-execute-persistent-action)
+        ("C-z" . helm-select-action))
+  :diminish helm-mode
+  :config
+  (require 'helm-config)
+  ;; Commdand prefix setup
+  ;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
+  ;; Changed to "C-c h". Note: We must set "C-c h" globally, because we
+  ;; cannot change `helm-command-prefix-key' once `helm-config' is loaded.
+  (global-set-key (kbd "C-c h") 'helm-command-prefix)
+  (global-unset-key (kbd "C-x c"))
+  (setq
+   ;; TODO: helm-ff-file-name-history-use-recentf t
+   ;; Open helm buffer inside current window,
+   ;; not occupy whole other window.
+   helm-split-window-in-side-p t
+   ;; Move to end or beginning of source
+   ;; when reaching top or bottom of source.
+   helm-move-to-line-cycle-in-source nil
+   ;; Scroll 8 lines other window using M-<next>/M-<prior>.
+   helm-scroll-amount 8
+   ;; Search for library in `require' and `declare-function' sexp.
+   helm-ff-search-library-in-sexp t
+   ;; Follow results.
+   helm-follow-mode-persistent t)
+  ;; Toggle helm in all buffers.
+  (helm-mode +1))
+#+end_src
 **** Ivy
 ** Languages
 *** C#

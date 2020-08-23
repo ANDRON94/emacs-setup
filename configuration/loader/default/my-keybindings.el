@@ -17,21 +17,6 @@
 ;; Define keybindings.
 ;; -- Interface enchancement
 (my-load-set-keybindings-func
- 'helm
- (lambda ()
-   ;; (global-set-key (kbd "C-h SPC") 'helm-all-mark-rings)
-   (bind-keys ("M-x" . helm-M-x)
-              ("M-y" . helm-show-kill-ring)
-              ("C-x b" . helm-mini)
-              ("C-x C-f" . helm-find-files)
-              ("C-c h o" . helm-occur)
-              ("C-c h g" . helm-google-suggest))
-   (bind-keys :map helm-map
-              ([tab] . helm-execute-persistent-action)
-              ("C-i" . helm-execute-persistent-action)
-              ("C-z" . helm-select-action))))
-
-(my-load-set-keybindings-func
  'helm-flycheck
  (lambda ()
    (bind-keys :map flycheck-mode-map

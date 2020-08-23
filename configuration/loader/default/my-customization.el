@@ -17,43 +17,6 @@
 
 ;; Define customization.
 ;; -- Interface enchancement
-(defun my-browse-url-chrome-incognito (url &optional _ignore)
-  "Browse URL in Google Chrome incognito mode."
-  (helm-generic-browser url "google-chrome" "--incognito"))
-
-(my-load-set-customization-func
- 'helm
- (lambda ()
-   (with-eval-after-load 'helm-mode
-     (progn
-       (my-setq-when-bound
-        ;; TODO: helm-ff-file-name-history-use-recentf t
-        ;; Open helm buffer inside current window,
-        ;; not occupy whole other window.
-        helm-split-window-in-side-p t
-        ;; Move to end or beginning of source
-        ;; when reaching top or bottom of source.
-        helm-move-to-line-cycle-in-source nil
-        ;; Scroll 8 lines other window using M-<next>/M-<prior>.
-        helm-scroll-amount 8
-        ;; Search for library in `require' and `declare-function' sexp.
-        helm-ff-search-library-in-sexp t
-        ;; Follow results.
-        helm-follow-mode-persistent t)
-       ;; Hide helm from mode line.
-       (diminish 'helm-mode)))
-   (with-eval-after-load 'helm-net
-     (when (executable-find "curl")
-       ;; Use curl to fetch candidates from Google.
-       (my-setq-when-bound helm-net-prefer-curl t))
-     ;; Open search result in Chrome incognito mode.
-     (my-setq-when-bound helm-google-suggest-default-browser-function
-                         'my-browse-url-chrome-incognito))
-   ;; man support.
-   (if (boundp 'helm-sources-using-default-as-input)
-       (add-to-list 'helm-sources-using-default-as-input
-                    'helm-source-man-pages))))
-
 (my-load-set-customization-func
  'company-quickhelp
  (lambda ()
