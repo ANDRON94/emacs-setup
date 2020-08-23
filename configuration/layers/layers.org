@@ -189,6 +189,13 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
   (add-hook 'emacs-lisp-mode-hook 'flycheck-mode)
   ;; Use Emacs `load-path' for checking elisp files.
   (setq flycheck-emacs-lisp-load-path 'inherit))
+
+(use-package helm-flycheck
+  :ensure t
+  :after (helm flycheck)
+  :bind
+  (:map flycheck-mode-map
+        ("C-c f h" . helm-flycheck)))
 #+end_src
 ** Interface Enchancement
 *** General

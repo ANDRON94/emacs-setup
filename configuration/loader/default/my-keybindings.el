@@ -15,13 +15,6 @@
 (require 'my-load)
 
 ;; Define keybindings.
-;; -- Interface enchancement
-(my-load-set-keybindings-func
- 'helm-flycheck
- (lambda ()
-   (bind-keys :map flycheck-mode-map
-              ("C-c f h" . helm-flycheck))))
-
 ;; -- Navigate
 (my-load-set-keybindings-func
  'helm-gtags
