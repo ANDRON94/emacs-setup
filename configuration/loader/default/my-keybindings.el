@@ -22,12 +22,6 @@
    (bind-keys :map flycheck-mode-map
               ("C-c f h" . helm-flycheck))))
 
-(my-load-set-keybindings-func
- 'company-quickhelp
- (lambda ()
-   (bind-keys :map company-active-map
-              ("M-h" . company-quickhelp-manual-begin))))
-
 ;; -- Navigate
 (my-load-set-keybindings-func
  'helm-gtags

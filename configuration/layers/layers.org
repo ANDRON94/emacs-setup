@@ -263,6 +263,20 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
   (helm-mode +1))
 #+end_src
 **** Ivy
+*** Pop-ups
+#+begin_src emacs-lisp :tangle yes
+(use-package company-quickhelp
+  :ensure t
+  :after (company)
+  :bind
+  (:map company-active-map
+        ("M-h" . company-quickhelp-manual-begin))
+  :config
+  ;; Don't show quickhelp popup automatically.
+  (setq company-quickhelp-delay nil)
+  ;; Activate company-quickhelp mode globally.
+  (company-quickhelp-mode +1))
+#+end_src
 ** Languages
 *** C#
 **** Navigation, autocomplete, syntax checking

@@ -16,13 +16,6 @@
 (require 'my-utility)
 
 ;; Define customization.
-;; -- Interface enchancement
-(my-load-set-customization-func
- 'company-quickhelp
- (lambda ()
-   ;; Don't show quickhelp popup automatically.
-   (my-setq-when-bound company-quickhelp-delay nil)))
-
 ;; -- Navigate
 (my-load-set-customization-func
  'helm-gtags
