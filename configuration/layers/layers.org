@@ -180,6 +180,16 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
   (setf (car (member 'company-capf company-backends))
         '(company-capf company-dabbrev)))
 #+end_src
+*** Syntax checking
+#+begin_src emacs-lisp :tangle yes
+(use-package flycheck
+  :ensure t
+  :config
+  ;; Use flycheck for Emacs Lisp.
+  (add-hook 'emacs-lisp-mode-hook 'flycheck-mode)
+  ;; Use Emacs `load-path' for checking elisp files.
+  (setq flycheck-emacs-lisp-load-path 'inherit))
+#+end_src
 ** Interface Enchancement
 *** General
 **** Use "y" or "n" instead of "yes" or "not"

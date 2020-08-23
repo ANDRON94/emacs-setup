@@ -79,11 +79,6 @@ It holds files which define configuration structure.")
   (my-load-make-setup-options
    (my-setup-absolute-path "/search/setup-helm-swoop.el"))
 
-  ;; syntax-checking
-  'flycheck
-  (my-load-make-setup-options
-   (my-setup-absolute-path "/syntax-checking/setup-flycheck.el"))
-
   ;; system
   'docker
   (my-load-make-setup-options

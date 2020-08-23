@@ -90,19 +90,6 @@
     ;; in exchange for text color.
     helm-swoop-speed-or-color t)))
 
-;; -- Syntax checking
-(my-load-set-customization-func
- 'flycheck
- (lambda ()
-   ;; TODO: (add-hook 'javascript-mode-hook 'flycheck-mode)
-   ;; TODO: (add-hook 'python-mode-hook 'flycheck-mode)
-   ;; TODO: (add-hook 'sql-mode-hook 'flycheck-mode)
-   ;; TODO: (add-hook 'lisp-mode-hook 'flycheck-mode)
-   ;; Use flycheck for next file modes:
-   (add-hook 'emacs-lisp-mode-hook 'flycheck-mode)
-   ;; Use Emacs `load-path' for checking elisp files.
-   (my-setq-when-bound flycheck-emacs-lisp-load-path 'inherit)))
-
 ;; -- Task managment
 (defun my--org-capture-find-target ()
   "Find and jump to the user selected headline of the user selected org file."
