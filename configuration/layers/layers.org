@@ -301,6 +301,11 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
   (flycheck-pos-tip-mode +1))
 #+end_src
 ** Search & Navigation
+*** General
+**** Smooth scrolling
+#+begin_src emacs-lisp :tangle yes
+(setq scroll-conservatively 10000)
+#+end_src
 *** Jump between matched patterns
 #+begin_src emacs-lisp :tangle yes
 (use-package helm-swoop
@@ -553,8 +558,4 @@ in irony-mode's buffers by irony-mode's function."
   (setq recentf-save-file (my-make-valid-path
                            (my-get-full-emacs-path
                             ".cache/recentf/recentf"))))
-#+end_src
-**** Smooth scrolling
-#+begin_src emacs-lisp :tangle yes
-(setq scroll-conservatively 10000)
 #+end_src
