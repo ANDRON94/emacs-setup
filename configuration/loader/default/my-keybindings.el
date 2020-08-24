@@ -46,13 +46,6 @@
  (lambda ()
    (bind-keys ("C-c d m" . git-messenger:popup-message))))
 
-(my-load-set-keybindings-func
- 'magit
- (lambda ()
-   (bind-keys ("C-c d s" . magit-status)
-              ("C-c d i" . magit-init)
-              ("C-c d c" . magit-clone))))
-
 ;; -- Visual
 (my-load-set-keybindings-func
  'general-visual

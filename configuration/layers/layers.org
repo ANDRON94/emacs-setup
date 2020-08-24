@@ -548,6 +548,20 @@ in irony-mode's buffers by irony-mode's function."
   ;; It seems that "ssh" method is faster than the default method "scp".
   (setq tramp-default-method "ssh"))
 #+end_src
+** Version Control
+*** Git
+#+begin_src emacs-lisp :tangle yes
+(use-package magit
+  :ensure t
+  :bind
+  ("C-c d s" . magit-status)
+  ("C-c d i" . magit-init)
+  ("C-c d c" . magit-clone))
+
+(use-package magit-lfs
+  :ensure t
+  :after (magit))
+#+end_src
 ** Miscellaneous
 *** General
 **** Save all backups in one place

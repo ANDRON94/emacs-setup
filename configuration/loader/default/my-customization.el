@@ -84,9 +84,6 @@
                        (seq-filter 'file-exists-p
                                    (org-projectile-todo-files)))))
 
-;; -- Version control
-;; TODO!!!
-
 ;; -- Visual
 (defun my--show-trailing-whitespace ()
   "Show trailing whitespace."
