@@ -60,11 +60,6 @@ It holds files which define configuration structure.")
   (my-load-make-setup-options
    (my-setup-absolute-path "/task-managment/setup-org-projectile-helm.el"))
 
-  ;; version-control
-  'diff-hl
-  (my-load-make-setup-options
-   (my-setup-absolute-path "/version-control/setup-diff-hl.el"))
-
   ;; visual
   'general-visual
   (my-load-make-setup-options

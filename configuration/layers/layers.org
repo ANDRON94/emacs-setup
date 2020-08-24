@@ -80,6 +80,25 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
   ;; Toggle Nlinum mode in all buffers.
   (global-nlinum-mode +1))
  #+end_src
+** Visual
+*** Highlight uncommitted changes
+#+begin_src emacs-lisp :tangle yes
+(use-package diff-hl
+  :ensure t
+  :bind
+  ("C-c d n" . diff-hl-next-hunk)
+  ("C-c d p" . diff-hl-previous-hunk)
+  ("C-c d r" . diff-hl-revert-hunk)
+  :config
+  ;; Integrate `diff-hl' with `magit'.
+  (with-eval-after-load 'magit
+    (add-hook 'magit-pre-refresh-hook 'diff-hl-magit-pre-refresh)
+    (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
+  ;; Perform highlighting on-the-fly.
+  (diff-hl-flydiff-mode +1)
+  ;; Activate `diff-hl' mode globally.
+  (global-diff-hl-mode +1))
+#+end_src
 ** Edit
 *** General
 **** Always end a file with a newline
