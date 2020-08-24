@@ -16,22 +16,6 @@
 (require 'my-utility)
 
 ;; Define customization.
-;; -- Search
-(my-load-set-customization-func
- 'helm-swoop
- (lambda ()
-   ;; TODO: Save buffer when helm-multi-swoop-edit complete.
-   ;; (setq helm-multi-swoop-edit-save t)
-   (my-setq-when-bound
-    ;; If this value is t, split window inside the current window.
-    helm-swoop-split-with-multiple-windows t
-    ;; Split direcion: 'split-window-vertically
-    ;; or 'split-window-horizontally.
-    helm-swoop-split-direction 'split-window-vertically
-    ;; If nil, you can slightly boost invoke speed
-    ;; in exchange for text color.
-    helm-swoop-speed-or-color t)))
-
 ;; -- Task managment
 (defun my--org-capture-find-target ()
   "Find and jump to the user selected headline of the user selected org file."

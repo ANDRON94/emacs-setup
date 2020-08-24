@@ -300,6 +300,32 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
   ;; Activate `flycheck-pos-tip-mode' mode globally.
   (flycheck-pos-tip-mode +1))
 #+end_src
+** Search & Navigation
+*** Jump between matched patterns
+#+begin_src emacs-lisp :tangle yes
+(use-package helm-swoop
+  :ensure t
+  :after (helm)
+  :bind
+  ("C-c s s" . helm-swoop)
+  ("C-c s m" . helm-multi-swoop)
+  ("C-c s a" . helm-multi-swoop-all)
+  ("C-c s p" . helm-multi-swoop-projectile)
+  ("M-I" . helm-swoop-back-to-last-point)
+  (:map isearch-mode-map
+        ;; When doing isearch, hand the word over to helm-swoop
+        ("M-i" . helm-swoop-from-isearch))
+  :config
+  (setq
+   ;; If this value is t, split window inside the current window.
+   helm-swoop-split-with-multiple-windows t
+   ;; Split direcion: 'split-window-vertically
+   ;; or 'split-window-horizontally.
+   helm-swoop-split-direction 'split-window-vertically
+   ;; If nil, you can slightly boost invoke speed
+   ;; in exchange for text color.
+   helm-swoop-speed-or-color t))
+#+end_src
 ** Project Management
 #+begin_src emacs-lisp :tangle yes
 (defun my--projectile-mode-line-function ()

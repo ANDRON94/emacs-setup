@@ -15,25 +15,6 @@
 (require 'my-load)
 
 ;; Define keybindings.
-;; -- Search
-(my-load-set-keybindings-func
- 'helm-swoop
- (lambda ()
-   (bind-keys ("C-c s s" . helm-swoop)
-              ("C-c s m" . helm-multi-swoop)
-              ("C-c s a" . helm-multi-swoop-all)
-              ("C-c s p" . helm-multi-swoop-projectile)
-              ("M-I" . helm-swoop-back-to-last-point)
-              ;; From helm-swoop to helm-multi-swoop-all
-              ;; :map helm-swoop-map
-              ;; ("M-i" . helm-multi-swoop-all-from-helm-swoop)
-              :map isearch-mode-map
-              ;; When doing isearch, hand the word over to helm-swoop
-              ("M-i" . helm-swoop-from-isearch))))
-
-;; -- Syntax checking
-;; TODO!!!
-
 ;; -- Task managment
 (my-load-set-keybindings-func
  'org

@@ -51,11 +51,6 @@ It holds files which define configuration structure.")
 
 (my-load-add-setup-files
  (list
-  ;; search
-  'helm-swoop
-  (my-load-make-setup-options
-   (my-setup-absolute-path "/search/setup-helm-swoop.el"))
-
   ;; system
   'docker
   (my-load-make-setup-options
