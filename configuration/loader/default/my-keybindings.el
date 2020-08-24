@@ -30,15 +30,6 @@
    (bind-keys ("C-c o p" . org-projectile-goto-location-for-project)
               ("C-c o n" . org-projectile-helm-template-or-project))))
 
-;; -- Visual
-(my-load-set-keybindings-func
- 'highlight-symbol
- (lambda ()
-   (bind-keys ("C-c n h" . highlight-symbol)
-              ("C-c n n" . highlight-symbol-next)
-              ("C-c n p" . highlight-symbol-prev)
-              ("C-c n r" . highlight-symbol-query-replace))))
-
 (provide 'my-default-keybindings)
 
 ;;; my-keybindings.el ends here

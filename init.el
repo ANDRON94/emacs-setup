@@ -61,10 +61,6 @@ It holds files which define configuration structure.")
    (my-setup-absolute-path "/task-managment/setup-org-projectile-helm.el"))
 
   ;; visual
-  'highlight-symbol
-  (my-load-make-setup-options
-   (my-setup-absolute-path "/visual/setup-highlight-symbol.el"))
-
   'pulse
   (my-load-make-setup-options
    (my-setup-absolute-path "/visual/setup-pulse.el"))))

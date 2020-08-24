@@ -112,6 +112,16 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
   ;; Activate `diff-hl' mode globally.
   (global-diff-hl-mode +1))
 #+end_src
+*** Highlight symbol under cursor
+#+begin_src emacs-lisp :tangle yes
+(use-package highlight-symbol
+  :ensure t
+  :bind
+  ("C-c n h" . highlight-symbol)
+  ("C-c n n" . highlight-symbol-next)
+  ("C-c n p" . highlight-symbol-prev)
+  ("C-c n r" . highlight-symbol-query-replace))
+#+end_src
 ** Edit
 *** General
 **** Always end a file with a newline
