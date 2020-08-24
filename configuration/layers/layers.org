@@ -27,10 +27,9 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
 #+begin_src emacs-lisp :tangle yes
 (tool-bar-mode -1)
 #+end_src
-**** TODO Hide minor modes from mode line
+**** Hide built-in minor modes from mode line
  #+begin_src emacs-lisp :tangle yes
 (use-package autorevert
-  :ensure t
   :diminish auto-revert-mode)
 
 (use-package abbrev
@@ -489,13 +488,16 @@ in irony-mode's buffers by irony-mode's function."
 (setq backup-directory-alist
       `(("" . ,(my-make-valid-path (my-get-full-emacs-path ".cache/backup")))))
 #+end_src
-**** Configure recent files list
+**** Move util files of the built-in minor modes to the common directory
 #+begin_src emacs-lisp :tangle yes
 (use-package recentf
-  :ensure t
   :config
   ;; Move 'recentf' related util files to the common directory
   (setq recentf-save-file (my-make-valid-path
                            (my-get-full-emacs-path
                             ".cache/recentf/recentf"))))
+#+end_src
+**** Smooth scrolling
+#+begin_src emacs-lisp :tangle yes
+(setq scroll-conservatively 10000)
 #+end_src

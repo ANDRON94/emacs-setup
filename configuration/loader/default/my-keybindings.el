@@ -15,19 +15,6 @@
 (require 'my-load)
 
 ;; Define keybindings.
-;; -- Navigate
-(my-load-set-keybindings-func
- 'my-scroll
- (lambda ()
-   (bind-keys ("M-N" . my-scroll-up-one-line)
-              ("M-P" . my-scroll-down-one-line))))
-
-;; -- Package managment
-;; TODO!!!
-
-;; -- Project managment
-;; TODO!!!
-
 ;; -- Search
 (my-load-set-keybindings-func
  'helm-swoop

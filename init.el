@@ -51,11 +51,6 @@ It holds files which define configuration structure.")
 
 (my-load-add-setup-files
  (list
-  ;; navigate
-  'my-scroll
-  (my-load-make-setup-options
-   (my-setup-absolute-path "/navigate/setup-my-scroll.el"))
-
   ;; project-managment
   'helm-projectile
   (my-load-make-setup-options
