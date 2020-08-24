@@ -300,6 +300,37 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
   ;; Activate `flycheck-pos-tip-mode' mode globally.
   (flycheck-pos-tip-mode +1))
 #+end_src
+** Project Management
+#+begin_src emacs-lisp :tangle yes
+(defun my--projectile-mode-line-function ()
+  "Report project name."
+  (format " Proj[%s]" (projectile-project-name)))
+
+(use-package helm-projectile
+  :ensure t
+  :after (helm)
+  :bind-keymap
+  ("C-c p" . projectile-command-map)
+  :config
+  ;; Use helm completion system.
+  (setq projectile-completion-system 'helm)
+  (helm-projectile-on)
+  ;; Mode of action after switch a project.
+  (setq projectile-switch-project-action 'helm-projectile)
+  ;; Format mode line indecator for projectile.
+  (setq projectile-mode-line-function 'my--projectile-mode-line-function)
+  ;; Move 'projectile' related util files to the common directory.
+  (setq projectile-cache-file
+        (my-make-valid-path
+         (my-get-full-emacs-path
+          ".cache/projectile/projectile.cache")))
+  (setq projectile-known-projects-file
+        (my-make-valid-path
+         (my-get-full-emacs-path
+          ".cache/projectile/known-projects.eld")))
+  ;; Activate projectile mode globally.
+  (projectile-mode +1))
+#+end_src
 ** Languages
 *** C#
 **** Navigation, autocomplete, syntax checking

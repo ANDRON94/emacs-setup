@@ -16,25 +16,6 @@
 (require 'my-utility)
 
 ;; Define customization.
-;; -- Project managment
-(defun my--projectile-mode-line-function ()
-  "Report project name."
-  (format " Proj[%s]" (projectile-project-name)))
-
-(my-load-set-customization-func
- 'helm-projectile
- (lambda ()
-   ;; TODO: (setq projectile-enable-caching t)
-   ;; Ignore next files for all projects.
-   (if (boundp 'projectile-globally-ignored-files)
-       (progn
-         (add-to-list 'projectile-globally-ignored-files "GPATH")
-         (add-to-list 'projectile-globally-ignored-files "GTAGS")
-         (add-to-list 'projectile-globally-ignored-files "GRTAGS")))
-   (my-setq-when-bound
-    ;; Format mode line indecator for projectile.
-    projectile-mode-line-function 'my--projectile-mode-line-function)))
-
 ;; -- Search
 (my-load-set-customization-func
  'helm-swoop

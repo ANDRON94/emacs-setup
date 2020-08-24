@@ -51,11 +51,6 @@ It holds files which define configuration structure.")
 
 (my-load-add-setup-files
  (list
-  ;; project-managment
-  'helm-projectile
-  (my-load-make-setup-options
-   (my-setup-absolute-path "/project-managment/setup-helm-projectile.el"))
-
   ;; search
   'helm-swoop
   (my-load-make-setup-options
