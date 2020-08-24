@@ -299,6 +299,14 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
   :config
   ;; Activate `flycheck-pos-tip-mode' mode globally.
   (flycheck-pos-tip-mode +1))
+
+(use-package git-messenger
+  :ensure t
+  :bind
+  ("C-c d m" . git-messenger:popup-message)
+  :config
+  (with-eval-after-load 'magit
+    (setq git-messenger:use-magit-popup t)))
 #+end_src
 ** Search & Navigation
 *** General

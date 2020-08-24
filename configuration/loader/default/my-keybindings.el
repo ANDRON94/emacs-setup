@@ -41,11 +41,6 @@
               ("C-c d p" . diff-hl-previous-hunk)
               ("C-c d r" . diff-hl-revert-hunk))))
 
-(my-load-set-keybindings-func
- 'git-messenger
- (lambda ()
-   (bind-keys ("C-c d m" . git-messenger:popup-message))))
-
 ;; -- Visual
 (my-load-set-keybindings-func
  'general-visual
