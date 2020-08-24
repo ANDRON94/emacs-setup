@@ -536,7 +536,6 @@ in irony-mode's buffers by irony-mode's function."
 (use-package docker
   :ensure t)
 #+end_src
-** Network
 *** Remote file access
 #+begin_src emacs-lisp :tangle yes
 (use-package tramp
