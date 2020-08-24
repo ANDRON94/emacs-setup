@@ -32,11 +32,6 @@
 
 ;; -- Visual
 (my-load-set-keybindings-func
- 'general-visual
- (lambda ()
-   (bind-keys ("C-c w" . whitespace-mode))))
-
-(my-load-set-keybindings-func
  'highlight-symbol
  (lambda ()
    (bind-keys ("C-c n h" . highlight-symbol)

@@ -85,19 +85,6 @@
                                    (org-projectile-todo-files)))))
 
 ;; -- Visual
-(defun my--show-trailing-whitespace ()
-  "Show trailing whitespace."
-  (interactive)
-  (setq show-trailing-whitespace 1))
-
-(my-load-set-customization-func
- 'general-visual
- (lambda ()
-   ;; TODO: Set appearance of a tab that is represented by 4 spaces.
-   ;; (setq-default tab-width 4)
-   ;; Show unnecessary whitespace that can mess up diff.
-   (add-hook 'prog-mode-hook 'my--show-trailing-whitespace)))
-
 (my-load-set-customization-func
  'pulse
  (lambda ()

@@ -81,6 +81,19 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
   (global-nlinum-mode +1))
  #+end_src
 ** Visual
+*** General
+**** Show trailing whitespaces in prog mode
+#+begin_src emacs-lisp :tangle yes
+(defun my--show-trailing-whitespace ()
+  "Show trailing whitespace."
+  (interactive)
+  (setq show-trailing-whitespace 1))
+
+(use-package whitespace
+  :hook (prog-mode . my--show-trailing-whitespace)
+  :bind
+  ("C-c w" . whitespace-mode))
+#+end_src
 *** Highlight uncommitted changes
 #+begin_src emacs-lisp :tangle yes
 (use-package diff-hl
