@@ -530,6 +530,12 @@ in irony-mode's buffers by irony-mode's function."
   ;; (flycheck-add-mode 'html-tidy 'web-mode)
   )
 #+end_src
+** Integration
+*** Docker
+#+begin_src emacs-lisp :tangle yes
+(use-package docker
+  :ensure t)
+#+end_src
 ** Network
 *** Remote file access
 #+begin_src emacs-lisp :tangle yes

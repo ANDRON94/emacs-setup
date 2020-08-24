@@ -51,11 +51,6 @@ It holds files which define configuration structure.")
 
 (my-load-add-setup-files
  (list
-  ;; system
-  'docker
-  (my-load-make-setup-options
-   (my-setup-absolute-path "/system/setup-docker.el"))
-
   ;; task-managment
   'org
   (my-load-make-setup-options
