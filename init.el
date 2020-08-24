@@ -69,10 +69,6 @@ It holds files which define configuration structure.")
   (my-load-make-setup-options
    (my-setup-absolute-path "/version-control/setup-git-messenger.el"))
 
-  'magit-svn
-  (my-load-make-setup-options
-   (my-setup-absolute-path "/version-control/setup-magit-svn.el"))
-
   ;; visual
   'general-visual
   (my-load-make-setup-options

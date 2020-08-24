@@ -562,6 +562,12 @@ in irony-mode's buffers by irony-mode's function."
   :ensure t
   :after (magit))
 #+end_src
+*** Subversion
+#+begin_src emacs-lisp :tangle yes
+(use-package magit-svn
+  :ensure t
+  :after (magit))
+#+end_src
 ** Miscellaneous
 *** General
 **** Save all backups in one place
