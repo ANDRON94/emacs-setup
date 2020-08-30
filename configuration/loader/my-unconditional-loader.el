@@ -27,7 +27,8 @@
 ;; if it wasn't installed before.
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
-  (package-install 'use-package))
+  (package-install 'use-package)
+  (package-install 'diminish))
 
 ;; Enable `use-package'
 (eval-when-compile
