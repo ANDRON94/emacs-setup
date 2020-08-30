@@ -84,17 +84,6 @@
                        (seq-filter 'file-exists-p
                                    (org-projectile-todo-files)))))
 
-;; -- Visual
-(my-load-set-customization-func
- 'pulse
- (lambda ()
-   (my-setq-when-bound
-    ;; Use pulsing for momentary highlighting.
-    pulse-flag t
-    ;; Modify the behavior of `pulse-line-hook-function':
-    ;; it will pulse the current line.
-    pulse-command-advice-flag t)))
-
 (provide 'my-default-customization)
 
 ;;; my-customization.el ends here

@@ -454,6 +454,16 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
 #+end_src
 **** Navigation, autocomplete, syntax checking
 #+begin_src emacs-lisp :tangle yes
+(use-package pulse
+  :ensure t
+  :config
+  (setq
+   ;; Use pulsing for momentary highlighting.
+   pulse-flag t
+   ;; Modify the behavior of `pulse-line-hook-function':
+   ;; it will pulse the current line.
+   pulse-command-advice-flag t))
+
 (defun my--pulse-line-hook-function (&optional prefix)
   "Wrapper around `pulse-line-hook-function' with the ignored PREFIX argument.
 It is used as advice for several `rtags' functions."

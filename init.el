@@ -58,12 +58,7 @@ It holds files which define configuration structure.")
 
   'org-projectile-helm
   (my-load-make-setup-options
-   (my-setup-absolute-path "/task-managment/setup-org-projectile-helm.el"))
-
-  ;; visual
-  'pulse
-  (my-load-make-setup-options
-   (my-setup-absolute-path "/visual/setup-pulse.el"))))
+   (my-setup-absolute-path "/task-managment/setup-org-projectile-helm.el"))))
 
 ;; Define and load 'configuration loader' file.
 (require 'my-custom-loader-dispatcher nil t)
