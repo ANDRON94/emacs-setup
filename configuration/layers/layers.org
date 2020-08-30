@@ -13,6 +13,27 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
   (expand-file-name relative-path user-emacs-directory))
 #+end_src
 * Layers
+** Miscellaneous
+*** General
+**** Move util files of the built-in minor modes to the common directory
+#+begin_src emacs-lisp :tangle yes
+(use-package recentf
+  :config
+  ;; Move 'recentf' related util files to the common directory
+  (setq recentf-save-file (my-make-valid-path
+                           (my-get-full-emacs-path
+                            ".cache/recentf/recentf"))))
+
+;; Move `auto-save' related util files to the common directory
+(setq auto-save-list-file-prefix (my-make-valid-path
+                                  (my-get-full-emacs-path
+                                   ".cache/auto-save/sessions/")))
+#+end_src
+**** Save all backups in one place
+#+begin_src emacs-lisp :tangle yes
+(setq backup-directory-alist
+      `(("" . ,(my-make-valid-path (my-get-full-emacs-path ".cache/backup")))))
+#+end_src
 ** Appearance
 *** General
 **** Disable the welcome message
@@ -517,7 +538,11 @@ in irony-mode's buffers by irony-mode's function."
   ;; Rebind completion functions for irony mode.
   (add-hook 'irony-mode-hook 'my--irony-setup-completion-functions)
   ;; Setup C++ completion database(according to compile options).
-  (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
+  (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+  ;; Move `irony' related util files to the common directory.
+  (setq irony-user-dir (my-make-valid-path
+                        (my-get-full-emacs-path
+                         ".cache/irony/"))))
 
 (use-package company-irony
   :ensure t
@@ -608,6 +633,16 @@ in irony-mode's buffers by irony-mode's function."
   ;; It seems that "ssh" method is faster than the default method "scp".
   (setq tramp-default-method "ssh"))
 #+end_src
+*** Shell
+#+begin_src emacs-lisp :tangle yes
+(use-package eshell
+  :ensure t
+  :config
+  ;; Move `eshell' related util files to the common directory.
+  (setq eshell-directory-name (my-make-valid-path
+                               (my-get-full-emacs-path
+                                ".cache/eshell/"))))
+#+end_src
 ** Version Control
 *** Git
 #+begin_src emacs-lisp :tangle yes
@@ -616,7 +651,13 @@ in irony-mode's buffers by irony-mode's function."
   :bind
   ("C-c d s" . magit-status)
   ("C-c d i" . magit-init)
-  ("C-c d c" . magit-clone))
+  ("C-c d c" . magit-clone)
+  :config
+  (with-eval-after-load 'transient
+    ;; Move `transient' related util files to the common directory.
+    (setq transient-history-file (my-make-valid-path
+                                  (my-get-full-emacs-path
+                                   ".cache/transient/history.el")))))
 
 (use-package magit-lfs
   :ensure t
@@ -627,20 +668,4 @@ in irony-mode's buffers by irony-mode's function."
 (use-package magit-svn
   :ensure t
   :after (magit))
-#+end_src
-** Miscellaneous
-*** General
-**** Save all backups in one place
-#+begin_src emacs-lisp :tangle yes
-(setq backup-directory-alist
-      `(("" . ,(my-make-valid-path (my-get-full-emacs-path ".cache/backup")))))
-#+end_src
-**** Move util files of the built-in minor modes to the common directory
-#+begin_src emacs-lisp :tangle yes
-(use-package recentf
-  :config
-  ;; Move 'recentf' related util files to the common directory
-  (setq recentf-save-file (my-make-valid-path
-                           (my-get-full-emacs-path
-                            ".cache/recentf/recentf"))))
 #+end_src
