@@ -1,15 +1,11 @@
 # Compiled
 *.elc
 
-# Packaging
-.cask
-
 # Temporary
 *~
 
 # Specific files
 
 # Specific folders
-elpa/
 org/
 .cache/
