@@ -423,6 +423,7 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
    helm-swoop-speed-or-color t))
 #+end_src
 ** Project Management
+*** Project (group of files) Interaction
 #+begin_src emacs-lisp :tangle yes
 (defun my--projectile-mode-line-function ()
   "Report project name."
@@ -452,6 +453,85 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
           ".cache/projectile/known-projects.eld")))
   ;; Activate projectile mode globally.
   (projectile-mode +1))
+#+end_src
+*** TODO Organizer
+#+begin_src emacs-lisp :tangle yes
+(defun my--org-capture-find-target ()
+  "Find and jump to the user selected headline of the user selected org file."
+  (let* ((path-to-target-file (completing-read "Choose target file: "
+                                               org-agenda-files nil t))
+         (target-buffer (find-file-noselect path-to-target-file))
+         (target (org-refile-get-location "Choose target headline: "
+                                          target-buffer t))
+         (pos (nth 3 target)))
+    (set-buffer target-buffer)
+    (goto-char pos)))
+
+(defun my--org-capture-templates ()
+  "Return list of custom org capture templates."
+  (let* ((capture-format "%<%Y-%b-%d %H:%M>")
+         (todo
+          (format "* TODO %%^{Task} %%^g\n SCHEDULED: %%^T\n Captured: %s"
+                  capture-format))
+         (note
+          (format "* %%^{Note} %%^g\n SCHEDULED: %%^T\n Captured: %s"
+                  capture-format)))
+    (list `("t" "Create TODO" entry
+            (function my--org-capture-find-target)
+            ,todo)
+          `("n" "Get a Note" entry
+            (function my--org-capture-find-target)
+            ,note))))
+
+(use-package org
+  :ensure t
+  :bind
+  ("C-c l" . org-store-link)
+  ("C-c c" . org-capture)
+  ("C-c a" . org-agenda)
+  :config
+  ;; Templates for capture items. For example, todo task,
+  ;; note, journal entry, etc.
+  (with-eval-after-load 'org-capture
+    (setq org-capture-templates (my--org-capture-templates)))
+  (setq
+   ;; Information to record when a task moves to the DONE state.
+   org-log-done 'time
+   ;; List of export backends.
+   org-export-backends '(ascii html icalendar latex md)
+   ;; Indent the code inside "src" block according to a mode.
+   org-src-tab-acts-natively t
+   ;; Fontify the code inside "src" block according to a mode.
+   org-src-fontify-natively t
+   ;; Preserve indents of the code inside "src" block on export.
+   org-src-preserve-indentation t
+   ;; Directory with org files.
+   org-directory (my-get-full-emacs-path "org/")
+   ;; Show full outline path at once.
+   org-outline-path-complete-in-steps nil
+   ;; Provide refile targets as paths.
+   org-refile-use-outline-path t
+   ;; Use headlines with level 2 or less as refile targets.
+   org-refile-targets '((nil . (:maxlevel . 2)))
+   ;; List of agenda files.
+   org-agenda-files (list (my-get-full-emacs-path "org/gtd.org"))))
+
+(use-package org-re-reveal
+  :ensure t
+  :after org
+  :config
+  (setq org-re-reveal-root "https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.8.0/"))
+
+;; (use-package org-projectile-helm
+;;   :ensure t
+;;   :bind
+;;   ("C-c o p" . org-projectile-goto-location-for-project)
+;;   ("C-c o n" . org-projectile-helm-template-or-project)
+;;   :config
+;;   (org-projectile-per-project)
+;;   (setq org-projectile-per-project-filepath "gtd.org")
+;;   (setq org-agenda-files (seq-filter 'file-exists-p
+;;                                      (org-projectile-todo-files))))
 #+end_src
 ** Languages
 *** C#

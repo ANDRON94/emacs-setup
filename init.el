@@ -55,16 +55,7 @@ It holds files which define configuration structure.")
 ;; Define main setup files registry.
 (require 'my-load)
 
-(my-load-add-setup-files
- (list
-  ;; task-managment
-  'org
-  (my-load-make-setup-options
-   (my-setup-absolute-path "/task-managment/setup-org.el"))
-
-  'org-projectile-helm
-  (my-load-make-setup-options
-   (my-setup-absolute-path "/task-managment/setup-org-projectile-helm.el"))))
+(my-load-add-setup-files (list))
 
 ;; Define and load 'configuration loader' file.
 (require 'my-custom-loader-dispatcher nil t)

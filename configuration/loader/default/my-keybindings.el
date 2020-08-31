@@ -15,20 +15,6 @@
 (require 'my-load)
 
 ;; Define keybindings.
-;; -- Task managment
-(my-load-set-keybindings-func
- 'org
- (lambda ()
-   (bind-keys ("C-c l" . org-store-link)
-              ("C-c c" . org-capture)
-              ("C-c a" . org-agenda)
-              ("C-c o u" . org-table-iterate-buffer-tables))))
-
-(my-load-set-keybindings-func
- 'org-projectile-helm
- (lambda ()
-   (bind-keys ("C-c o p" . org-projectile-goto-location-for-project)
-              ("C-c o n" . org-projectile-helm-template-or-project))))
 
 (provide 'my-default-keybindings)
 
