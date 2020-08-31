@@ -41,12 +41,6 @@
 (require 'my-default-keybindings my--default-keybindings-file-path)
 (require 'my-default-customization my--default-customization-file-path)
 
-;; 3. Load necessary setup files.
-;; load 'layers'
-(org-babel-load-file (my-emacs-absolute-path "configuration/layers/layers.org"))
-(load (my-emacs-absolute-path "configuration/layers/interface-enchancement/layer-interface-enchancement.el"))
-;; old load system
-(my-load-load-except '())
 (provide 'my-configuration-loader)
 
 ;;; my-configuration-loader.el ends here

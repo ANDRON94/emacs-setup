@@ -15,7 +15,28 @@
 
 ;;; Code:
 
-;(package-initialize)
+(require 'package)
+
+;; Remote package archive setup.
+(setq package-enable-at-startup nil)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
+
+(package-initialize)
+
+;; Install `use-package'(handy macro for package configuration)
+;; if it wasn't installed before.
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package)
+  (package-install 'diminish))
+
+;; Enable `use-package'
+(eval-when-compile
+  (require 'use-package)
+  (setq use-package-verbose t))
+(require 'diminish)
+(require 'bind-key)
 
 ;; Define configuration version.
 (defconst my-config-version "2.18.37"
@@ -41,10 +62,6 @@ It holds files which define configuration structure.")
 
 (add-to-list 'load-path my-custom-packages-dir-path)
 (add-to-list 'load-path my-loader-dir-path)
-
-;; Load all packages that necessary for
-;; successful configuration setup.
-(require 'my-unconditional-loader)
 
 ;; Define main setup files registry.
 (require 'my-load)
@@ -74,5 +91,11 @@ If custom loader isn't specified by user returns default loader path."
     my-default-configuration-loader-path))
 
 (require 'my-configuration-loader (my-get-loader-path))
+
+;; Load necessary setup files.
+;; load 'layers'
+(org-babel-load-file (my-emacs-absolute-path "configuration/layers/layers.org"))
+;; old load system
+(my-load-load-except '())
 
 ;;; init.el ends here
