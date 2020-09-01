@@ -1,30 +1,34 @@
 ;;; init.el --- Loads appropriate Emacs configuration.  -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2017  Andrii Tymchuk
+;; Copyright (C) 2020  Andrii Tymchuk
 
 ;; Author: Andrii Tymchuk <makedonsky94@gmail.com>
 ;; Keywords: lisp
 
 ;;; Commentary:
 
-;; This file delegates loading of appropriate Emacs
-;; configuration to user-specified file(loader).
-;; For example, user can choose loader
-;; file depending on value of $USER
-;; environment variable.
+;; This file performs only most basic bootstrap
+;; code that is required to delegate actual configuration
+;; loading by Org.
+;; Org mode allows to write configuration files in literate way:
+;; https://www.emacswiki.org/emacs/ExampleConfigurations#toc1
 
 ;;; Code:
 
+;; Setup Emacs standard package system.
 (require 'package)
-
-;; Remote package archive setup.
+;; Optimize loading time.
 (setq package-enable-at-startup nil)
+;; Install new packages to the common directory.
+(setq package-user-dir
+      (expand-file-name ".cache/packages/" user-emacs-directory)
+      package-gnupghome-dir
+      (expand-file-name ".cache/packages/gnupg" user-emacs-directory))
+;; Add widely used and up-to-day MELPA package archive.
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-
+;; Activate package system.
 (package-initialize)
-
-;; Load necessary setup files.
-;; load 'layers'
+;; Load actual config that is written in literate way.
 (org-babel-load-file (expand-file-name "layers.org" user-emacs-directory))
 
 ;;; init.el ends here
