@@ -9,7 +9,7 @@
 
 ;; This file performs only most basic bootstrap
 ;; code that is required to delegate actual configuration
-;; loading by Org.
+;; loading to Org mode.
 ;; Org mode allows to write configuration files in literate way:
 ;; https://www.emacswiki.org/emacs/ExampleConfigurations#toc1
 
@@ -28,6 +28,10 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 ;; Activate package system.
 (package-initialize)
+;; Initialize descriptions of all configured ELPA(package archives)
+;; packages for the first time.
+(unless package-archive-contents
+  (package-refresh-contents))
 ;; Load actual config that is written in literate way.
 (org-babel-load-file (expand-file-name "layers.org" user-emacs-directory))
 

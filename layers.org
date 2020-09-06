@@ -1,4 +1,4 @@
-* Common Utils
+* Common utils
 ** Files
 #+begin_src emacs-lisp :tangle yes
 (defun my-make-valid-path (path)
@@ -17,15 +17,22 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
 ;; Install `use-package'(handy macro for package configuration)
 ;; if it wasn't installed before.
 (unless (package-installed-p 'use-package)
-  (package-refresh-contents)
   (package-install 'use-package)
+  ;; Install `diminish' package that is useful to hide some minor
+  ;; mode names from modeline.
+  ;; `use-package' has support for it(through :diminish keyword)
+  ;; but doesn't install it by default.
   (package-install 'diminish))
 
 ;; Load `use-package'.
 (eval-when-compile
   (require 'use-package)
+  ;; Report loading and configuration details.
   (setq use-package-verbose t))
+;; Load `diminish'(see details above).
 (require 'diminish)
+;; Load `bind-key' package that is used for easy key bindings setup.
+;; `use-package' has support for it(through :bind keyword).
 (require 'bind-key)
 #+end_src
 * Layers
@@ -35,12 +42,12 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
 #+begin_src emacs-lisp :tangle yes
 (use-package recentf
   :config
-  ;; Move 'recentf' related util files to the common directory
+  ;; Move `recentf' related util files to the common directory.
   (setq recentf-save-file (my-make-valid-path
                            (my-get-full-emacs-path
                             ".cache/recentf/recentf"))))
 
-;; Move `auto-save' related util files to the common directory
+;; Move `auto-save' related util files to the common directory.
 (setq auto-save-list-file-prefix (my-make-valid-path
                                   (my-get-full-emacs-path
                                    ".cache/auto-save/sessions/")))
@@ -79,7 +86,7 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
   (setq ediff-window-setup-function
         'ediff-setup-windows-plain))
 
-(add-hook 'ediff-load-hook 'my--use-ediff-plain-windows)
+(add-hook 'ediff-load-hook #'my--use-ediff-plain-windows)
   #+end_src
 **** Show scroll bar at right side of window
  #+begin_src emacs-lisp :tangle yes
@@ -95,9 +102,9 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
   :ensure t)
 
 (use-package darktooth-theme
-  :requires autothemer
-  :init (setq custom--inhibit-theme-enable nil)
-  :load-path  "configuration/custom-packages/emacs-theme-darktooth")
+  :load-path  "configuration/custom-packages/emacs-theme-darktooth"
+  :requires (autothemer)
+  :init (setq custom--inhibit-theme-enable nil))
  #+end_src
 *** Modeline
  #+begin_src emacs-lisp :tangle yes
@@ -111,15 +118,19 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
 
 (use-package flycheck-color-mode-line
   :ensure t
+  :after (flycheck)
   :hook (flycheck-mode . flycheck-color-mode-line-mode))
  #+end_src
-*** Lines
+*** Line numbers
  #+begin_src emacs-lisp :tangle yes
-(use-package nlinum
-  :ensure t
+(use-package display-line-numbers
   :config
-  ;; Toggle Nlinum mode in all buffers.
-  (global-nlinum-mode +1))
+  ;; Set default type of line numbers to be `relative'.
+  ;; (i.e. the number of the line relative to the line showing
+  ;; the window’s point).
+  (setq display-line-numbers-type 'relative)
+  ;; Activate `display-line-numbers' mode globally.
+  (global-display-line-numbers-mode +1))
  #+end_src
 ** Visual
 *** General
@@ -127,13 +138,12 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
 #+begin_src emacs-lisp :tangle yes
 (defun my--show-trailing-whitespace ()
   "Show trailing whitespace."
-  (interactive)
   (setq show-trailing-whitespace 1))
 
 (use-package whitespace
-  :hook (prog-mode . my--show-trailing-whitespace)
   :bind
-  ("C-c w" . whitespace-mode))
+  ("C-c w" . whitespace-mode)
+  :hook (prog-mode . my--show-trailing-whitespace))
 #+end_src
 *** Highlight uncommitted changes
 #+begin_src emacs-lisp :tangle yes
@@ -143,11 +153,12 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
   ("C-c d n" . diff-hl-next-hunk)
   ("C-c d p" . diff-hl-previous-hunk)
   ("C-c d r" . diff-hl-revert-hunk)
+  :demand t
   :config
   ;; Integrate `diff-hl' with `magit'.
   (with-eval-after-load 'magit
-    (add-hook 'magit-pre-refresh-hook 'diff-hl-magit-pre-refresh)
-    (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
+    (add-hook 'magit-pre-refresh-hook #'diff-hl-magit-pre-refresh)
+    (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh))
   ;; Perform highlighting on-the-fly.
   (diff-hl-flydiff-mode +1)
   ;; Activate `diff-hl' mode globally.
@@ -181,7 +192,6 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
 #+begin_src emacs-lisp :tangle yes
 (use-package multiple-cursors
   :ensure t
-  :demand t
   :bind
   ("C-S-c C-S-c" . mc/edit-lines)
   ("C->" . mc/mark-next-like-this)
@@ -193,39 +203,33 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
                       (my-get-full-emacs-path
                        ".cache/multiple-cursors/mc-lists.el"))))
 #+end_src
-*** TODO Parenthesis
+*** Parenthesis
 #+begin_src emacs-lisp :tangle yes
 (use-package smartparens
   :ensure t
-  :demand t
   :bind
   (:map smartparens-mode-map
         ;; Navigation
-        ;; TODO: setup smarparens navigation
         ("C-M-f" . sp-forward-sexp)
         ("C-M-b" . sp-backward-sexp)
         ;; Manipulation
-        ;; TODO: setup smartparens manipulation
         ("C-M-k" . sp-kill-sexp)
         ("C-M-w" . sp-copy-sexp)
         ("M-<delete>" . sp-unwrap-sexp)
         ("C-]" . sp-select-next-thing)
         ("C-M-]" . sp-select-previous-thing))
-  :diminish smartparens-mode
+  :demand t
   :config
   ;; Enable the default configuration.
   (require 'smartparens-config)
   ;; Toggle Show-Smartparens mode(highlight parenthesis) in all buffers.
   (show-smartparens-global-mode +1)
   ;; Toggle Smartparens mode in all buffers.
-  (smartparens-global-mode +1))
+  (smartparens-global-mode +1)
+  :diminish smartparens-mode)
 #+end_src
 *** Snippets
 #+begin_src emacs-lisp :tangle yes
-(defun my--disable-yasnippet-mode ()
-  "Disable yasnippet mode."
-  (yas-minor-mode -1))
-
 (use-package yasnippet
   :ensure t
   :config
@@ -233,8 +237,6 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
   (setq yas-snippet-dirs (list (my-make-valid-path
                                 (my-get-full-emacs-path
                                  ".cache/yasnippet/snippets/"))))
-  ;; Disable yasnippet in terminal mode.
-  (add-hook 'term-mode-hook 'my--disable-yasnippet-mode)
   ;; Activate yasnippet mode globally.
   (yas-global-mode +1))
 
@@ -267,8 +269,6 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
 (use-package flycheck
   :ensure t
   :config
-  ;; Use flycheck for Emacs Lisp.
-  (add-hook 'emacs-lisp-mode-hook 'flycheck-mode)
   ;; Use Emacs `load-path' for checking elisp files.
   (setq flycheck-emacs-lisp-load-path 'inherit))
 
@@ -279,13 +279,13 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
   (:map flycheck-mode-map
         ("C-c f h" . helm-flycheck)))
 #+end_src
-** Interface Enchancement
+** Interface enchancement
 *** General
 **** Use "y" or "n" instead of "yes" or "not"
  #+begin_src emacs-lisp :tangle yes
 (fset 'yes-or-no-p 'y-or-n-p)
  #+end_src
-*** External Commands Execution
+*** External commands execution
  #+begin_src emacs-lisp :tangle yes
 (use-package multi-compile
   :ensure t
@@ -302,50 +302,44 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
   (with-eval-after-load 'helm
     (setq multi-compile-completion-system 'helm)))
  #+end_src
-*** Incremental Completions
-**** Ido
-**** TODO Helm
+*** Text-based command execution interface
 #+begin_src emacs-lisp :tangle yes
-;; (defun my-browse-url-chrome-incognito (url &optional _ignore)
-;;   "Browse URL in Google Chrome incognito mode."
-;;   (helm-generic-browser url "google-chrome" "--incognito"))
-;; (with-eval-after-load 'helm-net
-;;      (when (executable-find "curl")
-;;        ;; Use curl to fetch candidates from Google.
-;;        (my-setq-when-bound helm-net-prefer-curl t))
-;;      ;; Open search result in Chrome incognito mode.
-;;      (my-setq-when-bound helm-google-suggest-default-browser-function
-;;                          'my-browse-url-chrome-incognito))
-;; bind keys
-;; ("C-c h g" . helm-google-suggest)
-
-;; (if (boundp 'helm-sources-using-default-as-input)
-;;        (add-to-list 'helm-sources-using-default-as-input
-;;                     'helm-source-man-pages))
-
+(use-package transient
+  :ensure t
+  :config
+  ;; Move `transient' related util files to the common directory.
+  (setq transient-history-file (my-make-valid-path
+                                (my-get-full-emacs-path
+                                 ".cache/transient/history.el"))))
+#+end_src
+*** Incremental completions
+**** COMMENT Ido
+**** COMMENT Ivy
+**** Helm
+#+begin_src emacs-lisp :tangle yes
 (use-package helm
   :ensure t
   :bind
+  ("C-c h" . helm-command-prefix)
   ("M-x" . helm-M-x)
   ("M-y" . helm-show-kill-ring)
   ("C-x b" . helm-mini)
   ("C-x C-f" . helm-find-files)
-  ("C-c h o" . helm-occur)
+  (:map helm-command-map
+        ("o" . helm-occur))
   (:map helm-map
         ([tab] . helm-execute-persistent-action)
         ("C-i" . helm-execute-persistent-action)
         ("C-z" . helm-select-action))
-  :diminish helm-mode
+  :init
+  (require 'helm-global-bindings)
+  :demand t
   :config
-  (require 'helm-config)
-  ;; Commdand prefix setup
-  ;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
-  ;; Changed to "C-c h". Note: We must set "C-c h" globally, because we
-  ;; cannot change `helm-command-prefix-key' once `helm-config' is loaded.
-  (global-set-key (kbd "C-c h") 'helm-command-prefix)
+  ;; Commdand prefix setup:
+  ;; The default "C-x c" is quite close to "C-x C-c",
+  ;; which quits Emacs. Changed to "C-c h".
   (global-unset-key (kbd "C-x c"))
   (setq
-   ;; TODO: helm-ff-file-name-history-use-recentf t
    ;; Open helm buffer inside current window,
    ;; not occupy whole other window.
    helm-split-window-in-side-p t
@@ -359,9 +353,9 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
    ;; Follow results.
    helm-follow-mode-persistent t)
   ;; Toggle helm in all buffers.
-  (helm-mode +1))
+  (helm-mode +1)
+  :diminish helm-mode)
 #+end_src
-**** Ivy
 *** Pop-ups
 #+begin_src emacs-lisp :tangle yes
 (use-package company-quickhelp
@@ -415,14 +409,13 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
   (setq
    ;; If this value is t, split window inside the current window.
    helm-swoop-split-with-multiple-windows t
-   ;; Split direcion: 'split-window-vertically
-   ;; or 'split-window-horizontally.
+   ;; Split direcion.
    helm-swoop-split-direction 'split-window-vertically
    ;; If nil, you can slightly boost invoke speed
    ;; in exchange for text color.
    helm-swoop-speed-or-color t))
 #+end_src
-** Project Management
+** Project management
 *** Project (group of files) Interaction
 #+begin_src emacs-lisp :tangle yes
 (defun my--projectile-mode-line-function ()
@@ -441,7 +434,7 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
   ;; Mode of action after switch a project.
   (setq projectile-switch-project-action 'helm-projectile)
   ;; Format mode line indecator for projectile.
-  (setq projectile-mode-line-function 'my--projectile-mode-line-function)
+  (setq projectile-mode-line-function #'my--projectile-mode-line-function)
   ;; Move 'projectile' related util files to the common directory.
   (setq projectile-cache-file
         (my-make-valid-path
@@ -454,35 +447,8 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
   ;; Activate projectile mode globally.
   (projectile-mode +1))
 #+end_src
-*** TODO Organizer
+*** Organizer
 #+begin_src emacs-lisp :tangle yes
-(defun my--org-capture-find-target ()
-  "Find and jump to the user selected headline of the user selected org file."
-  (let* ((path-to-target-file (completing-read "Choose target file: "
-                                               org-agenda-files nil t))
-         (target-buffer (find-file-noselect path-to-target-file))
-         (target (org-refile-get-location "Choose target headline: "
-                                          target-buffer t))
-         (pos (nth 3 target)))
-    (set-buffer target-buffer)
-    (goto-char pos)))
-
-(defun my--org-capture-templates ()
-  "Return list of custom org capture templates."
-  (let* ((capture-format "%<%Y-%b-%d %H:%M>")
-         (todo
-          (format "* TODO %%^{Task} %%^g\n SCHEDULED: %%^T\n Captured: %s"
-                  capture-format))
-         (note
-          (format "* %%^{Note} %%^g\n SCHEDULED: %%^T\n Captured: %s"
-                  capture-format)))
-    (list `("t" "Create TODO" entry
-            (function my--org-capture-find-target)
-            ,todo)
-          `("n" "Get a Note" entry
-            (function my--org-capture-find-target)
-            ,note))))
-
 (use-package org
   :ensure t
   :bind
@@ -490,10 +456,6 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
   ("C-c c" . org-capture)
   ("C-c a" . org-agenda)
   :config
-  ;; Templates for capture items. For example, todo task,
-  ;; note, journal entry, etc.
-  (with-eval-after-load 'org-capture
-    (setq org-capture-templates (my--org-capture-templates)))
   (setq
    ;; Information to record when a task moves to the DONE state.
    org-log-done 'time
@@ -514,24 +476,13 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
    ;; Use headlines with level 2 or less as refile targets.
    org-refile-targets '((nil . (:maxlevel . 2)))
    ;; List of agenda files.
-   org-agenda-files (list (my-get-full-emacs-path "org/gtd.org"))))
+   org-agenda-files (list (my-get-full-emacs-path "org/"))))
 
 (use-package org-re-reveal
   :ensure t
-  :after org
+  :after (org)
   :config
   (setq org-re-reveal-root "https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.8.0/"))
-
-;; (use-package org-projectile-helm
-;;   :ensure t
-;;   :bind
-;;   ("C-c o p" . org-projectile-goto-location-for-project)
-;;   ("C-c o n" . org-projectile-helm-template-or-project)
-;;   :config
-;;   (org-projectile-per-project)
-;;   (setq org-projectile-per-project-filepath "gtd.org")
-;;   (setq org-agenda-files (seq-filter 'file-exists-p
-;;                                      (org-projectile-todo-files))))
 #+end_src
 ** Languages
 *** C#
@@ -547,21 +498,21 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
 
 (use-package omnisharp
   :ensure t
-  :hook (csharp-mode . omnisharp-mode)
   :bind
   (:map csharp-mode-map
         ("M-." . omnisharp-go-to-definition)
         ("M-?" . omnisharp-helm-find-usages)
         ("C-c r" . omnisharp-run-code-action-refactoring))
+  :hook (csharp-mode . omnisharp-mode)
   :config
   ;; Use custom version of omnisharp server.
   (setq omnisharp-expected-server-version "1.30.1")
   ;; Define company backends for C#.
   (with-eval-after-load 'company
-    (add-hook 'csharp-mode-hook 'my--set-csharp-company-backends))
+    (add-hook 'csharp-mode-hook #'my--set-csharp-company-backends))
   ;; Use flycheck for C#.
   (with-eval-after-load 'flycheck
-    (add-hook 'csharp-mode-hook 'flycheck-mode)))
+    (add-hook 'csharp-mode-hook #'flycheck-mode)))
  #+end_src
 *** C++
 **** General
@@ -571,7 +522,7 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
   "Set code style for C++ language."
   (c-set-style "stroustrup"))
 
-(add-hook 'c++-mode-hook 'my--set-c++-code-style)
+(add-hook 'c++-mode-hook #'my--set-c++-code-style)
 #+end_src
 **** Navigation, autocomplete, syntax checking
 #+begin_src emacs-lisp :tangle yes
@@ -598,10 +549,11 @@ It is used as advice for several `rtags' functions."
         ("M-." . rtags-find-symbol-at-point)
         ("M-?" . rtags-find-references-at-point)
         ("M-," . rtags-location-stack-back)
-   :map c++-mode-map
+        :map c++-mode-map
         ("M-." . rtags-find-symbol-at-point)
         ("M-?" . rtags-find-references-at-point)
         ("M-," . rtags-location-stack-back))
+  :hook ((c-mode c++-mode) . rtags-start-process-unless-running)
   :config
   ;; Set installation path for RTags server.
   (setq rtags-install-path (my-make-valid-path
@@ -620,8 +572,17 @@ It is used as advice for several `rtags' functions."
   :after (helm rtags)
   :config
   ;; Integrate RTags with Helm.
-  (with-eval-after-load 'helm
-    (setq rtags-display-result-backend 'helm)))
+  (setq rtags-display-result-backend 'helm))
+
+(with-eval-after-load 'flycheck
+  (add-hook 'c-mode-hook #'flycheck-mode)
+  (add-hook 'c++-mode-hook #'flycheck-mode))
+
+(use-package flycheck-irony
+  :ensure t
+  :after (flycheck irony)
+  ;; Integrate flycheck with irony.
+  :hook (flycheck-mode . flycheck-irony-setup))
 
 (defun my--irony-setup-completion-functions ()
   "Replace the `completion-at-point' and `complete-symbol' bindings
@@ -636,9 +597,9 @@ in irony-mode's buffers by irony-mode's function."
   :hook ((c-mode c++-mode) . irony-mode)
   :config
   ;; Rebind completion functions for irony mode.
-  (add-hook 'irony-mode-hook 'my--irony-setup-completion-functions)
+  (add-hook 'irony-mode-hook #'my--irony-setup-completion-functions)
   ;; Setup C++ completion database(according to compile options).
-  (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+  (add-hook 'irony-mode-hook #'irony-cdb-autosetup-compile-options)
   ;; Move `irony' related util files to the common directory.
   (setq irony-user-dir (my-make-valid-path
                         (my-get-full-emacs-path
@@ -647,9 +608,8 @@ in irony-mode's buffers by irony-mode's function."
 (use-package company-irony
   :ensure t
   :after (company irony)
-  :config
   ;; Integrate company with irony.
-  (add-hook 'irony-mode-hook 'company-irony-setup-begin-commands))
+  :hook (irony-mode . company-irony-setup-begin-commands))
 
 (defun my--set-c++-company-backends ()
   "Set the list of company backends for C++ locally."
@@ -663,21 +623,9 @@ in irony-mode's buffers by irony-mode's function."
 
 (use-package company-irony-c-headers
   :ensure t
-  :after (company-irony company irony)
-  :config
+  :after (company irony)
   ;; Define company backends for C++.
-  (add-hook 'c++-mode-hook 'my--set-c++-company-backends))
-
-(use-package flycheck-irony
-  :ensure t
-  :after (flycheck irony)
-  :config
-  ;; Use flycheck for C.
-  (add-hook 'c-mode-hook 'flycheck-mode)
-  ;; Use flycheck for C++.
-  (add-hook 'c++-mode-hook 'flycheck-mode)
-  ;; Integrate flycheck with irony.
-  (add-hook 'flycheck-mode-hook 'flycheck-irony-setup))
+  :hook (irony-mode . my--set-c++-company-backends))
 #+end_src
 *** Common Lisp
 **** Navigation, autocomplete, syntax checking
@@ -691,15 +639,15 @@ in irony-mode's buffers by irony-mode's function."
   :ensure t
   :config
   (with-eval-after-load 'company
-    (add-hook 'lisp-mode-hook 'my--set-lisp-company-backends)
-    (add-hook 'sly-mrepl-hook 'my--set-lisp-company-backends)))
+    (add-hook 'lisp-mode-hook #'my--set-lisp-company-backends)
+    (add-hook 'sly-mrepl-hook #'my--set-lisp-company-backends)))
 #+end_src
 *** Dockerfile
 #+begin_src emacs-lisp :tangle yes
 (use-package dockerfile-mode
   :ensure t)
 #+end_src
-*** TODO Web
+*** Web
 #+begin_src emacs-lisp :tangle yes
 (use-package web-mode
   :ensure t
@@ -709,11 +657,13 @@ in irony-mode's buffers by irony-mode's function."
   ;; Setup HTML, CSS and script indentation.
   (setq web-mode-markup-indent-offset 2
         web-mode-css-indent-offset 2
-        web-mode-code-indent-offset 2)
-  ;; TODO: (add-hook 'web-mode-hook 'flycheck-mode)
-  ;; TODO: Integrate flycheck with Web
-  ;; (flycheck-add-mode 'html-tidy 'web-mode)
-  )
+        web-mode-code-indent-offset 2))
+#+end_src
+*** Emacs Lisp
+**** Syntax checking
+#+begin_src emacs-lisp :tangle yes
+(with-eval-after-load 'flycheck
+  (add-hook 'emacs-lisp-mode-hook #'flycheck-mode))
 #+end_src
 ** Integration
 *** Docker
@@ -726,7 +676,7 @@ in irony-mode's buffers by irony-mode's function."
 (use-package tramp
   :ensure t
   :config
-  ;; Move 'tramp' related util files to the common directory.
+  ;; Move `tramp' related util files to the common directory.
   (setq tramp-persistency-file-name (my-make-valid-path
                                      (my-get-full-emacs-path
                                       ".cache/tramp/tramp")))
@@ -743,7 +693,7 @@ in irony-mode's buffers by irony-mode's function."
                                (my-get-full-emacs-path
                                 ".cache/eshell/"))))
 #+end_src
-** Version Control
+** Version control
 *** Git
 #+begin_src emacs-lisp :tangle yes
 (use-package magit
@@ -751,13 +701,7 @@ in irony-mode's buffers by irony-mode's function."
   :bind
   ("C-c d s" . magit-status)
   ("C-c d i" . magit-init)
-  ("C-c d c" . magit-clone)
-  :config
-  (with-eval-after-load 'transient
-    ;; Move `transient' related util files to the common directory.
-    (setq transient-history-file (my-make-valid-path
-                                  (my-get-full-emacs-path
-                                   ".cache/transient/history.el")))))
+  ("C-c d c" . magit-clone))
 
 (use-package magit-lfs
   :ensure t
