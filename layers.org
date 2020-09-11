@@ -1,3 +1,20 @@
+* Table of Contents
+#+begin_quote
+- [[#common-utils][Common utils]]
+ - [[#files][Files]]
+- [[#bootstrap][Bootstrap]]
+- [[#layers][Layers]]
+ - [[#miscellaneous][Miscellaneous]]
+ - [[#appearance][Appearance]]
+ - [[#visual][Visual]]
+ - [[#edit][Edit]]
+ - [[#interface-enchancement][Interface enchancement]]
+ - [[#search--navigation][Search & Navigation]]
+ - [[#project-management][Project management]]
+ - [[#languages][Languages]]
+ - [[#integration][Integration]]
+ - [[#version-control][Version control]]
+#+end_quote
 * Common utils
 ** Files
 #+begin_src emacs-lisp :tangle yes
@@ -720,7 +737,7 @@ in irony-mode's buffers by irony-mode's function."
   (setq tramp-default-method "ssh"))
 #+end_src
 *** Shell
-[[https://www.gnu.org/software/emacs/manual/html_mono/eshell.html][Eshell]] is a shell-like command interpreter implemented in Emacs Lisp. 
+[[https://www.gnu.org/software/emacs/manual/html_mono/eshell.html][Eshell]] is a shell-like command interpreter implemented in Emacs Lisp.
 #+begin_src emacs-lisp :tangle yes
 (use-package eshell
   :ensure t
