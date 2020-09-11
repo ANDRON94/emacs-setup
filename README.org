@@ -1,65 +1,12 @@
 * Introduction
-It's yet another custom Emacs configuration =) I hope, it will be the helpful
-starting point for an Emacs beginner. All configuration files and options
-are split into several different categories, for example, "appearance",
-"edit", "search", "version control". Such approach helps to understand and
-extend configuration more easily.
-
-Also, there are two types of configuration files: setup files and customization
-files. The first one contains information about package installation
-and some basic configuration steps. And the second one contains more detailed
-personal customizations for the package(s). It helps to leave the configuration
-core unchanged but at the same time define new customizations for different
-situations. See more details below.
-** Features list
-+ Appearance
-  + [[https://github.com/emacsfodder/emacs-theme-darktooth][Darktooth theme.]]
-  + [[https://github.com/flycheck/flycheck-color-mode-line][Coloring the mode line]] according to the [[http://www.flycheck.org/en/latest/][Flycheck]]
-    state of the current buffer.
-  + [[https://elpa.gnu.org/packages/nlinum.html][Displaying line numbers]] in a buffer.
-  + [[https://github.com/milkypostman/powerline][Better-looking, more functional]] Emacs mode line.
-+ Edit
-  + [[http://www.omnisharp.net/][IDE-like features for editing files]] in C# solutions in Emacs.
-  + [[https://github.com/Sarcasm/irony-mode][Improving the editing experience]] for the C, C++.
-  + [[https://common-lisp.net/project/slime/][Common Lisp IDE.]]
-  + [[https://github.com/spotify/dockerfile-mode][Dockerfile support.]]
-  + [[https://github.com/magnars/multiple-cursors.el][Multiple cursors for Emacs.]]
-  + [[https://github.com/Fuco1/smartparens][Dealing with pairs.]]
-  + [[http://web-mode.org/][Web support.]]
-+ Interface enchancement
-  + [[https://github.com/emacs-helm/helm][Incremental completions and narrowing selections.]]
-  + [[https://github.com/expez/company-quickhelp][Documentation popup]] for [[http://company-mode.github.io/][Company.]]
-  + Displaying [[http://www.flycheck.org/en/latest/][Flycheck]] errors in [[https://github.com/flycheck/flycheck-pos-tip][tooltip.]]
-+ Navigate
-  + [[https://github.com/Andersbakken/rtags][Client/Server indexer]] for C/C++ with integration for Emacs.
-  + GNU GLOBAL [[https://github.com/syohex/emacs-helm-gtags][helm interface.]]
-  + [[https://github.com/emacsmirror/sr-speedbar][Buffer explorer.]]
-+ Project managment
-  + [[https://github.com/bbatsov/projectile][Project]] [[https://github.com/bbatsov/helm-projectile][interaction library.]]
-+ Search
-  + [[https://github.com/ShingoFukuyama/helm-swoop][Efficiently hopping squeezed lines.]]
-+ Syntax checking
-  + On the [[http://www.flycheck.org/en/latest/][fly syntax checking.]]
-+ System
-  + [[https://github.com/Silex/docker.el][Manage docker from Emacs.]]
-+ Task managment
-  + [[http://orgmode.org/][Keeping notes, maintaining TODO lists, planning projects.]]
-  + [[https://github.com/IvanMalison/org-projectile][Manage org-mode TODOs for your projectile projects.]]
-  + [[https://gitlab.com/oer/org-re-reveal][Build HTML presentations with reveal.js]] from Org mode source files.
-+ Type
-  + A text [[http://company-mode.github.io/][completion.]]
-  + A template system(a code [[https://github.com/joaotavora/yasnippet][snippets]]).
-+ Version control
-  + [[https://github.com/dgutov/diff-hl][Highlighting uncommitted]] changes.
-  + Popup [[https://github.com/syohex/emacs-git-messenger][commit message]] at the current line.
-  + Interface to the version control system Git: [[https://magit.vc/][Magit!!!]]
-  + [[https://github.com/magit/magit-svn][Git-Svn extension]] for [[https://magit.vc/][Magit!!!]]
-+ Visual
-  + Automatic and manual [[https://github.com/nschum/highlight-symbol.el][symbol highlighting.]]
+It's yet another custom Emacs configuration =)
+I hope, it will be a helpful starting point for an Emacs beginner.
+The [[file:layers.org][configuration file]] is written in a [[https://en.wikipedia.org/wiki/Literate_programming][literate way]]
+which means that it's also a [[file:layers.org][documentation file]] =)
 *  How To
 ** Learn Emacs
 *** Useful links
-+ [[https://github.com/emacs-tw/awesome-emacs][Awesome Emacs]] is a community driven list of useful Emacs packages,
++ [[https://github.com/emacs-tw/awesome-emacs][(!)Awesome Emacs]] is a community driven list of useful Emacs packages,
   libraries and others.
 + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/index.html][Emacs Manual]] is an official online manual.
 + [[https://www.emacswiki.org/][EmacsWiki]] is the collection of tutorials, source code, question and answers.
@@ -68,222 +15,17 @@ situations. See more details below.
 + [[http://tuhdo.github.io/helm-projectile.html][Exploring large projects with Projectile and Helm Projectile.]]
 + [[http://tuhdo.github.io/c-ide.html][C/C++ Development Environment for Emacs.]]
 + [[http://syamajala.github.io/c-ide.html][Emacs as C++ IDE.]]
-** Work with configuration
-*** Customization example
-Ok, suppose we want to get the next configuration:
-+ for the user "One":
-  + load only [[http://orgmode.org/][org-mode]] and [[https://github.com/emacsfodder/emacs-theme-darktooth][darktooth]] theme.
-+ for the user "Two":
-  + load default configuration except [[https://github.com/dgutov/diff-hl][diff-hl]] package.
-  + additionally load [[https://github.com/Fanael/rainbow-delimiters][rainbow-delimiters]] package.
-  + redefine keybindings for [[https://github.com/syohex/emacs-git-messenger][git-messenger]].
-  + [[http://www.gnu.org/software/emacs/manual/html_node/emacs/Useless-Whitespace.html][whitespace-mode]] is always enabled.
-
-Let's do it step by step!
-1. First of all, we need to load the different configuration files
-   for the different users. And for that, we should create
-   a "my-custom-loader-dispatcher.el" file in the "infrastructure"
-   directory. "my-custom-loader-dispatcher.el" should define
-   a single function "my-get-custom-loader-path" which returns path
-   to a proper  configuration loader. We can define it as:
-   #+BEGIN_SRC emacs-lisp
-   ;; Implementation
-   (defun my--test-configuration-loader-path (username)
-     "Return path to the test configuration loader for the USERNAME."
-     (concat my-loader-dir-path
-             "/test/"
-             (downcase username)
-             "/my-configuration-loader.el"))
-   ;; Interface
-   (defun my-get-custom-loader-path ()
-     "Return path to a proper custom configuration loader."
-     (let ((user (getenv "USER")))
-       (cond ((or (string= user "One")
-                  (string= user "Two"))
-              (my--test-configuration-loader-path user))
-             (t my-default-configuration-loader-path))))
-   #+END_SRC
-2. After we create two configuration loader files in the proper directories,
-   let us define configuration for the user "One":
-   #+BEGIN_SRC emacs-lisp
-   ;;; This code should be in the
-   ;;; "<Emacs dir>/configuration/loader/test/one/my-configuration-loader.el"
-   (require 'my-configuration-directories)
-   (require 'my-load)
-
-   ;; 1. Use default customizations.
-   (require 'my-default-keybindings (concat my-loader-dir-path
-                                            "/default/my-customization.el"))
-   (require 'my-default-customization (concat my-loader-dir-path
-                                              "/default/my-keybindings.el"))
-
-   ;; 2. Load only "org-mode" and "darktooth" packages.
-   (my-load-load-only '(org darktooth-theme))
-
-   (provide 'my-configuration-loader)
-   #+END_SRC
-   It was pretty straightforward!
-   And now we will move to the more complex example.
-3. The configuration process for the user "Two" consist of:
-   1. We need to install [[https://github.com/Fanael/rainbow-delimiters][rainbow-delimiters]] package. For that, we should
-      create setup file in the corresponding category directory.
-      "visual" category is the best choice, I think.
-      #+BEGIN_SRC emacs-lisp
-      ;;; This code should be in the
-      ;;; "<Emacs dir>/configuration/setup/visual/setup-rainbow-delimiters.el"
-      (require 'my-utility)
-      (require 'my-load)
-
-      ;; "use-package" will automatically download and install package.
-      (use-package rainbow-delimiters
-        :ensure t
-        :demand t
-        :config
-        ;; Setup keybindings if customization function exists.
-        ;; See more below.
-        (my-apply-if-exist
-         (my-load-get-keybindings-func 'rainbow-delimiters) nil)
-        ;; Setup settings if customization function exists.
-        ;; See more below.
-        (my-apply-if-exist
-         (my-load-get-customization-func 'rainbow-delimiters) nil))
-      #+END_SRC
-      After we install package, we are trying to find two customization
-      functions associated with this package: one for the keybindings
-      and another for the various settings. This functions can be defined
-      via "my-load-set-keybindings-func" and "my-load-set-customization-func".
-   2. Then we will redefine keybindings for [[https://github.com/syohex/emacs-git-messenger][git-messenger]] package.
-      #+BEGIN_SRC emacs-lisp
-      ;;; This code should be in the
-      ;;; "<Emacs dir>/configuration/loader/test/two/my-keybindings.el"
-      (require 'my-load)
-
-      ;; Define keybindings.
-      ;; -- Version control
-      (my-load-set-keybindings-func
-       'git-messenger
-       (lambda ()
-         (bind-keys ("C-c e" . git-messenger:popup-message))))
-
-      (provide 'my-keybindings)
-      #+END_SRC
-   3. Also we should redefine default settings for [[http://www.gnu.org/software/emacs/manual/html_node/emacs/Useless-Whitespace.html][whitespace-mode]] and
-      define settings for our new [[https://github.com/Fanael/rainbow-delimiters][rainbow-delimiter]] package.
-      #+BEGIN_SRC emacs-lisp
-      ;;; This code should be in the
-      ;;; "<Emacs dir>/configuration/loader/test/two/my-customization.el"
-      (require 'my-load)
-
-      (my-load-set-customization-func
-       'general-visual
-       (lambda ()
-         ;; Show unnecessary whitespace that can mess up diff.
-         (global-whitespace-mode)))
-
-      (my-load-set-customization-func
-       'rainbow-delimiters
-       (lambda ()
-         ;; Enable "rainbow-delimiters" in the most programming modes.
-         (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)))
-
-      (provide 'my-customization)
-      #+END_SRC
-   4. And finally, the last step we will want to take is
-      to combine all pieces together. So, we will define configuration
-      for the user "Two":
-      #+BEGIN_SRC emacs-lisp
-      ;;; This code should be in the
-      ;;; "<Emacs dir>/configuration/loader/test/two/my-configuration-loader.el"
-      (require 'my-configuration-directories)
-      (require 'my-load)
-
-      ;; 1. Add new package to the registry.
-      (my-load-add-setup-files
-       (list
-        ;; visual
-        'rainbow-delimiters
-        (my-load-make-setup-options
-         (my-setup-absolute-path "/visual/setup-rainbow-delimiters.el"))))
-
-      ;; 2. Use default customizations.
-      (require 'my-default-keybindings (concat my-loader-dir-path
-                                               "/default/my-customization.el"))
-      (require 'my-default-customization (concat my-loader-dir-path
-                                                 "/default/my-keybindings.el"))
-
-      ;; 3. Add new customizations.
-      (require 'my-keybindings (concat my-loader-dir-path
-                                       "/test/two/my-customization.el"))
-      (require 'my-customization (concat my-loader-dir-path
-                                         "/test/two/my-keybindings.el"))
-
-      ;; 4. Load all packages from the registry except "diff-hl" package.
-      (my-load-load-except '(diff-hl))
-
-      (provide 'my-configuration-loader)
-      #+END_SRC
-
-As you can see, we don't modify already existing files. We only add new
-or use the old ones. It means that our changes are independent of
-the repository changes.
-
-Now we are ready to test our new configurations. Execute next commands
-and compare results:
-#+BEGIN_SRC sh
-# for the user "One"
-USER=One emacs
-# for the user "Two"
-USER=Two emacs
-# for the user with name "Unknown"
-USER=Unknown emacs
-# for the current user
-emacs
-#+END_SRC
 * Installation
-1. [required] Install [[https://www.gnu.org/software/emacs/][Emacs]].
-   + I use versions 24.4 and 25.3.
+1. Install [[https://www.gnu.org/software/emacs/][Emacs]].
+   + I use version 27.1.
    + Most GNU/Linux distributions provide GNU Emacs in their repositories.
      And installation process can be easy as "sudo apt-get install emacs" =)
-2. [required] Get configuration.
+2. Get configuration.
    + Just clone or download this repository to your Emacs directory:
      #+BEGIN_SRC sh
      git clone https://github.com/andron94/emacs-setup <Emacs directory>
      #+END_SRC
-3. [optional] Install [[https://www.gnu.org/software/global/][GNU Global]]. It is used for source code navigation.
-   + I also recommend to install [[http://pygments.org/][pygments]] plugin.
-     It supports more languages out of the box than GNU Global.
-   + To use it you should create/update gtags database in your project directory
-     with next command:
-     #+BEGIN_SRC sh
-     gtags -c
-     #+END_SRC
-   + You can also create gtags database that is shared between all your
-     projects. For example, you can create gtags for some commonly
-     used libraries.
-     + Set path to gtags database. Add it to "~/.profile"(or whatever you use).
-       After that don't forget to reload "~/.profile" with "source" command.
-       #+BEGIN_SRC sh
-       export GTAGSLIBPATH=<path to gtags database. For example, $HOME/.gtags/>
-       #+END_SRC
-     + Create the directory for such a database.
-       #+BEGIN_SRC sh
-       mkdir GTAGSLIBPATH
-       #+END_SRC
-     + Add external libraries/projects/code to gtags database directory.
-       You can add more in the future.
-       #+BEGIN_SRC sh
-       cd GTAGSLIBPATH
-       ln -s /LIBRARY PATH1/ LINK_NAME1
-       ln -s /LIBRARY PATH2/ LINK_NAME2
-       ln -s /LIBRARY PATH3/ LINK_NAME3
-       ...
-       #+END_SRC
-     + Create/Update database.
-       #+BEGIN_SRC sh
-       cd GTAGSLIBPATH
-       gtags -c
-       #+END_SRC
-4. [required] Run Emacs :) [[https://github.com/jwiegley/use-package][use-package]] will download and setup
+3. Run Emacs :) [[https://github.com/jwiegley/use-package][use-package]] will download and configure
    all packages automatically.
-5. [optional] I also recommend using Emacs in daemon mode.
-   More about it you can find in [[https://www.emacswiki.org/emacs/EmacsAsDaemon][EmacsWiki]].
+4. I also recommend using Emacs in daemon mode.
+   More about it you can find on [[https://www.emacswiki.org/emacs/EmacsAsDaemon][EmacsWiki]].
