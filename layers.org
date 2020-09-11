@@ -226,7 +226,7 @@ Automatic and manual [[https://github.com/nschum/highlight-symbol.el][symbol hig
   ("C->" . mc/mark-next-like-this)
   ("C-<" . mc/mark-previous-like-this)
   ("C-c C-<" . mc/mark-all-like-this)
-  :config
+  :init
   ;; Move 'multiple-cursors' related util files to the common directory.
   (setq mc/list-file (my-make-valid-path
                       (my-get-full-emacs-path
