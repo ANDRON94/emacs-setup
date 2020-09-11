@@ -13,6 +13,7 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
   (expand-file-name relative-path user-emacs-directory))
 #+end_src
 * Bootstrap
+[[https://github.com/jwiegley/use-package][use-package]] will download and configure all packages automatically.
 #+begin_src emacs-lisp :tangle yes
 ;; Install `use-package'(handy macro for package configuration)
 ;; if it wasn't installed before.
@@ -80,6 +81,8 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
   :diminish abbrev-mode)
  #+end_src
 **** Run ediff control panel in the current frame
+[[https://www.gnu.org/software/emacs/manual/html_mono/ediff.html][Ediff]] provides a convenient way for simultaneous browsing through
+the differences between a pair (or a triple) of files or buffers.
  #+begin_src emacs-lisp :tangle yes
 (defun my--use-ediff-plain-windows ()
   "Show all ediff windows in one frame."
@@ -97,6 +100,7 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
 (blink-cursor-mode 0)
  #+end_src
 *** Theme
+[[https://github.com/emacsfodder/emacs-theme-darktooth][Darktooth theme.]]
  #+begin_src emacs-lisp :tangle yes
 (use-package autothemer
   :ensure t)
@@ -107,6 +111,8 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
   :init (setq custom--inhibit-theme-enable nil))
  #+end_src
 *** Modeline
+1. [[https://github.com/milkypostman/powerline][Better-looking, more functional]] Emacs mode line.
+2. [[https://github.com/flycheck/flycheck-color-mode-line][Coloring the mode line]] according to the [[http://www.flycheck.org/en/latest/][Flycheck]] state of the current buffer.
  #+begin_src emacs-lisp :tangle yes
 (use-package powerline
   :ensure t
@@ -122,6 +128,7 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
   :hook (flycheck-mode . flycheck-color-mode-line-mode))
  #+end_src
 *** Line numbers
+[[https://www.gnu.org/software/emacs/manual/html_node/emacs/Display-Custom.html][Display line numbers.]]
  #+begin_src emacs-lisp :tangle yes
 (use-package display-line-numbers
   :config
@@ -135,6 +142,7 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
 ** Visual
 *** General
 **** Show trailing whitespaces in prog mode
+[[https://www.gnu.org/software/emacs/manual/html_node/emacs/Useless-Whitespace.html][Useless whitespace.]]
 #+begin_src emacs-lisp :tangle yes
 (defun my--show-trailing-whitespace ()
   "Show trailing whitespace."
@@ -146,6 +154,7 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
   :hook (prog-mode . my--show-trailing-whitespace))
 #+end_src
 *** Highlight uncommitted changes
+[[https://github.com/dgutov/diff-hl][Highlighting uncommitted]] changes.
 #+begin_src emacs-lisp :tangle yes
 (use-package diff-hl
   :ensure t
@@ -165,6 +174,7 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
   (global-diff-hl-mode +1))
 #+end_src
 *** Highlight symbol under cursor
+Automatic and manual [[https://github.com/nschum/highlight-symbol.el][symbol highlighting.]]
 #+begin_src emacs-lisp :tangle yes
 (use-package highlight-symbol
   :ensure t
@@ -181,6 +191,7 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
 (setq require-final-newline t)
 #+end_src
 **** Always allow region narrowing
+[[https://www.gnu.org/software/emacs/manual/html_node/emacs/Narrowing.html][Narrowing.]]
 #+begin_src emacs-lisp :tangle yes
 (put 'narrow-to-region 'disabled nil)
 #+end_src
@@ -189,6 +200,7 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
 (setq-default indent-tabs-mode nil)
 #+end_src
 *** Multiple cursors
+[[https://github.com/magnars/multiple-cursors.el][Multiple cursors for Emacs.]]
 #+begin_src emacs-lisp :tangle yes
 (use-package multiple-cursors
   :ensure t
@@ -204,6 +216,7 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
                        ".cache/multiple-cursors/mc-lists.el"))))
 #+end_src
 *** Parenthesis
+[[https://github.com/Fuco1/smartparens][Dealing with pairs.]]
 #+begin_src emacs-lisp :tangle yes
 (use-package smartparens
   :ensure t
@@ -229,6 +242,7 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
   :diminish smartparens-mode)
 #+end_src
 *** Snippets
+A template system(a code [[https://github.com/joaotavora/yasnippet][snippets]]).
 #+begin_src emacs-lisp :tangle yes
 (use-package yasnippet
   :ensure t
@@ -247,6 +261,7 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
   (yasnippet-snippets-initialize))
 #+end_src
 *** Autocomplete
+A text [[http://company-mode.github.io/][completion.]]
 #+begin_src emacs-lisp :tangle yes
 (use-package company
   :ensure t
@@ -265,19 +280,13 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
         '(company-capf company-dabbrev)))
 #+end_src
 *** Syntax checking
+On the [[http://www.flycheck.org/en/latest/][fly syntax checking.]]
 #+begin_src emacs-lisp :tangle yes
 (use-package flycheck
   :ensure t
   :config
   ;; Use Emacs `load-path' for checking elisp files.
   (setq flycheck-emacs-lisp-load-path 'inherit))
-
-(use-package helm-flycheck
-  :ensure t
-  :after (helm flycheck)
-  :bind
-  (:map flycheck-mode-map
-        ("C-c f h" . helm-flycheck)))
 #+end_src
 ** Interface enchancement
 *** General
@@ -286,6 +295,7 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
 (fset 'yes-or-no-p 'y-or-n-p)
  #+end_src
 *** External commands execution
+Automate running [[https://github.com/ffevotte/multi-compile][multiple shell commands.]]
  #+begin_src emacs-lisp :tangle yes
 (use-package multi-compile
   :ensure t
@@ -303,6 +313,7 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
     (setq multi-compile-completion-system 'helm)))
  #+end_src
 *** Text-based command execution interface
+A convenient interface for [[https://magit.vc/manual/transient.html][commands]] execution.
 #+begin_src emacs-lisp :tangle yes
 (use-package transient
   :ensure t
@@ -316,6 +327,8 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
 **** COMMENT Ido
 **** COMMENT Ivy
 **** Helm
+1. [[https://github.com/emacs-helm/helm][Incremental completions and narrowing selections.]]
+2. Show [[https://www.flycheck.org/en/latest/][Flycheck]] errors with [[https://github.com/emacs-helm/helm][Helm.]]
 #+begin_src emacs-lisp :tangle yes
 (use-package helm
   :ensure t
@@ -355,8 +368,18 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
   ;; Toggle helm in all buffers.
   (helm-mode +1)
   :diminish helm-mode)
+
+(use-package helm-flycheck
+  :ensure t
+  :after (helm flycheck)
+  :bind
+  (:map flycheck-mode-map
+        ("C-c f h" . helm-flycheck)))
 #+end_src
 *** Pop-ups
+1. [[https://github.com/expez/company-quickhelp][Documentation popup]] for [[http://company-mode.github.io/][Company.]]
+2. Displaying [[http://www.flycheck.org/en/latest/][Flycheck]] errors in [[https://github.com/flycheck/flycheck-pos-tip][tooltip.]]
+3. Popup [[https://github.com/syohex/emacs-git-messenger][commit message]] at the current line.
 #+begin_src emacs-lisp :tangle yes
 (use-package company-quickhelp
   :ensure t
@@ -388,10 +411,12 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
 ** Search & Navigation
 *** General
 **** Smooth scrolling
+[[https://www.emacswiki.org/emacs/SmoothScrolling][About smooth scrolling.]]
 #+begin_src emacs-lisp :tangle yes
 (setq scroll-conservatively 10000)
 #+end_src
 *** Jump between matched patterns
+[[https://github.com/ShingoFukuyama/helm-swoop][Efficiently hopping squeezed lines.]]
 #+begin_src emacs-lisp :tangle yes
 (use-package helm-swoop
   :ensure t
@@ -417,6 +442,7 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
 #+end_src
 ** Project management
 *** Project (group of files) Interaction
+[[https://github.com/bbatsov/projectile][Project]] [[https://github.com/bbatsov/helm-projectile][interaction library.]]
 #+begin_src emacs-lisp :tangle yes
 (defun my--projectile-mode-line-function ()
   "Report project name."
@@ -448,6 +474,8 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
   (projectile-mode +1))
 #+end_src
 *** Organizer
+1. [[http://orgmode.org/][Keeping notes, maintaining TODO lists, planning projects.]]
+2. [[https://gitlab.com/oer/org-re-reveal][Build HTML presentations with reveal.js]] from Org mode source files.
 #+begin_src emacs-lisp :tangle yes
 (use-package org
   :ensure t
@@ -487,6 +515,7 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
 ** Languages
 *** C#
 **** Navigation, autocomplete, syntax checking
+[[http://www.omnisharp.net/][IDE-like features for editing files]] in C# solutions for Emacs.
 #+begin_src emacs-lisp :tangle yes
 (defun my--set-csharp-company-backends ()
   "Set the list of company backends for C# locally."
@@ -525,6 +554,8 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
 (add-hook 'c++-mode-hook #'my--set-c++-code-style)
 #+end_src
 **** Navigation, autocomplete, syntax checking
+1. [[https://github.com/Andersbakken/rtags][Client/Server indexer]] for C, C++ with integration for Emacs.
+2. [[https://github.com/Sarcasm/irony-mode][Improving the editing experience]] for the C, C++.
 #+begin_src emacs-lisp :tangle yes
 (use-package pulse
   :ensure t
@@ -629,6 +660,7 @@ in irony-mode's buffers by irony-mode's function."
 #+end_src
 *** Common Lisp
 **** Navigation, autocomplete, syntax checking
+[[https://github.com/joaotavora/sly][Common Lisp IDE.]]
 #+begin_src emacs-lisp :tangle yes
 (defun my--set-lisp-company-backends ()
   "Set the list of company backends for Common Lisp locally."
@@ -643,11 +675,13 @@ in irony-mode's buffers by irony-mode's function."
     (add-hook 'sly-mrepl-hook #'my--set-lisp-company-backends)))
 #+end_src
 *** Dockerfile
+[[https://github.com/spotify/dockerfile-mode][Dockerfile support.]]
 #+begin_src emacs-lisp :tangle yes
 (use-package dockerfile-mode
   :ensure t)
 #+end_src
 *** Web
+[[http://web-mode.org/][Web support.]]
 #+begin_src emacs-lisp :tangle yes
 (use-package web-mode
   :ensure t
@@ -667,11 +701,13 @@ in irony-mode's buffers by irony-mode's function."
 #+end_src
 ** Integration
 *** Docker
+[[https://github.com/Silex/docker.el][Manage docker from Emacs.]]
 #+begin_src emacs-lisp :tangle yes
 (use-package docker
   :ensure t)
 #+end_src
 *** Remote file access
+[[https://www.gnu.org/software/tramp/][TRAMP]] is for transparently accessing remote files from within Emacs.
 #+begin_src emacs-lisp :tangle yes
 (use-package tramp
   :ensure t
@@ -684,6 +720,7 @@ in irony-mode's buffers by irony-mode's function."
   (setq tramp-default-method "ssh"))
 #+end_src
 *** Shell
+[[https://www.gnu.org/software/emacs/manual/html_mono/eshell.html][Eshell]] is a shell-like command interpreter implemented in Emacs Lisp. 
 #+begin_src emacs-lisp :tangle yes
 (use-package eshell
   :ensure t
@@ -695,6 +732,7 @@ in irony-mode's buffers by irony-mode's function."
 #+end_src
 ** Version control
 *** Git
+Interface to the version control system Git: [[https://magit.vc/][Magit!!!]]
 #+begin_src emacs-lisp :tangle yes
 (use-package magit
   :ensure t
@@ -708,6 +746,7 @@ in irony-mode's buffers by irony-mode's function."
   :after (magit))
 #+end_src
 *** Subversion
+[[https://github.com/magit/magit-svn][Git-Svn extension]] for [[https://magit.vc/][Magit.]]
 #+begin_src emacs-lisp :tangle yes
 (use-package magit-svn
   :ensure t
