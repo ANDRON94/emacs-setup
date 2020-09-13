@@ -156,9 +156,16 @@ the differences between a pair (or a triple) of files or buffers.
 1. A fancy and fast [[https://seagle0128.github.io/doom-modeline/][mode-line]] inspired by minimalism design.
 2. [[https://github.com/flycheck/flycheck-color-mode-line][Coloring the mode line]] according to the [[http://www.flycheck.org/en/latest/][Flycheck]] state of the current buffer.
  #+begin_src emacs-lisp :tangle yes
+(defun my--enable-doom-modeline-icons (frame)
+  (ignore frame)
+  (setq doom-modeline-icon t))
+
 (use-package doom-modeline
   :ensure t
-  :init (doom-modeline-mode +1))
+  :init (doom-modeline-mode +1)
+  :config
+  (add-hook 'after-make-frame-functions
+            #'my--enable-doom-modeline-icons))
 
 (use-package flycheck-color-mode-line
   :ensure t
