@@ -244,6 +244,13 @@ Automatic and manual [[https://github.com/nschum/highlight-symbol.el][symbol hig
 #+begin_src emacs-lisp :tangle yes
 (setq-default indent-tabs-mode nil)
 #+end_src
+*** Modal editing
+#+begin_src emacs-lisp :tangle yes
+(use-package evil
+  :ensure t
+  :config
+  (evil-mode +1))
+#+end_src
 *** Multiple cursors
 [[https://github.com/magnars/multiple-cursors.el][Multiple cursors for Emacs.]]
 #+begin_src emacs-lisp :tangle yes
