@@ -153,16 +153,12 @@ the differences between a pair (or a triple) of files or buffers.
   (doom-themes-org-config))
 #+end_src
 *** Modeline
-1. [[https://github.com/milkypostman/powerline][Better-looking, more functional]] Emacs mode line.
+1. A fancy and fast [[https://seagle0128.github.io/doom-modeline/][mode-line]] inspired by minimalism design.
 2. [[https://github.com/flycheck/flycheck-color-mode-line][Coloring the mode line]] according to the [[http://www.flycheck.org/en/latest/][Flycheck]] state of the current buffer.
  #+begin_src emacs-lisp :tangle yes
-(use-package powerline
+(use-package doom-modeline
   :ensure t
-  :config
-  ;; Format of mode line.
-  (powerline-center-theme)
-  ;; Mode line separator.
-  (setq powerline-default-separator 'wave))
+  :init (doom-modeline-mode +1))
 
 (use-package flycheck-color-mode-line
   :ensure t
