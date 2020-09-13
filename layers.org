@@ -165,7 +165,9 @@ the differences between a pair (or a triple) of files or buffers.
   :init (doom-modeline-mode +1)
   :config
   (add-hook 'after-make-frame-functions
-            #'my--enable-doom-modeline-icons))
+            #'my--enable-doom-modeline-icons)
+  ;; Show current column number in the modeline.
+  (setq column-number-mode t))
 
 (use-package flycheck-color-mode-line
   :ensure t
