@@ -85,9 +85,19 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
 #+begin_src emacs-lisp :tangle yes
 (setq visible-bell t)
 #+end_src
+**** Disable menu bar
+#+begin_src emacs-lisp :tangle yes
+(menu-bar-mode -1)
+#+end_src
 **** Disable tool bar
 #+begin_src emacs-lisp :tangle yes
 (tool-bar-mode -1)
+#+end_src
+**** Disable scroll bar
+#+begin_src emacs-lisp :tangle yes
+;; Use `customize-set-variable' to disable the scroll bar
+;; for Emacs run in daemon mode too.
+(customize-set-variable 'scroll-bar-mode nil)
 #+end_src
 **** Hide built-in minor modes from mode line
  #+begin_src emacs-lisp :tangle yes
@@ -108,10 +118,6 @@ the differences between a pair (or a triple) of files or buffers.
 
 (add-hook 'ediff-load-hook #'my--use-ediff-plain-windows)
   #+end_src
-**** Show scroll bar at right side of window
- #+begin_src emacs-lisp :tangle yes
-(set-scroll-bar-mode 'right)
- #+end_src
 **** Turn of cursor blinking
  #+begin_src emacs-lisp :tangle yes
 (blink-cursor-mode 0)
