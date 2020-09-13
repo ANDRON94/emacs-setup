@@ -122,6 +122,12 @@ the differences between a pair (or a triple) of files or buffers.
  #+begin_src emacs-lisp :tangle yes
 (blink-cursor-mode 0)
  #+end_src
+*** Icons
+[[https://github.com/domtronn/all-the-icons.el][A utility package]] to collect various Icon Fonts and propertize them within Emacs.
+#+begin_src emacs-lisp :tangle yes
+(use-package all-the-icons
+  :ensure t)
+#+end_src
 *** Theme
 **** COMMENT Light theme: Solarized
 #+begin_src emacs-lisp :tangle yes
