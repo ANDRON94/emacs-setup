@@ -123,16 +123,29 @@ the differences between a pair (or a triple) of files or buffers.
 (blink-cursor-mode 0)
  #+end_src
 *** Theme
-[[https://github.com/emacsfodder/emacs-theme-darktooth][Darktooth theme.]]
- #+begin_src emacs-lisp :tangle yes
-(use-package autothemer
-  :ensure t)
-
-(use-package darktooth-theme
-  :load-path  "configuration/custom-packages/emacs-theme-darktooth"
-  :requires (autothemer)
-  :init (setq custom--inhibit-theme-enable nil))
- #+end_src
+**** COMMENT Light theme: Solarized
+#+begin_src emacs-lisp :tangle yes
+(use-package solarized-theme
+  :ensure t
+  :config
+  (load-theme 'solarized-light t))
+#+end_src
+**** COMMENT Light theme: Leuven
+#+begin_src emacs-lisp :tangle yes
+(use-package leuven-theme
+  :ensure t
+  :config
+  (load-theme 'leuven t))
+#+end_src
+**** Dark theme: Doom
+#+begin_src emacs-lisp :tangle yes
+(use-package doom-themes
+  :ensure t
+  :config
+  (load-theme 'doom-one t)
+  ;; Corrects (and improves) org-mode's native fontification.
+  (doom-themes-org-config))
+#+end_src
 *** Modeline
 1. [[https://github.com/milkypostman/powerline][Better-looking, more functional]] Emacs mode line.
 2. [[https://github.com/flycheck/flycheck-color-mode-line][Coloring the mode line]] according to the [[http://www.flycheck.org/en/latest/][Flycheck]] state of the current buffer.
