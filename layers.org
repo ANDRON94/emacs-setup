@@ -189,6 +189,8 @@ An opinionated pack of [[https://github.com/hlissner/emacs-doom-themes][modern c
   ;; (i.e. the number of the line relative to the line showing
   ;; the window’s point).
   (setq display-line-numbers-type 'relative)
+  ;; Minimum width of space reserved for line number display.
+  (setq-default display-line-numbers-width 5)
   ;; Activate `display-line-numbers' mode globally.
   (global-display-line-numbers-mode +1))
  #+end_src
