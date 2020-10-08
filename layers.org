@@ -629,6 +629,7 @@ It is used as advice for several `rtags' functions."
   (pulse-line-hook-function))
 
 (use-package rtags
+  :disabled
   :ensure t
   :bind
   (:map c-mode-map
@@ -679,6 +680,7 @@ in irony-mode's buffers by irony-mode's function."
     'irony-completion-at-point-async))
 
 (use-package irony
+  :disabled
   :ensure t
   :hook ((c-mode c++-mode) . irony-mode)
   :config
