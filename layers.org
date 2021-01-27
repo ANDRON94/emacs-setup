@@ -785,6 +785,13 @@ in irony-mode's buffers by irony-mode's function."
   :after (flycheck plantuml-mode)
   :hook (flycheck-mode . flycheck-plantuml-setup))
 #+end_src
+*** Thrift
+[[https://github.com/facebook/fbthrift][Thrift IDL support.]]
+#+begin_src emacs-lisp :tangle yes
+(use-package thrift
+  :ensure t
+  :mode ("\\.thrift\\'" . thrift-mode))
+#+end_src
 ** Integration
 *** Docker
 [[https://github.com/Silex/docker.el][Manage docker from Emacs.]]
