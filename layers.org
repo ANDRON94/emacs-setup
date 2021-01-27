@@ -763,6 +763,28 @@ in irony-mode's buffers by irony-mode's function."
 (with-eval-after-load 'flycheck
   (add-hook 'emacs-lisp-mode-hook #'flycheck-mode))
 #+end_src
+*** PlantUML
+**** General
+[[https://github.com/skuro/plantuml-mode][A major mode]] for editing [[https://plantuml.com/][PlantUML]] sources in Emacs.
+#+begin_src emacs-lisp :tangle yes
+(use-package plantuml-mode
+  :ensure t
+  :config
+  ;; Use system executable as PlantUML backend service.
+  (setq plantuml-default-exec-mode 'executable)
+  ;; Setup PlantUML indentation.
+  (setq plantuml-indent-level 4))
+#+end_src
+**** Syntax checking
+#+begin_src emacs-lisp :tangle yes
+(with-eval-after-load 'flycheck
+  (add-hook 'plantuml-mode-hook #'flycheck-mode))
+
+(use-package flycheck-plantuml
+  :ensure t
+  :after (flycheck plantuml-mode)
+  :hook (flycheck-mode . flycheck-plantuml-setup))
+#+end_src
 ** Integration
 *** Docker
 [[https://github.com/Silex/docker.el][Manage docker from Emacs.]]
