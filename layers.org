@@ -773,7 +773,9 @@ in irony-mode's buffers by irony-mode's function."
   ;; Use system executable as PlantUML backend service.
   (setq plantuml-default-exec-mode 'executable)
   ;; Setup PlantUML indentation.
-  (setq plantuml-indent-level 4))
+  (setq plantuml-indent-level 4)
+  ;; Use SVG output format for generated diagrams.
+  (setq plantuml-output-type "svg"))
 #+end_src
 **** Syntax checking
 #+begin_src emacs-lisp :tangle yes
