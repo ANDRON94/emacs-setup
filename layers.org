@@ -777,7 +777,7 @@ in irony-mode's buffers by irony-mode's function."
   ;; Use SVG output format for generated diagrams.
   (setq plantuml-output-type "svg"))
 #+end_src
-**** Syntax checking
+**** COMMENT Syntax checking
 #+begin_src emacs-lisp :tangle yes
 (with-eval-after-load 'flycheck
   (add-hook 'plantuml-mode-hook #'flycheck-mode))
