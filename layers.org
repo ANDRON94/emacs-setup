@@ -28,6 +28,22 @@ and if necessary create missing directories."
   "Return full(absolute) path for RELATIVE-PATH.
 RELATIVE-PATH should be the path relative to user's Emacs directory."
   (expand-file-name relative-path user-emacs-directory))
+
+(defun my-etc (relative-path)
+  "Return full (absolute) path for RELATIVE-PATH.
+Full path will include user's Emacs directory,
+plus the \".cache/etc\" directory, plus the RELATIVE-PATH."
+  (my-make-valid-path
+   (my-get-full-emacs-path
+    (concat ".cache/etc/" relative-path))))
+
+(defun my-var (relative-path)
+  "Return full (absolute) path for RELATIVE-PATH.
+Full path will include user's Emacs directory,
+plus the \".cache/var\" directory, plus the RELATIVE-PATH."
+  (my-make-valid-path
+   (my-get-full-emacs-path
+    (concat ".cache/var/" relative-path))))
 #+end_src
 * Bootstrap
 [[https://github.com/jwiegley/use-package][use-package]] will download and configure all packages automatically.
@@ -61,19 +77,14 @@ RELATIVE-PATH should be the path relative to user's Emacs directory."
 (use-package recentf
   :config
   ;; Move `recentf' related util files to the common directory.
-  (setq recentf-save-file (my-make-valid-path
-                           (my-get-full-emacs-path
-                            ".cache/recentf/recentf"))))
+  (setq recentf-save-file (my-var "recentf/recentf")))
 
 ;; Move `auto-save' related util files to the common directory.
-(setq auto-save-list-file-prefix (my-make-valid-path
-                                  (my-get-full-emacs-path
-                                   ".cache/auto-save/sessions/")))
+(setq auto-save-list-file-prefix (my-var "auto-save/sessions/"))
 #+end_src
 **** Save all backups in one place
 #+begin_src emacs-lisp :tangle yes
-(setq backup-directory-alist
-      `(("" . ,(my-make-valid-path (my-get-full-emacs-path ".cache/backup")))))
+(setq backup-directory-alist `(("" . ,(my-var "backup"))))
 #+end_src
 ** Appearance
 *** General
@@ -273,9 +284,7 @@ Automatic and manual [[https://github.com/nschum/highlight-symbol.el][symbol hig
   ("C-c C-<" . mc/mark-all-like-this)
   :init
   ;; Move 'multiple-cursors' related util files to the common directory.
-  (setq mc/list-file (my-make-valid-path
-                      (my-get-full-emacs-path
-                       ".cache/multiple-cursors/mc-lists.el"))))
+  (setq mc/list-file (my-var "multiple-cursors/mc-lists.el")))
 #+end_src
 *** Parenthesis
 [[https://github.com/Fuco1/smartparens][Dealing with pairs.]]
@@ -310,9 +319,7 @@ A template system(a code [[https://github.com/joaotavora/yasnippet][snippets]]).
   :ensure t
   :config
   ;; Move 'yasnippet' related util files to the common directory.
-  (setq yas-snippet-dirs (list (my-make-valid-path
-                                (my-get-full-emacs-path
-                                 ".cache/yasnippet/snippets/"))))
+  (setq yas-snippet-dirs (list (my-etc "yasnippet/snippets/")))
   ;; Activate yasnippet mode globally.
   (yas-global-mode +1))
 
@@ -367,9 +374,7 @@ Automate running [[https://github.com/ffevotte/multi-compile][multiple shell com
   (put 'multi-compile-alist 'safe-local-variable #'listp)
   ;; Move 'multi-compile' related util files to the common directory.
   (setq multi-compile-history-file
-        (my-make-valid-path
-         (my-get-full-emacs-path
-          ".cache/multi-compile/multi-compile.cache")))
+        (my-var "multi-compile/multi-compile-history.el"))
   ;; Set "helm" completion system after "helm" is loaded.
   (with-eval-after-load 'helm
     (setq multi-compile-completion-system 'helm)))
@@ -381,9 +386,7 @@ A convenient interface for [[https://magit.vc/manual/transient.html][commands]] 
   :ensure t
   :config
   ;; Move `transient' related util files to the common directory.
-  (setq transient-history-file (my-make-valid-path
-                                (my-get-full-emacs-path
-                                 ".cache/transient/history.el"))))
+  (setq transient-history-file (my-var "transient/history.el")))
 #+end_src
 *** Incremental completions
 **** COMMENT Ido
@@ -524,14 +527,8 @@ A convenient interface for [[https://magit.vc/manual/transient.html][commands]] 
   ;; Format mode line indecator for projectile.
   (setq projectile-mode-line-function #'my--projectile-mode-line-function)
   ;; Move 'projectile' related util files to the common directory.
-  (setq projectile-cache-file
-        (my-make-valid-path
-         (my-get-full-emacs-path
-          ".cache/projectile/projectile.cache")))
-  (setq projectile-known-projects-file
-        (my-make-valid-path
-         (my-get-full-emacs-path
-          ".cache/projectile/known-projects.eld")))
+  (setq projectile-cache-file (my-var "projectile/projectile.el"))
+  (setq projectile-known-projects-file (my-var "projectile/known-projects.el"))
   ;; Activate projectile mode globally.
   (projectile-mode +1))
 #+end_src
@@ -650,9 +647,7 @@ It is used as advice for several `rtags' functions."
   :hook ((c-mode c++-mode) . rtags-start-process-unless-running)
   :config
   ;; Set installation path for RTags server.
-  (setq rtags-install-path (my-make-valid-path
-                            (my-get-full-emacs-path
-                             ".cache/rtags")))
+  (setq rtags-install-path (my-var "rtags/"))
   ;; Add line pulsing for `rtags' search functions:
   (advice-add 'rtags-find-symbol-at-point
               :after 'my--pulse-line-hook-function)
@@ -696,9 +691,7 @@ in irony-mode's buffers by irony-mode's function."
   ;; Setup C++ completion database(according to compile options).
   (add-hook 'irony-mode-hook #'irony-cdb-autosetup-compile-options)
   ;; Move `irony' related util files to the common directory.
-  (setq irony-user-dir (my-make-valid-path
-                        (my-get-full-emacs-path
-                         ".cache/irony/"))))
+  (setq irony-user-dir (my-var "irony/")))
 
 (use-package company-irony
   :ensure t
@@ -808,9 +801,8 @@ in irony-mode's buffers by irony-mode's function."
   :ensure t
   :config
   ;; Move `tramp' related util files to the common directory.
-  (setq tramp-persistency-file-name (my-make-valid-path
-                                     (my-get-full-emacs-path
-                                      ".cache/tramp/tramp")))
+  (setq tramp-auto-save-directory (my-var "tramp/auto-save/"))
+  (setq tramp-persistency-file-name (my-var "tramp/persistency.el"))
   ;; It seems that "ssh" method is faster than the default method "scp".
   (setq tramp-default-method "ssh"))
 #+end_src
@@ -821,9 +813,7 @@ in irony-mode's buffers by irony-mode's function."
   :ensure t
   :config
   ;; Move `eshell' related util files to the common directory.
-  (setq eshell-directory-name (my-make-valid-path
-                               (my-get-full-emacs-path
-                                ".cache/eshell/"))))
+  (setq eshell-directory-name (my-var "eshell/")))
 #+end_src
 ** Version control
 *** Git
