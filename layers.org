@@ -357,6 +357,22 @@ On the [[http://www.flycheck.org/en/latest/][fly syntax checking.]]
   ;; Use Emacs `load-path' for checking elisp files.
   (setq flycheck-emacs-lisp-load-path 'inherit))
 #+end_src
+*** Language Server Protocol
+Emacs [[https://emacs-lsp.github.io/lsp-mode/][client/library]] for the [[https://microsoft.github.io/language-server-protocol/][Language Server Protocol.]]
+#+begin_src emacs-lisp :tangle yes
+(use-package lsp-mode
+  :ensure t
+  :init
+  ;; Set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l").
+  (setq lsp-keymap-prefix "C-c q")
+  :config
+  (setq lsp-server-install-dir (my-var "lsp/server/")
+        lsp-session-file (my-var "lsp/session.el")))
+
+(use-package lsp-ui
+  :ensure t
+  :after (lsp-mode))
+#+end_src
 ** Interface enchancement
 *** General
 **** Use "y" or "n" instead of "yes" or "not"
@@ -440,6 +456,10 @@ A convenient interface for [[https://magit.vc/manual/transient.html][commands]] 
   :bind
   (:map flycheck-mode-map
         ("C-c f h" . helm-flycheck)))
+
+(use-package helm-lsp
+  :ensure t
+  :after (helm lsp-mode))
 #+end_src
 *** Pop-ups
 1. [[https://github.com/expez/company-quickhelp][Documentation popup]] for [[http://company-mode.github.io/][Company.]]
@@ -714,6 +734,9 @@ in irony-mode's buffers by irony-mode's function."
   :after (company irony)
   ;; Define company backends for C++.
   :hook (irony-mode . my--set-c++-company-backends))
+
+(with-eval-after-load 'lsp-mode
+  (add-hook 'c++-mode-hook #'lsp))
 #+end_src
 *** Common Lisp
 **** Navigation, autocomplete, syntax checking
