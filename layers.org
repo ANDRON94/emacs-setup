@@ -371,11 +371,23 @@ Emacs [[https://emacs-lsp.github.io/lsp-mode/][client/library]] for the [[https:
 (use-package lsp-mode
   :ensure t
   :init
-  ;; Set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l").
-  (setq lsp-keymap-prefix "C-c q")
+  ;; Disable default prefix for `lsp-command-keymap'.
+  (setq lsp-keymap-prefix nil)
   :config
-  (setq lsp-server-install-dir (my-var "lsp/server/")
-        lsp-session-file (my-var "lsp/session.el")))
+  (setq
+   ;; Move `lsp-mode' related util files to the common directory.
+   lsp-server-install-dir (my-var "lsp/server/")
+   lsp-session-file (my-var "lsp/session.el")
+   ;; Disable auto-execution of the code actions
+   ;; if there is only a single action option.
+   lsp-auto-execute-action nil)
+  (bind-map-for-mode-inherit my-lsp-mode-map my-leader-map
+    :minor-modes (lsp-mode)
+    :bindings ("g p" 'xref-pop-marker-stack
+               "g d" 'lsp-find-definition
+               "g r" 'lsp-find-references
+               "a a" 'lsp-execute-code-action
+               "r r" 'lsp-rename)))
 
 (use-package lsp-ui
   :ensure t
