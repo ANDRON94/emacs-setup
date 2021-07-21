@@ -409,7 +409,8 @@ A convenient interface for [[https://magit.vc/manual/transient.html][commands]] 
 **** COMMENT Ivy
 **** Helm
 1. [[https://github.com/emacs-helm/helm][Incremental completions and narrowing selections.]]
-2. Show [[https://www.flycheck.org/en/latest/][Flycheck]] errors with [[https://github.com/emacs-helm/helm][Helm.]]
+2. [[https://github.com/emacs-helm/helm][Helm]] interface for [[https://github.com/brotzeit/helm-xref][xref]] results.
+3. Show [[https://www.flycheck.org/en/latest/][Flycheck]] errors with [[https://github.com/emacs-helm/helm][Helm.]]
 #+begin_src emacs-lisp :tangle yes
 (use-package helm
   :ensure t
@@ -449,6 +450,10 @@ A convenient interface for [[https://magit.vc/manual/transient.html][commands]] 
   ;; Toggle helm in all buffers.
   (helm-mode +1)
   :diminish helm-mode)
+
+(use-package helm-xref
+  :ensure t
+  :after (helm))
 
 (use-package helm-flycheck
   :ensure t
