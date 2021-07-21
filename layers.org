@@ -491,7 +491,12 @@ A convenient interface for [[https://magit.vc/manual/transient.html][commands]] 
 
 (use-package helm-lsp
   :ensure t
-  :after (helm lsp-mode))
+  :after (helm lsp-mode)
+  :bind
+  (:map my-lsp-mode-map
+        ("g s" . helm-lsp-workspace-symbol)
+        ("g e" . helm-lsp-diagnostics)
+        ("g a" . helm-lsp-code-actions)))
 #+end_src
 *** Pop-ups
 1. [[https://github.com/expez/company-quickhelp][Documentation popup]] for [[http://company-mode.github.io/][Company.]]
