@@ -391,7 +391,14 @@ Emacs [[https://emacs-lsp.github.io/lsp-mode/][client/library]] for the [[https:
 
 (use-package lsp-ui
   :ensure t
-  :after (lsp-mode))
+  :after (lsp-mode)
+  :bind
+  (:map my-lsp-mode-map
+        ("G d" . lsp-ui-peek-find-definitions)
+        ("G r" . lsp-ui-peek-find-references))
+  :config
+  ;; Disable documentation popups.
+  (setq lsp-ui-doc-enable nil))
 #+end_src
 ** Interface enchancement
 *** General
