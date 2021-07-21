@@ -266,11 +266,19 @@ Automatic and manual [[https://github.com/nschum/highlight-symbol.el][symbol hig
 (setq-default indent-tabs-mode nil)
 #+end_src
 *** Modal editing
+1. [[https://github.com/justbur/emacs-bind-map][Bind]] personal keymaps in multiple locations.
+2. [[https://github.com/emacs-evil/evil][the Extensible VI Layer]] for Emacs.
 #+begin_src emacs-lisp :tangle yes
+(use-package bind-map
+  :ensure t)
+
 (use-package evil
   :ensure t
   :config
-  (evil-mode +1))
+  (evil-mode +1)
+  (bind-map my-leader-map
+    :evil-keys ("SPC")
+    :evil-states (normal motion visual)))
 #+end_src
 *** Multiple cursors
 [[https://github.com/magnars/multiple-cursors.el][Multiple cursors for Emacs.]]
