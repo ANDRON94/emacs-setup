@@ -4,6 +4,7 @@
  - [[#files][Files]]
 - [[#bootstrap][Bootstrap]]
 - [[#layers][Layers]]
+ - [[#keymaps][Keymaps]]
  - [[#miscellaneous][Miscellaneous]]
  - [[#appearance][Appearance]]
  - [[#visual][Visual]]
@@ -70,6 +71,24 @@ plus the \".cache/var\" directory, plus the RELATIVE-PATH."
 (require 'bind-key)
 #+end_src
 * Layers
+** Keymaps
+[[https://github.com/justbur/emacs-bind-map][Bind]] personal keymaps in multiple locations.
+#+begin_src emacs-lisp :tangle yes
+(use-package bind-map
+  :ensure t
+  :bind
+  (:map my-base-leader-map
+        ("k" . kill-this-buffer)
+        ("o o" . other-window)
+        ("o d" . delete-other-windows)
+        ("o h" . split-window-horizontally)
+        ("o v" . split-window-vertically))
+  :config
+  (bind-map my-base-leader-map
+    :keys ("C-c")
+    :evil-keys ("SPC")
+    :evil-states (normal motion visual)))
+#+end_src
 ** Miscellaneous
 *** General
 **** Move util files of the built-in minor modes to the common directory
@@ -216,7 +235,8 @@ An opinionated pack of [[https://github.com/hlissner/emacs-doom-themes][modern c
 
 (use-package whitespace
   :bind
-  ("C-c w" . whitespace-mode)
+  (:map my-base-leader-map
+        ("v w" . whitespace-mode))
   :hook (prog-mode . my--show-trailing-whitespace))
 #+end_src
 *** Highlight uncommitted changes
@@ -225,9 +245,10 @@ An opinionated pack of [[https://github.com/hlissner/emacs-doom-themes][modern c
 (use-package diff-hl
   :ensure t
   :bind
-  ("C-c d n" . diff-hl-next-hunk)
-  ("C-c d p" . diff-hl-previous-hunk)
-  ("C-c d r" . diff-hl-revert-hunk)
+  (:map my-base-leader-map
+        ("d n" . diff-hl-next-hunk)
+        ("d p" . diff-hl-previous-hunk)
+        ("d r" . diff-hl-revert-hunk))
   :demand t
   :config
   ;; Integrate `diff-hl' with `magit'.
@@ -245,10 +266,11 @@ Automatic and manual [[https://github.com/nschum/highlight-symbol.el][symbol hig
 (use-package highlight-symbol
   :ensure t
   :bind
-  ("C-c n h" . highlight-symbol)
-  ("C-c n n" . highlight-symbol-next)
-  ("C-c n p" . highlight-symbol-prev)
-  ("C-c n r" . highlight-symbol-query-replace))
+  (:map my-base-leader-map
+        ("v v" . highlight-symbol)
+        ("v n" . highlight-symbol-next)
+        ("v p" . highlight-symbol-prev)
+        ("v r" . highlight-symbol-query-replace)))
 #+end_src
 ** Edit
 *** General
@@ -266,21 +288,14 @@ Automatic and manual [[https://github.com/nschum/highlight-symbol.el][symbol hig
 (setq-default indent-tabs-mode nil)
 #+end_src
 *** Modal editing
-1. [[https://github.com/justbur/emacs-bind-map][Bind]] personal keymaps in multiple locations.
-2. [[https://github.com/emacs-evil/evil][the Extensible VI Layer]] for Emacs.
+[[https://github.com/emacs-evil/evil][the Extensible VI Layer]] for Emacs.
 #+begin_src emacs-lisp :tangle yes
-(use-package bind-map
-  :ensure t)
-
 (use-package evil
   :ensure t
   :config
-  (evil-mode +1)
-  (bind-map my-leader-map
-    :evil-keys ("SPC")
-    :evil-states (normal motion visual)))
+  (evil-mode +1))
 #+end_src
-*** Multiple cursors
+*** COMMENT Multiple cursors
 [[https://github.com/magnars/multiple-cursors.el][Multiple cursors for Emacs.]]
 #+begin_src emacs-lisp :tangle yes
 (use-package multiple-cursors
@@ -297,19 +312,14 @@ Automatic and manual [[https://github.com/nschum/highlight-symbol.el][symbol hig
 *** Parenthesis
 [[https://github.com/Fuco1/smartparens][Dealing with pairs.]]
 #+begin_src emacs-lisp :tangle yes
+(bind-map-for-mode-inherit my-smartparens-mode-map my-base-leader-map
+  :minor-modes (smartparens-mode))
+
 (use-package smartparens
   :ensure t
   :bind
-  (:map smartparens-mode-map
-        ;; Navigation
-        ("C-M-f" . sp-forward-sexp)
-        ("C-M-b" . sp-backward-sexp)
-        ;; Manipulation
-        ("C-M-k" . sp-kill-sexp)
-        ("C-M-w" . sp-copy-sexp)
-        ("M-<delete>" . sp-unwrap-sexp)
-        ("C-]" . sp-select-next-thing)
-        ("C-M-]" . sp-select-previous-thing))
+  (:map my-smartparens-mode-map
+        ("s d" . sp-unwrap-sexp))
   :demand t
   :config
   ;; Enable the default configuration.
@@ -368,11 +378,21 @@ On the [[http://www.flycheck.org/en/latest/][fly syntax checking.]]
 *** Language Server Protocol
 Emacs [[https://emacs-lsp.github.io/lsp-mode/][client/library]] for the [[https://microsoft.github.io/language-server-protocol/][Language Server Protocol.]]
 #+begin_src emacs-lisp :tangle yes
+(bind-map-for-mode-inherit my-lsp-mode-map my-base-leader-map
+ :minor-modes (lsp-mode))
+
 (use-package lsp-mode
   :ensure t
+  :bind
+  (:map my-lsp-mode-map
+        ("g p" . xref-pop-marker-stack)
+        ("g d" . lsp-find-definition)
+        ("g r" . lsp-find-references)
+        ("r r" . lsp-rename))
   :init
   ;; Disable default prefix for `lsp-command-keymap'.
   (setq lsp-keymap-prefix nil)
+  :demand t
   :config
   (setq
    ;; Move `lsp-mode' related util files to the common directory.
@@ -380,14 +400,7 @@ Emacs [[https://emacs-lsp.github.io/lsp-mode/][client/library]] for the [[https:
    lsp-session-file (my-var "lsp/session.el")
    ;; Disable auto-execution of the code actions
    ;; if there is only a single action option.
-   lsp-auto-execute-action nil)
-  (bind-map-for-mode-inherit my-lsp-mode-map my-leader-map
-    :minor-modes (lsp-mode)
-    :bindings ("g p" 'xref-pop-marker-stack
-               "g d" 'lsp-find-definition
-               "g r" 'lsp-find-references
-               "a a" 'lsp-execute-code-action
-               "r r" 'lsp-rename)))
+   lsp-auto-execute-action nil))
 
 (use-package lsp-ui
   :ensure t
@@ -442,17 +455,18 @@ A convenient interface for [[https://magit.vc/manual/transient.html][commands]] 
 (use-package helm
   :ensure t
   :bind
-  ("C-c h" . helm-command-prefix)
-  ("M-x" . helm-M-x)
-  ("M-y" . helm-show-kill-ring)
-  ("C-x b" . helm-mini)
-  ("C-x C-f" . helm-find-files)
+  (:map my-base-leader-map
+        ("h" . helm-command-prefix)
+        ("SPC" . helm-M-x)
+        ("y" . helm-show-kill-ring)
+        ("b" . helm-mini)
+        ("f" . helm-find-files))
   (:map helm-command-map
         ("o" . helm-occur))
   (:map helm-map
         ([tab] . helm-execute-persistent-action)
         ("C-i" . helm-execute-persistent-action)
-        ("C-z" . helm-select-action))
+        ("C-e" . helm-select-action))
   :init
   (require 'helm-global-bindings)
   :demand t
@@ -484,17 +498,13 @@ A convenient interface for [[https://magit.vc/manual/transient.html][commands]] 
 
 (use-package helm-flycheck
   :ensure t
-  :after (helm flycheck)
-  :bind
-  (:map flycheck-mode-map
-        ("C-c f h" . helm-flycheck)))
+  :after (helm flycheck))
 
 (use-package helm-lsp
   :ensure t
   :after (helm lsp-mode)
   :bind
   (:map my-lsp-mode-map
-        ("g s" . helm-lsp-workspace-symbol)
         ("g e" . helm-lsp-diagnostics)
         ("g a" . helm-lsp-code-actions)))
 #+end_src
@@ -525,7 +535,8 @@ A convenient interface for [[https://magit.vc/manual/transient.html][commands]] 
 (use-package git-messenger
   :ensure t
   :bind
-  ("C-c d m" . git-messenger:popup-message)
+  (:map my-base-leader-map
+        ("d m" . git-messenger:popup-message))
   :config
   (with-eval-after-load 'magit
     (setq git-messenger:use-magit-popup t)))
@@ -544,14 +555,8 @@ A convenient interface for [[https://magit.vc/manual/transient.html][commands]] 
   :ensure t
   :after (helm)
   :bind
-  ("C-c s s" . helm-swoop)
-  ("C-c s m" . helm-multi-swoop)
-  ("C-c s a" . helm-multi-swoop-all)
-  ("C-c s p" . helm-multi-swoop-projectile)
-  ("M-I" . helm-swoop-back-to-last-point)
-  (:map isearch-mode-map
-        ;; When doing isearch, hand the word over to helm-swoop
-        ("M-i" . helm-swoop-from-isearch))
+  (:map my-base-leader-map
+        ("g s" . helm-swoop))
   :config
   (setq
    ;; If this value is t, split window inside the current window.
@@ -573,8 +578,10 @@ A convenient interface for [[https://magit.vc/manual/transient.html][commands]] 
 (use-package helm-projectile
   :ensure t
   :after (helm)
-  :bind-keymap
-  ("C-c p" . projectile-command-map)
+  :bind
+  (:map my-base-leader-map
+        ("p" . projectile-command-map))
+  :demand t
   :config
   ;; Use helm completion system.
   (setq projectile-completion-system 'helm)
@@ -595,10 +602,6 @@ A convenient interface for [[https://magit.vc/manual/transient.html][commands]] 
 #+begin_src emacs-lisp :tangle yes
 (use-package org
   :ensure t
-  :bind
-  ("C-c l" . org-store-link)
-  ("C-c c" . org-capture)
-  ("C-c a" . org-agenda)
   :config
   (setq
    ;; Information to record when a task moves to the DONE state.
@@ -630,7 +633,7 @@ A convenient interface for [[https://magit.vc/manual/transient.html][commands]] 
 #+end_src
 ** Languages
 *** C#
-**** Navigation, autocomplete, syntax checking
+**** COMMENT Navigation, autocomplete, syntax checking
 [[http://www.omnisharp.net/][IDE-like features for editing files]] in C# solutions for Emacs.
 #+begin_src emacs-lisp :tangle yes
 (defun my--set-csharp-company-backends ()
@@ -784,9 +787,12 @@ Interface to the version control system Git: [[https://magit.vc/][Magit!!!]]
 (use-package magit
   :ensure t
   :bind
-  ("C-c d s" . magit-status)
-  ("C-c d i" . magit-init)
-  ("C-c d c" . magit-clone))
+  (:map my-base-leader-map
+        ("d s" . magit-status)
+        ("d i" . magit-init)
+        ("d c" . magit-clone))
+  (:map magit-mode-map
+        ("SPC" . my-base-leader-map-prefix)))
 
 (use-package magit-lfs
   :ensure t
