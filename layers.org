@@ -80,6 +80,7 @@ plus the \".cache/var\" directory, plus the RELATIVE-PATH."
   (:map my-base-leader-map
         ("k" . kill-this-buffer)
         ("o o" . other-window)
+        ("o k" . delete-window)
         ("o d" . delete-other-windows)
         ("o h" . split-window-horizontally)
         ("o v" . split-window-vertically))
