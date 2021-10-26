@@ -698,7 +698,9 @@ A convenient interface for [[https://magit.vc/manual/transient.html][commands]] 
   :config
   (with-eval-after-load 'company
     (add-hook 'lisp-mode-hook #'my--set-lisp-company-backends)
-    (add-hook 'sly-mrepl-hook #'my--set-lisp-company-backends)))
+    (add-hook 'sly-mrepl-hook #'my--set-lisp-company-backends))
+  (with-eval-after-load 'evil
+    (evil-set-initial-state 'sly-db-mode 'emacs)))
 #+end_src
 *** Dockerfile
 [[https://github.com/spotify/dockerfile-mode][Dockerfile support.]]
