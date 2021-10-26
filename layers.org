@@ -708,8 +708,13 @@ A convenient interface for [[https://magit.vc/manual/transient.html][commands]] 
 #+begin_src emacs-lisp :tangle yes
 (use-package web-mode
   :ensure t
-  :mode ("\\.html?\\'" "\\.xml?\\'" "\\.css\\'"
-         "\\.scss\\'" "\\.js\\'" "\\.tpl\\'")
+  :mode ("\\.html?\\'"
+         "\\.xml\\'"
+         "\\.css\\'"
+         "\\.scss\\'"
+         "\\.js\\'"
+         "\\.tpl\\'"
+         "\\.jinja\\'")
   :config
   ;; Setup HTML, CSS and script indentation.
   (setq web-mode-markup-indent-offset 2
