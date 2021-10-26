@@ -798,6 +798,8 @@ Interface to the version control system Git: [[https://magit.vc/][Magit!!!]]
         ("d i" . magit-init)
         ("d c" . magit-clone))
   (:map magit-mode-map
+        ("SPC" . my-base-leader-map-prefix))
+  (:map magit-revision-mode-map
         ("SPC" . my-base-leader-map-prefix)))
 
 (use-package magit-lfs
