@@ -480,6 +480,9 @@ A convenient interface for [[https://magit.vc/manual/transient.html][commands]] 
    ;; Open helm buffer inside current window,
    ;; not occupy whole other window.
    helm-split-window-in-side-p t
+   ;; Open helm completion buffer using common behavior
+   ;; of other helm buffers (instead of separate frame for completion).
+   helm-show-completion-display-function #'helm-show-completion-default-display-function
    ;; Move to end or beginning of source
    ;; when reaching top or bottom of source.
    helm-move-to-line-cycle-in-source nil
@@ -780,8 +783,15 @@ A convenient interface for [[https://magit.vc/manual/transient.html][commands]] 
 *** Shell
 [[https://www.gnu.org/software/emacs/manual/html_mono/eshell.html][Eshell]] is a shell-like command interpreter implemented in Emacs Lisp.
 #+begin_src emacs-lisp :tangle yes
+(bind-map-for-mode-inherit my-eshell-mode-map my-base-leader-map
+  :major-modes (eshell-mode))
+
 (use-package eshell
   :ensure t
+  :bind
+  (:map my-eshell-mode-map
+        ("c c" . helm-eshell-history)
+        ("c p" . helm-eshell-prompts))
   :config
   ;; Move `eshell' related util files to the common directory.
   (setq eshell-directory-name (my-var "eshell/")))
