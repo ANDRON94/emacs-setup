@@ -785,6 +785,40 @@ A convenient interface for [[https://magit.vc/manual/transient.html][commands]] 
 *** Shell
 [[https://www.gnu.org/software/emacs/manual/html_mono/eshell.html][Eshell]] is a shell-like command interpreter implemented in Emacs Lisp.
 #+begin_src emacs-lisp :tangle yes
+(defun my--goto-end-of-eshell-prompt ()
+  "Move cursor to the prompt while switching to evil insert mode (if evil is present)."
+  (interactive)
+  (goto-char (point-max))
+  (when (featurep 'evil)
+    (evil-append 1)))
+
+(require 'cl)
+
+(defun company-eshell-history (command &optional arg &rest ignored)
+  (interactive (list 'interactive))
+  (cl-case command
+    (interactive (company-begin-backend 'company-eshell-history))
+    (prefix (and (eq major-mode 'eshell-mode)
+                 (let ((word (company-grab-word)))
+                   (save-excursion
+                     (eshell-bol)
+                     (and (looking-at-p (s-concat word "$")) word)))))
+    (candidates (remove-duplicates
+                 (->> (ring-elements eshell-history-ring)
+                      (remove-if-not (lambda (item) (s-prefix-p arg item)))
+                      (mapcar 's-trim))
+                 :test 'string=))
+    (sorted t)))
+
+(defun my--set-eshell-company-backends ()
+  "Set the list of company backends for Eshell locally."
+  (setq-local company-backends '((company-capf company-eshell-history))))
+
+(defun my--set-evil-eshell-keybindings ()
+  "Set custom evil eshell keybindings."
+  (evil-define-key 'normal eshell-mode-map
+    (kbd "<return>") #'my--goto-end-of-eshell-prompt))
+
 (bind-map-for-mode-inherit my-eshell-mode-map my-base-leader-map
   :major-modes (eshell-mode))
 
@@ -796,7 +830,12 @@ A convenient interface for [[https://magit.vc/manual/transient.html][commands]] 
         ("c p" . helm-eshell-prompts))
   :config
   ;; Move `eshell' related util files to the common directory.
-  (setq eshell-directory-name (my-var "eshell/")))
+  (setq eshell-directory-name (my-var "eshell/"))
+  ;; Make `[return]' key more convenient for evil normal mode in eshell.
+  (with-eval-after-load 'evil
+    (add-hook 'eshell-mode-hook #'my--set-evil-eshell-keybindings))
+  (with-eval-after-load 'company
+    (add-hook 'eshell-mode-hook #'my--set-eshell-company-backends)))
 #+end_src
 ** Version control
 *** Git
