@@ -153,6 +153,10 @@ the differences between a pair (or a triple) of files or buffers.
  #+begin_src emacs-lisp :tangle yes
 (blink-cursor-mode 0)
  #+end_src
+**** Disable X resources settings
+ #+begin_src emacs-lisp :tangle yes
+(setq inhibit-x-resources t)
+ #+end_src
 *** Icons
 [[https://github.com/domtronn/all-the-icons.el][A utility package]] to collect various Icon Fonts and propertize them within Emacs.
 #+begin_src emacs-lisp :tangle yes
