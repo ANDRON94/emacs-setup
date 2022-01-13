@@ -70,6 +70,13 @@ plus the \".cache/var\" directory, plus the RELATIVE-PATH."
 ;; `use-package' has support for it(through :bind keyword).
 (require 'bind-key)
 #+end_src
+** Environment variables
+#+begin_src emacs-lisp :tangle yes
+(use-package exec-path-from-shell
+  :ensure t
+  :config
+  (exec-path-from-shell-initialize))
+#+end_src
 * Layers
 ** Keymaps
 [[https://github.com/justbur/emacs-bind-map][Bind]] personal keymaps in multiple locations.
