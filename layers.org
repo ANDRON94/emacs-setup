@@ -695,6 +695,14 @@ A convenient interface for [[https://magit.vc/manual/transient.html][commands]] 
 (with-eval-after-load 'lsp-mode
   (add-hook 'c++-mode-hook #'lsp))
 #+end_src
+*** Python
+**** Navigation, autocomplete, syntax checking
+1. [[https://github.com/python-lsp/python-lsp-server][Python LSP server]].
+2. Emacs [[https://emacs-lsp.github.io/lsp-mode/][client/library]] for the Language Server Protocol.
+#+begin_src emacs-lisp :tangle yes
+(with-eval-after-load 'lsp-mode
+  (add-hook 'python-mode-hook #'lsp))
+#+end_src
 *** Common Lisp
 **** Navigation, autocomplete, syntax checking
 [[https://github.com/joaotavora/sly][Common Lisp IDE.]]
