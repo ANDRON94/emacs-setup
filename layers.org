@@ -637,34 +637,24 @@ A convenient interface for [[https://magit.vc/manual/transient.html][commands]] 
 #+end_src
 ** Languages
 *** C#
-**** COMMENT Navigation, autocomplete, syntax checking
-[[http://www.omnisharp.net/][IDE-like features for editing files]] in C# solutions for Emacs.
+**** Navigation, autocomplete, syntax checking
+1. [[https://github.com/OmniSharp/omnisharp-roslyn][OmniSharp server]] (HTTP, STDIO) based on Roslyn workspaces.
+2. Emacs [[https://emacs-lsp.github.io/lsp-mode/][client/library]] for the Language Server Protocol.
 #+begin_src emacs-lisp :tangle yes
-(defun my--set-csharp-company-backends ()
-  "Set the list of company backends for C# locally."
-  (setq-local company-backends
-              '((company-omnisharp
-                 :separate
-                 company-dabbrev
-                 company-yasnippet))))
-
-(use-package omnisharp
+(use-package csharp-mode
   :ensure t
-  :bind
-  (:map csharp-mode-map
-        ("M-." . omnisharp-go-to-definition)
-        ("M-?" . omnisharp-helm-find-usages)
-        ("C-c r" . omnisharp-run-code-action-refactoring))
-  :hook (csharp-mode . omnisharp-mode)
   :config
-  ;; Use custom version of omnisharp server.
-  (setq omnisharp-expected-server-version "1.30.1")
-  ;; Define company backends for C#.
-  (with-eval-after-load 'company
-    (add-hook 'csharp-mode-hook #'my--set-csharp-company-backends))
-  ;; Use flycheck for C#.
-  (with-eval-after-load 'flycheck
-    (add-hook 'csharp-mode-hook #'flycheck-mode)))
+  (with-eval-after-load 'lsp-mode
+    (add-hook 'csharp-mode-hook #'lsp)))
+
+(use-package unity
+  :load-path ".cache/packages/unity/"
+  :after (csharp-mode)
+  :hook ((after-init . unity-build-code-shim)
+         (after-init . unity-setup))
+  :config
+  (setq unity-var-directory (my-var "unity/")))
+
  #+end_src
 *** C++
 **** General
